@@ -1,0 +1,334 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="white-toolbar">
+    <ion-title>Your Loans</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="presentApplyModal()">
+        <ion-icon name="add" color="primary">
+
+        </ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <!-- <ion-toolbar class="white-toolbar">
+    <ion-segment (ionChange)="segmentChanged($event)" style="width: 100%;" [value]="selectedSegment">
+      <ion-segment-button value="active">
+        <ion-label>Active</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="completed">
+        <ion-label>Completed</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar> -->
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-refresher slot="fixed" pullFactor="0.5" pullMin="100" pullMax="200" (ionRefresh)="refreshLoans($event)">
+    <ion-refresher-content>
+    </ion-refresher-content>
+  </ion-refresher>
+   <ng-container *ngIf="!allLoans">
+    <div class="loan-card active">
+      <div class="flex" style="justify-content: space-between;">
+        <ion-skeleton-text slot="start" style="width: 30%; height: 18px;"   animated></ion-skeleton-text>
+        <ion-skeleton-text slot="start" style="width: 30%"   animated></ion-skeleton-text>
+        </div>
+       <hr>
+       <div class="flex" style="justify-content: space-between;">
+        <div style="width: 100%;">
+          <ion-skeleton-text slot="start" style="width: 30%"   animated></ion-skeleton-text>
+          <ion-skeleton-text slot="start" style="width: 20%"   animated></ion-skeleton-text>
+        </div>
+        <ion-skeleton-text slot="start" style="width: 30%; height: 10px;"   animated></ion-skeleton-text>
+        </div>
+    </div>
+    <div class="loan-card active">
+      <div class="flex" style="justify-content: space-between;">
+        <ion-skeleton-text slot="start" style="width: 30%; height: 18px;"   animated></ion-skeleton-text>
+        <ion-skeleton-text slot="start" style="width: 30%"   animated></ion-skeleton-text>
+        </div>
+       <hr>
+       <div class="flex" style="justify-content: space-between;">
+        <div style="width: 100%;">
+          <ion-skeleton-text slot="start" style="width: 30%"   animated></ion-skeleton-text>
+          <ion-skeleton-text slot="start" style="width: 20%"   animated></ion-skeleton-text>
+        </div>
+        <ion-skeleton-text slot="start" style="width: 30%; height: 10px;"   animated></ion-skeleton-text>
+        </div>
+    </div>
+    <div class="loan-card active">
+      <div class="flex" style="justify-content: space-between;">
+        <ion-skeleton-text slot="start" style="width: 30%; height: 18px;"   animated></ion-skeleton-text>
+        <ion-skeleton-text slot="start" style="width: 30%"   animated></ion-skeleton-text>
+        </div>
+       <hr>
+       <div class="flex" style="justify-content: space-between;">
+        <div style="width: 100%;">
+          <ion-skeleton-text slot="start" style="width: 30%"   animated></ion-skeleton-text>
+          <ion-skeleton-text slot="start" style="width: 20%"   animated></ion-skeleton-text>
+        </div>
+        <ion-skeleton-text slot="start" style="width: 30%; height: 10px;"   animated></ion-skeleton-text>
+        </div>
+    </div>
+   </ng-container>
+   <ng-container *ngIf="allLoans">
+    <div *ngFor="let loan of allLoans" class="loan-card active remove-focus" [routerLink]="['/main/single-loan', loan.loan_id]">
+      <ion-item lines="none" class="ion-no-padding">
+       <ion-text slot="start" color="primary">
+         <p class="loan-amount">
+           {{loan.loan_principal_amount | currency: '₦'}}
+         </p>
+       </ion-text>
+      <ion-label style="font-size: 14px; white-space: pre-wrap;" class="ion-no-margin" slot="end">
+       {{loan.loan_application_id}}
+      </ion-label>
+      </ion-item>
+       <hr>
+       <ion-item lines="none" class="ion-no-padding">
+         <ion-label slot="start">
+           <ion-text color="primary">
+             <span class="monthly-payment">
+               {{loan.first_repayment_amount | currency: '₦'}}
+             </span>
+           </ion-text>
+           <ion-note style="font-size: 12px;" color="medium">monthly</ion-note>
+         </ion-label>
+         <ion-label class="ion-no-margin" slot="end">
+           <ion-note style="font-size: 12px;" color="medium">for {{loan.loan_duration}} month(s)</ion-note>
+           <span style="display: block;">
+             &nbsp;
+           </span>
+         </ion-label>
+       </ion-item>
+     </div>
+    </ng-container>
+  <!-- <ng-container *ngIf="selectedSegment == 'active'">
+    <div class="loan-card active" [routerLink]="['/single-loan']">
+     <ion-item lines="none" class="ion-no-padding">
+      <ion-text slot="start" color="primary">
+        <p class="loan-amount">
+          N100,000
+        </p>
+      </ion-text>
+     <ion-label class="ion-no-margin" slot="end">
+      CW1002297
+     </ion-label>
+     </ion-item>
+      <hr>
+      <ion-item lines="none" class="ion-no-padding">
+        <ion-label slot="start">
+          <ion-text color="primary">
+            <span class="monthly-payment">
+              N33,432
+            </span>
+          </ion-text>
+          <ion-note style="font-size: 12px;" color="medium">monthly</ion-note>
+        </ion-label>
+        <ion-label class="ion-no-margin" slot="end">
+          <ion-note style="font-size: 12px;" color="medium">for 7 months</ion-note>
+          <span style="display: block;">
+            &nbsp;
+          </span>
+        </ion-label>
+      </ion-item>
+    </div>
+    <div class="loan-card active" [routerLink]="['/single-loan']">
+      <ion-item lines="none" class="ion-no-padding">
+        <ion-label slot="start">
+          <ion-text color="primary">
+            <span class="monthly-payment">
+              N33,432
+            </span>
+          </ion-text>
+          <ion-note style="font-size: 12px;" color="medium">monthly</ion-note>
+        </ion-label>
+        <ion-label class="ion-no-margin" slot="end">
+          <ion-note style="font-size: 12px;" color="medium">for 7 months</ion-note>
+          <span style="display: block;">
+            &nbsp;
+          </span>
+        </ion-label>
+      </ion-item>
+      <hr>
+      <ion-item lines="none" class="ion-no-padding">
+        <ion-text slot="start" color="primary">
+          <p class="loan-amount">
+            N100,000
+          </p>
+        </ion-text>
+        <ion-label class="ion-no-margin" slot="end">
+          CW1002297
+         </ion-label>
+       </ion-item>
+    </div>
+    <div class="loan-card active" [routerLink]="['/single-loan']">
+      <ion-item lines="none" class="ion-no-padding">
+        <ion-label slot="start">
+          <ion-text color="primary">
+            <span class="monthly-payment">
+              N33,432
+            </span>
+          </ion-text>
+          <ion-note style="font-size: 12px;" color="medium">Monthly</ion-note>
+        </ion-label>
+        <ion-label class="ion-no-margin" slot="end">
+          <ion-note style="font-size: 12px;" color="medium">7 months</ion-note>
+          <span style="display: block;">
+            &nbsp;
+          </span>
+        </ion-label>
+      </ion-item>
+      <hr>
+      <ion-text color="primary">
+        <p class="loan-amount">
+          N100,000
+        </p>
+      </ion-text>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="selectedSegment == 'completed'">
+    <div class="loan-card completed" [routerLink]="['/single-loan']">
+      <ion-item lines="none" class="ion-no-padding">
+        <ion-label slot="start">
+          <ion-text color="primary">
+            <span class="monthly-payment">
+              N33,432
+            </span>
+          </ion-text>
+          <ion-note style="font-size: 12px;" color="medium">Monthly</ion-note>
+        </ion-label>
+        <ion-label class="ion-no-margin" slot="end">
+          <ion-note style="font-size: 12px;" color="medium">7 months</ion-note>
+          <span style="display: block;">
+            &nbsp;
+          </span>
+        </ion-label>
+      </ion-item>
+      <hr>
+      <ion-text color="success">
+        <p class="loan-amount">
+          N100,000
+        </p>
+      </ion-text>
+    </div>
+    <div class="loan-card completed" [routerLink]="['/single-loan']">
+      <ion-item lines="none" class="ion-no-padding">
+        <ion-label slot="start">
+          <ion-text color="primary">
+            <span class="monthly-payment">
+              N33,432
+            </span>
+          </ion-text>
+          <ion-note style="font-size: 12px;" color="medium">Monthly</ion-note>
+        </ion-label>
+        <ion-label class="ion-no-margin" slot="end">
+          <ion-note style="font-size: 12px;" color="medium">7 months</ion-note>
+          <span style="display: block;">
+            &nbsp;
+          </span>
+        </ion-label>
+      </ion-item>
+      <hr>
+      <ion-text color="success">
+        <p class="loan-amount">
+          N100,000
+        </p>
+      </ion-text>
+    </div>
+    <div class="loan-card completed" [routerLink]="['/single-loan']">
+      <ion-item lines="none" class="ion-no-padding">
+        <ion-label slot="start">
+          <ion-text color="primary">
+            <span class="monthly-payment">
+              N33,432
+            </span>
+          </ion-text>
+          <ion-note style="font-size: 12px;" color="medium">Monthly</ion-note>
+        </ion-label>
+        <ion-label class="ion-no-margin" slot="end">
+          <ion-note style="font-size: 12px;" color="medium">7 months</ion-note>
+          <span style="display: block;">
+            &nbsp;
+          </span>
+        </ion-label>
+      </ion-item>
+      <hr>
+      <ion-text color="success">
+        <p class="loan-amount">
+          N100,000
+        </p>
+      </ion-text>
+    </div>
+    <div class="loan-card completed" [routerLink]="['/single-loan']">
+      <ion-item lines="none" class="ion-no-padding">
+        <ion-label slot="start">
+          <ion-text color="primary">
+            <span class="monthly-payment">
+              N33,432
+            </span>
+          </ion-text>
+          <ion-note style="font-size: 12px;" color="medium">Monthly</ion-note>
+        </ion-label>
+        <ion-label class="ion-no-margin" slot="end">
+          <ion-note style="font-size: 12px;" color="medium">7 months</ion-note>
+          <span style="display: block;">
+            &nbsp;
+          </span>
+        </ion-label>
+      </ion-item>
+      <hr>
+      <ion-text color="success">
+        <p class="loan-amount">
+          N100,000
+        </p>
+      </ion-text>
+    </div>
+    <div class="loan-card completed">
+      <ion-item lines="none" class="ion-no-padding">
+        <ion-label slot="start">
+          <ion-text color="primary">
+            <span class="monthly-payment">
+              N33,432
+            </span>
+          </ion-text>
+          <ion-note style="font-size: 12px;" color="medium">Monthly</ion-note>
+        </ion-label>
+        <ion-label class="ion-no-margin" slot="end">
+          <ion-note style="font-size: 12px;" color="medium">7 months</ion-note>
+          <span style="display: block;">
+            &nbsp;
+          </span>
+        </ion-label>
+      </ion-item>
+      <hr>
+      <ion-text color="success">
+        <p class="loan-amount">
+          N100,000
+        </p>
+      </ion-text>
+    </div>
+    <div class="loan-card completed">
+      <ion-item lines="none" class="ion-no-padding">
+        <ion-label slot="start">
+          <ion-text color="primary">
+            <span class="monthly-payment">
+              N33,432
+            </span>
+          </ion-text>
+          <ion-note style="font-size: 12px;" color="medium">Monthly</ion-note>
+        </ion-label>
+        <ion-label class="ion-no-margin" slot="end">
+          <ion-note style="font-size: 12px;" color="medium">7 months</ion-note>
+          <span style="display: block;">
+            &nbsp;
+          </span>
+        </ion-label>
+      </ion-item>
+      <hr>
+      <ion-text color="success">
+        <p class="loan-amount">
+          N100,000
+        </p>
+      </ion-text>
+    </div>
+  </ng-container> -->
+</ion-content>

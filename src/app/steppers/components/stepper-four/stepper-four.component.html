@@ -1,0 +1,21 @@
+<div class="stepper-content">
+  <ion-text color="dark">
+    <h3 class="stepper-title">
+      How long do you want it for?
+    </h3>
+  </ion-text>
+  <form style="display: flex; flex-direction: column; flex: 1;" [formGroup]="loanForm">
+    <ion-item class="ion-no-padding ion-margin-bottom">
+      <ion-label color="medium" position="stacked">
+        Select duration
+      </ion-label>
+      <ion-select formControlName="tenor" #b [interfaceOptions]="customActionSheetOptions" okText="Okay"
+        cancelText="Dismiss" interface="alert">
+        <ion-select-option *ngFor="let tenor of tenors" [value]="tenor.value">{{tenor.label}}</ion-select-option>
+      </ion-select>
+      <small *ngIf="(formControls.tenor.dirty || formControls.tenor.touched) && formControls.tenor.errors"
+        slot="error">Select Duration</small>
+    </ion-item>
+    <ion-button (click)="goToNext()" class="stepper-progress-btn" color="secondary">next</ion-button>
+  </form>
+</div>

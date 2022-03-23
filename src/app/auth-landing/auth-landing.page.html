@@ -1,0 +1,41 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>auth-landing</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content [scrollY]="false">
+  <div class="ion-padding">
+    <div class="ion-margin-bottom ion-margin-top">
+      <img src="assets/images/logo.png" style="border-radius: 100%; overflow: hidden;" width="60" height="60" alt="" srcset="">
+    </div>
+    <div class="landing-header ion-margin-bottom">
+      <ion-text color="secondary">
+       <p class="landing-title ion-no-margin" style="font-weight: 300;">
+         {{TimeOfDay}}!
+       </p>
+      </ion-text>
+       <ion-text color="primary">
+         <p class="landing-title ion-no-margin" style="font-weight: 600;">
+           What would you like to do?
+         </p>
+       </ion-text>
+     </div>
+     <p class="landing-text">
+       Kindly choose an option below
+     </p>
+     <div style="margin-top: 30px;">
+      <!-- <ion-button (click)="presentModal()" expand="block" class="ion-margin-bottom" color="secondary">Apply for a Loan</ion-button> -->
+      <ion-button (click)="closeAndNavigate('start')" expand="block" class="ion-margin-bottom" color="secondary">Apply for a Loan</ion-button>
+      <!-- <ion-nav-link
+      router-direction="forward"
+      [component]="nextPage"
+    >
+    <ion-button expand="block" class="" color="primary">Log In to your Account</ion-button>
+    </ion-nav-link> -->
+    <ion-button (click)="closeAndNavigateToLogin()" expand="block" class="" color="primary">Log In to your Account</ion-button>
+    <!-- <ion-button [routerLink]="['/video-capture']" expand="block" class="" color="primary">Videoo capture</ion-button> -->
+     </div>
+  </div>
+</ion-content>
+

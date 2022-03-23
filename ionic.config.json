@@ -1,0 +1,7 @@
+{
+  "name": "creditwallet-mobile",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

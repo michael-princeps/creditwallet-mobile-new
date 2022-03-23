@@ -1,0 +1,30 @@
+<div class="stepper-content">
+  <ion-text color="primary">
+    <h3 class="stepper-title ion-text-center">
+      To proceed please provide details of your preferred account to receive your funds
+    </h3>
+  </ion-text>
+ <form style="display: flex; flex-direction: column; flex: 1;" [formGroup]="bankDetailsForm">
+  <ion-item class="ion-no-padding ion-margin-bottom">
+    <ion-label color="medium" position="stacked">
+      Bank Name
+    </ion-label>
+   <ionic-selectable formControlName="bank_name" [items]="banks" itemValueField="bankcode" itemTextField="name"
+   [canSearch]="true">
+ </ionic-selectable>
+   <small *ngIf="(formControls.bank_name.dirty || formControls.bank_name.touched) && formControls.bank_name.errors" slot="error">Select bank name</small>
+  </ion-item>
+  <ion-item class="ion-no-padding ion-margin-bottom">
+    <ion-label color="medium" position="stacked">
+      Account Number
+    </ion-label>
+    <!-- <ion-icon style="color: rgba(32, 27, 27, .5);" slot="start" name="keypad"></ion-icon> -->
+   <ion-input type="tel" enterkeyhint="next" formControlName="bank_account" #b (keyup.enter)="handleFormCollect()" class="form-input"></ion-input>
+   <ion-text color="primary">
+   <small class="ion-no-margin">{{userAccountDetails?.account_name | uppercase}}</small>
+   </ion-text>
+   <small *ngIf="(formControls.bank_account.dirty || formControls.bank_account.touched) && formControls.bank_account.errors" slot="error">Enter valid account number</small>
+  </ion-item>
+  <ion-button (click)="handleFormCollect()" class="stepper-progress-btn" color="secondary">next</ion-button>
+ </form>
+</div>

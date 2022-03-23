@@ -1,0 +1,45 @@
+<div class="stepper-content">
+  <!-- <ion-text color="dark">
+    <h3 class="stepper-title">
+      Enter IPPIS Number
+    </h3>
+  </ion-text> -->
+ <div style="display: flex; flex-direction: column; flex: 1;">
+  <ion-radio-group class="ion-margin-bottom" value="no" (ionChange)="showEvent($event)">
+    <ion-list-header class="ion-no-padding">
+      <ion-text color="dark">
+      <ion-label>Are you on IPPIS?</ion-label>
+      </ion-text>
+    </ion-list-header>
+
+    <ion-item class="ion-no-padding" lines="none">
+      <ion-label>Yes</ion-label>
+      <ion-radio slot="start" value="yes"></ion-radio>
+    </ion-item>
+
+    <ion-item class="ion-no-padding" lines="none">
+      <ion-label>No</ion-label>
+      <ion-radio slot="start" value="no"></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+ <ng-container *ngIf="showValue === 'yes' else noIPPIS">
+  <form style="display: flex; flex-direction: column; flex: 1;" [formGroup]="loanForm">
+    <ion-item class="ion-no-padding ion-margin-bottom">
+      <ion-label color="medium" position="stacked">
+        IPPIS Number
+      </ion-label>
+      <ion-input type="text" enterkeyhint="done" formControlName="ippis_number" class="form-input"></ion-input>
+      <small
+        *ngIf="(formControls.ippis_number.dirty || formControls.ippis_number.touched) && formControls.ippis_number.errors"
+        slot="error">Enter your phone number</small>
+    </ion-item>
+    <ion-button expand="block" (click)="goToNext()" class="stepper-progress-btn" color="secondary">next</ion-button>
+  </form>
+ </ng-container>
+ </div>
+</div>
+
+<ng-template #noIPPIS>
+
+  <ion-button expand="block" (click)="goToNext()" class="stepper-progress-btn" color="secondary">next</ion-button>
+</ng-template>

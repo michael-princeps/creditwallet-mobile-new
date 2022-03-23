@@ -1,0 +1,40 @@
+<div class="stepper-content">
+  <ion-text color="primary">
+    <h3 class="stepper-title">
+      Liveness Detection
+    </h3>
+  </ion-text>
+  <div style="display: flex; flex-direction: column; flex: 1;">
+    <ng-container *ngIf="imageSrc; else showRules">
+      <img *ngIf="imageSrc" [src]="imageSrc" alt="User Passport Photo" style="object-fit: cover; margin-left: auto; margin-right: auto; border-radius: 10px;" width="300" height="300"/>
+      <ion-text color="danger">
+        <p class="ion-text-center" *ngIf="showErrorLiveness">
+          Couldn't verify image. Please retake picture in a properly lit environment
+        </p>
+      </ion-text>
+      <ion-button *ngIf="imageSrc" class="stepper-progress-btn" color="primary" (click)="performLivenessTest()">
+        Proceed
+      </ion-button>
+      <ion-button (click)="takePicture()" color="secondary" style="margin-top: 5px;">
+        <ion-icon name="camera-outline"></ion-icon>&nbsp;Retake Picture
+      </ion-button>
+    </ng-container>
+  </div>
+</div>
+<ng-template #showRules>
+  <div>
+    <ion-text color="secondary">
+      <p>To proceed, you need to take a selfie for biometric verification
+      </p>
+    </ion-text>
+    <ion-text color="secondary">
+      <ol>
+        <li>Make sure you are in a well lit environment and your ears are uncovered</li>
+        <li>Hold your device at eye level and look straight to the camera</li>
+      </ol>
+    </ion-text>
+  </div>
+  <ion-button (click)="takePicture()" class="stepper-progress-btn" color="secondary">
+    <ion-icon name="camera-outline"></ion-icon>&nbsp;Take Picture
+  </ion-button>
+</ng-template>

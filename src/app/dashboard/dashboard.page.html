@@ -1,0 +1,333 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="white-toolbar">
+    <!-- <ion-title>dashboard</ion-title> -->
+    <div>
+      <ion-text color="secondary">
+        <span style="font-weight: 500; font-size: 25px; text-transform: capitalize;">
+          welcome
+        </span>
+      </ion-text>
+      <ion-text color="primary">
+        <p style="font-weight: 500;margin: 0;">
+          How are you today {{user?.borrower_firstname}}?
+        </p>
+      </ion-text>
+    </div>
+    <ion-buttons slot="end">
+      <ion-button slot="icon-only" (click)="presentActionSheet()">
+        <ion-icon color="medium" name="headset"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-refresher slot="fixed" pullFactor="0.5" pullMin="100" pullMax="200" (ionRefresh)="refreshDashboard($event)">
+    <ion-refresher-content>
+    </ion-refresher-content>
+  </ion-refresher>
+ <ng-container *ngIf="dashboardData">
+  <div class="balance-card">
+    <h2 class="balance-title">
+      TOTAL BALANCE
+    </h2>
+    <div class="balance-info">
+      <span class="balance">
+        ₦{{showBalance ?  dashboardData?.current_loan_balance : '***,***'}}
+      </span>
+      <ion-button (click)="toggleBalance()" slot="icon-only" fill="clear" size="small" color="primary">
+        <ion-icon slot="icon-only" [name]="showBalance ? 'eye-off-outline':  'eye'" size="small">
+        </ion-icon>
+      </ion-button>
+    </div>
+    <!-- <div class="ion-text-center">
+      <ion-text color="medium">
+        <span style="font-size: 12px; text-transform: capitalize;">
+          repayment day
+        </span>
+      </ion-text>
+      &nbsp;
+      <ion-text color="secondary">
+        <span style="font-size: 15px">
+          10 July
+        </span>
+      </ion-text>
+    </div> -->
+  </div>
+  <div class="balance-card-bottom">
+    <div class="balance-progress">
+
+    </div>
+  </div>
+  <!-- <div class="dashboard-actions">
+    <div>
+      <ion-button color="primary" slot="icon-only" class="dashboard-action">
+        <img src="assets/images/loan.svg" alt="" srcset="">
+      </ion-button>
+    </div>
+    <div>
+      <ion-button color="primary" slot="icon-only" class="dashboard-action">
+        <img src="assets/images/top-up.svg" alt="" srcset="">
+      </ion-button>
+    </div>
+    <div>
+      <ion-button color="primary" slot="icon-only" class="dashboard-action">
+        <img src="assets/images/refund.svg" alt="" srcset="">
+      </ion-button>
+    </div>
+    <div>
+      <ion-button color="primary" slot="icon-only" class="dashboard-action">
+        <img src="assets/images/more.svg" alt="" srcset="">
+      </ion-button>
+    </div>
+  </div> -->
+ <div style="display: flex; flex-wrap: wrap; gap: 5px; margin-top: 25px; margin-bottom: 25px;">
+  <span (click)="presentApplyModal()" class="dashboard-cta">
+    <div class="dashboard-cta-icon">
+      <ion-icon name="add" slot="icon-only" color="primary"></ion-icon>
+    </div>
+    <span>
+      Apply for loan
+    </span>
+  </span>
+  <span [routerLink]="['/main/statement-account']" class="dashboard-cta remove-focus">
+    <div class="dashboard-cta-icon">
+      <ion-icon name="document-text-outline" color="primary"></ion-icon>
+    </div>
+    <span>
+      Account Letter
+    </span>
+  </span>
+  <!-- <span (click)="showLiquidationModal = true" class="dashboard-cta">
+    <div class="dashboard-cta-icon">
+      <ion-icon name="print" color="primary"></ion-icon>
+    </div>
+    <span>
+      Liquidate Loan
+    </span>
+  </span>
+  <span class="dashboard-cta">
+    <div class="dashboard-cta-icon">
+      <ion-icon name="ellipsis-horizontal" color="primary"></ion-icon>
+    </div>
+    <span>
+      More
+    </span>
+  </span> -->
+ </div>
+ <p style="font-size: 14px; font-weight: 300; margin-bottom: 5px; color: #002E5B; padding: 0 5px;" class="ion-margin-top">
+  Recent Repayments
+ </p>
+ <div style="border-radius: 3px;">
+  <ion-list class="transactions">
+   <ng-container *ngFor="let repayment of repayments">
+    <ion-item class="ion-no-padding">
+      <!-- <ion-icon slot="start" color="secondary" name="checkmark-circle-outline"></ion-icon> -->
+      <ion-label>
+        <div class="flex flex-column">
+         <ion-text color="secondary">
+          <span class="list-item-text">
+            {{getRepaymentType(repayment.loan_repayment_method_id)}}
+          </span>
+         </ion-text>
+          <span class="list-item-subtitle">
+            {{repayment.repayment_collected_date}}
+          </span>
+        </div>
+      </ion-label>
+      <ion-label slot="end">
+        <div class="flex flex-column">
+          <ion-text>
+           <span class="list-item-text">
+            {{repayment.repayment_amount | currency: '₦'}}
+           </span>
+          </ion-text>
+           <!-- <span class="list-item-subtitle">
+             August refund
+           </span> -->
+         </div>
+      </ion-label>
+    </ion-item>
+   </ng-container>
+    <!-- <ion-item class="ion-no-padding">
+      <ion-icon slot="start" color="secondary" name="checkmark-circle-outline"></ion-icon>
+      <ion-label>
+        <div class="flex flex-column">
+         <ion-text color="secondary">
+          <span class="list-item-text">
+            Refund
+          </span>
+         </ion-text>
+          <span class="list-item-subtitle">
+            01/09/2021
+          </span>
+        </div>
+      </ion-label>
+      <ion-label slot="end">
+        <div class="flex flex-column">
+          <ion-text>
+           <span class="list-item-text">
+             N20,000
+           </span>
+          </ion-text>
+           <span class="list-item-subtitle">
+             August refund
+           </span>
+         </div>
+      </ion-label>
+    </ion-item>
+    <ion-item class="ion-no-padding">
+      <ion-icon slot="start" color="secondary" name="checkmark-circle-outline"></ion-icon>
+      <ion-label>
+        <div class="flex flex-column">
+         <ion-text color="secondary">
+          <span class="list-item-text">
+            Refund
+          </span>
+         </ion-text>
+          <span class="list-item-subtitle">
+            01/09/2021
+          </span>
+        </div>
+      </ion-label>
+      <ion-label slot="end">
+        <div class="flex flex-column">
+          <ion-text>
+           <span class="list-item-text">
+             N20,000
+           </span>
+          </ion-text>
+           <span class="list-item-subtitle">
+             August refund
+           </span>
+         </div>
+      </ion-label>
+    </ion-item>
+    <ion-item class="ion-no-padding">
+      <ion-icon slot="start" color="secondary" name="checkmark-circle-outline"></ion-icon>
+      <ion-label>
+        <div class="flex flex-column">
+         <ion-text color="secondary">
+          <span class="list-item-text">
+            Refund
+          </span>
+         </ion-text>
+          <span class="list-item-subtitle">
+            01/09/2021
+          </span>
+        </div>
+      </ion-label>
+      <ion-label slot="end">
+        <div class="flex flex-column">
+          <ion-text>
+           <span class="list-item-text">
+             N20,000
+           </span>
+          </ion-text>
+           <span class="list-item-subtitle">
+             August refund
+           </span>
+         </div>
+      </ion-label>
+    </ion-item>
+    <ion-item class="ion-no-padding">
+      <ion-icon slot="start" color="secondary" name="checkmark-circle-outline"></ion-icon>
+      <ion-label>
+        <div class="flex flex-column">
+         <ion-text color="secondary">
+          <span class="list-item-text">
+            Refund
+          </span>
+         </ion-text>
+          <span class="list-item-subtitle">
+            01/09/2021
+          </span>
+        </div>
+      </ion-label>
+      <ion-label slot="end">
+        <div class="flex flex-column">
+          <ion-text>
+           <span class="list-item-text">
+             N20,000
+           </span>
+          </ion-text>
+           <span class="list-item-subtitle">
+             August refund
+           </span>
+         </div>
+      </ion-label>
+    </ion-item>
+    <ion-item class="ion-no-padding">
+      <ion-icon slot="start" color="secondary" name="checkmark-circle-outline"></ion-icon>
+      <ion-label>
+        <div class="flex flex-column">
+         <ion-text color="secondary">
+          <span class="list-item-text">
+            Refund
+          </span>
+         </ion-text>
+          <span class="list-item-subtitle">
+            01/09/2021
+          </span>
+        </div>
+      </ion-label>
+      <ion-label slot="end">
+        <div class="flex flex-column">
+          <ion-text>
+           <span class="list-item-text">
+             N20,000
+           </span>
+          </ion-text>
+           <span class="list-item-subtitle">
+             August refund
+           </span>
+         </div>
+      </ion-label>
+    </ion-item> -->
+  </ion-list>
+ </div>
+ </ng-container>
+</ion-content>
+
+
+
+<ion-modal
+(didDismiss)="showSupportModal = false"
+  [isOpen]="showSupportModal"
+  [breakpoints]="[0, 0.2, 0.5]"
+  [initialBreakpoint]="0.2"
+>
+  <ng-template>
+    <ion-content class="ion-padding">
+     <support-methods></support-methods>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<ion-modal
+(didDismiss)="showLiquidationModal = false"
+  [isOpen]="showLiquidationModal"
+  [breakpoints]="[0, 0.5, 1]"
+  [initialBreakpoint]="0.5"
+>
+  <ng-template>
+    <ion-content class="ion-padding">
+    <ion-text color="primary">
+      <h4>
+        Liquidate your loan
+      </h4>
+    </ion-text>
+     <form class="ion-margin-top" autocomplete="off">
+      <ion-item class="ion-no-padding ion-margin-bottom">
+        <ion-label color="medium" position="stacked">
+          Enter preferred email
+        </ion-label>
+        <ion-icon size="small" slot="start" color="medium" name="mail"></ion-icon>
+       <ion-input  autocapitalize="off" autocomplete="off" class="form-input"></ion-input>
+      </ion-item>
+  
+      <ion-button expand="block" class="ion-margin-top" color="secondary">Proceed</ion-button>
+     </form>
+    </ion-content>
+  </ng-template>
+</ion-modal>

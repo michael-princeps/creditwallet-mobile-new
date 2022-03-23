@@ -1,0 +1,20 @@
+<div class="stepper-content">
+  <ion-text color="dark">
+    <h3 class="stepper-title">
+      How much do you want?
+    </h3>
+  </ion-text>
+  <form style="display: flex; flex-direction: column; flex: 1;" [formGroup]="loanForm">
+    <ion-item class="ion-no-padding ion-margin-bottom">
+      <ion-label color="medium" position="stacked">
+        Loan Amount
+      </ion-label>
+      <ion-input type="number" enterkeyhint="next" formControlName="loanamount" class="form-input"></ion-input>
+      <small
+        *ngIf="(formControls.loanamount.dirty || formControls.loanamount.touched) && formControls.loanamount.errors"
+        slot="error">Enter your loan amount</small>
+        <small slot="helper">Enter your preferred amount between 5000 and 1000000</small>
+    </ion-item>
+    <ion-button (click)="goToNext()" class="stepper-progress-btn" color="secondary">next</ion-button>
+  </form>
+</div>

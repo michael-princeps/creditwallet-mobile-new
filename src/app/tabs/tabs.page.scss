@@ -1,0 +1,30 @@
+
+ion-tab-bar{
+    --background: #ffffff;
+    --border: 0;
+    // padding: 5px;
+    // border-radius: 5px;
+}
+
+ion-tab-button {
+    // --color-selected: #ffffff;
+
+    &.tab-selected {
+        // color: var(--color-selected);
+        position: relative;
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 4px;
+            border-radius: 8px;
+            background-color: #002E5B;
+        }
+
+    // background: rgba(0, 46, 91, 1);
+    // border-radius: 999px;
+    }
+}

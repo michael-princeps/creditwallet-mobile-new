@@ -1,0 +1,25 @@
+<div class="stepper-content">
+  <ion-text color="primary">
+    <h3 class="stepper-title ion-text-center">
+      Please fill the form to get started
+    </h3>
+  </ion-text>
+ <form style="display: flex; flex-direction: column; flex: 1;" [formGroup]="loanForm">
+  <ion-item class="ion-no-padding ion-margin-bottom">
+    <ion-label color="medium" position="stacked">
+      IPPIS Number
+    </ion-label>
+   <ion-input type="text" enterkeyhint="next" formControlName="ippis_number" #a (keyup.enter)="setFocus(b)" class="form-input"></ion-input>
+   <small *ngIf="(formControls.ippis_number.dirty || formControls.ippis_number.touched) && formControls.ippis_number.errors" slot="error">Enter your IPPIS number</small>
+  </ion-item>
+  <ion-item class="ion-no-padding ion-margin-bottom">
+    <ion-label color="medium" position="stacked">
+      Phone Number
+    </ion-label>
+    <!-- <ion-icon style="color: rgba(32, 27, 27, .5);" slot="start" name="keypad"></ion-icon> -->
+   <ion-input type="tel" enterkeyhint="next" formControlName="telephone" #b (keyup.enter)="goToNext()" class="form-input"></ion-input>
+   <small *ngIf="(formControls.telephone.dirty || formControls.telephone.touched) && formControls.telephone.errors" slot="error">Enter your phone number</small>
+  </ion-item>
+  <ion-button (click)="goToNext()" class="stepper-progress-btn" color="secondary">next</ion-button>
+ </form>
+</div>

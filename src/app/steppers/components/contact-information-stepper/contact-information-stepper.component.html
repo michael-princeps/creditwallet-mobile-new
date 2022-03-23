@@ -1,0 +1,68 @@
+<div class="stepper-content">
+  <ion-text color="primary">
+    <h3 class="stepper-title">
+      Your Contact Information
+    </h3>
+  </ion-text>
+  <ion-text color="medium">
+    <p class="stepper-bigtext">
+      This data would be used for your future applications
+    </p>
+  </ion-text>
+  
+  <form [formGroup]="contactForm" style="flex: 1; display: flex; flex-direction: column;">
+
+  <ion-item class="ion-no-padding ion-margin-bottom">
+    <ion-label color="medium" position="stacked">
+      Email
+    </ion-label>
+    <!-- <ion-icon style="color: rgba(32, 27, 27, .5);" slot="start" name="keypad"></ion-icon> -->
+    <ion-input enterkeyhint="next" #a (keyup.enter)="setFocus(c)" formControlName="email" type="email" class="form-input"></ion-input>
+    <small *ngIf="(formControls.email.dirty || formControls.email.touched) && formControls.email.errors"
+    slot="error">Enter valid email</small>
+  </ion-item>
+  <!-- <ion-item class="ion-no-padding ion-margin-bottom">
+    <ion-label color="medium" position="stacked">
+      Phone Number
+    </ion-label>
+    <ion-input enterkeyhint="next" #b (keyup.enter)="setFocus(c)" formControlName="telephone" type="tel" class="form-input"></ion-input>
+    <small *ngIf="(formControls.telephone.dirty || formControls.telephone.touched) && formControls.telephone.errors"
+    slot="error">Enter phone number</small>
+  </ion-item> -->
+  <ion-item class="ion-no-padding ion-margin-bottom">
+    <ion-label color="medium" position="stacked">
+      House Address
+    </ion-label>
+    <!-- <ion-icon style="color: rgba(32, 27, 27, .5);" slot="start" name="keypad"></ion-icon> -->
+    <!-- <ion-input type="text" ></ion-input> -->
+    <ion-textarea enterkeyhint="next" #c (keyup.enter)="setFocus(d)" formControlName="house_address" class="form-input"></ion-textarea>
+    <small *ngIf="(formControls.house_address.dirty || formControls.house_address.touched) && formControls.house_address.errors"
+    slot="error">Enter house address</small>
+  </ion-item>
+  <ion-item class="ion-no-padding ion-margin-bottom">
+    <ion-label color="medium" position="stacked">
+      City
+    </ion-label>
+    <!-- <ion-icon style="color: rgba(32, 27, 27, .5);" slot="start" name="keypad"></ion-icon> -->
+    <ion-input enterkeyhint="next" #d (keyup.enter)="openSelect(e)" formControlName="city" type="text" class="form-input"></ion-input>
+    <small *ngIf="(formControls.city.dirty || formControls.city.touched) && formControls.city.errors"
+    slot="error">Enter city</small>
+  </ion-item>
+  <ion-item class="ion-no-padding ion-margin-bottom">
+    <ion-label color="medium" position="stacked">
+      State
+    </ion-label>
+    <!-- <ion-select #e formControlName="state" [interfaceOptions]="customActionSheetOptions" interface="alert">
+      <ion-select-option *ngFor="let state of states" [value]="state.name">{{state.name}}</ion-select-option>
+    </ion-select> -->
+    <ionic-selectable #e formControlName="state" [items]="states" itemValueField="name" itemTextField="name"
+    [canSearch]="true">
+  </ionic-selectable>
+    <small *ngIf="(formControls.state.dirty || formControls.state.touched) && formControls.state.errors"
+    slot="error">Select state</small>
+  </ion-item>
+  <ion-button type="button" (click)="goToNext()" class="stepper-progress-btn" color="secondary">next</ion-button>
+  </form>
+
+
+</div>

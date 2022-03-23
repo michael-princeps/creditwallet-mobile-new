@@ -1,0 +1,15 @@
+<div class="stepper-content">
+  <ion-text color="primary">
+    <h3 class="stepper-title ion-text-center">
+      Please use the code that was sent to your email or phone number to authorize the transaction
+    </h3>
+  </ion-text>
+  <div style="display: flex; flex-direction: column; flex: 1;">
+    <div class="ion-text-center ion-margin-top ion-margin-bottom">
+      <ng-otp-input (onInputChange)="onOtpChange($event)" [config]="config"></ng-otp-input>
+    </div>
+    <ion-button [disabled]="disabled" (click)="verifyCode()" class="stepper-progress-btn" color="secondary">
+      Proceed
+    </ion-button>
+  </div>
+</div>

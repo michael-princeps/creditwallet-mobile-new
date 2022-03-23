@@ -1,0 +1,26 @@
+ion-item.input-container {
+    --background: rgba(196, 196, 196, 0.27);
+    --border-radius: 10px;
+    --min-height: 50px;
+
+}
+
+ion-input.input-element {
+    --padding-start: 20px !important;
+    --padding-end: 20px !important;
+    // --placeholder-color	: rgba(49, 49, 49, 0.2);
+}
+
+ion-select{
+    width: 100%;
+    justify-content: center;
+    // --padding-end : 0rem;
+    // --padding-start: 0
+}
+
+// ion-select::part(icon) {
+//     // opacity: 1;
+//     margin-left: 1em;
+//     // color: red;
+//     background: url('/assets/icon/chevron-down-icon.svg') no-repeat center;
+// }

@@ -1,0 +1,18 @@
+<div class="stepper-content">
+  <ion-text color="dark">
+    <h3 class="stepper-title">
+      Kindly provide your phone number
+    </h3>
+  </ion-text>
+ <form style="display: flex; flex-direction: column; flex: 1;" [formGroup]="numberForm">
+  <ion-item class="ion-no-padding ion-margin-bottom">
+    <ion-label color="medium" position="stacked">
+      Enter phone number
+    </ion-label>
+   <ion-input type="tel" enterkeyhint="done" formControlName="telephone" class="form-input"></ion-input>
+   <!-- <ion-icon src="assets/icon/phone-icon.svg" slot="end" size="small" ></ion-icon> -->
+   <small *ngIf="(formControls.telephone.dirty || formControls.telephone.touched) && formControls.telephone.errors" slot="error">Enter your phone number</small>
+  </ion-item>
+  <ion-button (click)="goToNext()" class="stepper-progress-btn" color="secondary">next</ion-button>
+ </form>
+</div>

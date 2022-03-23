@@ -1,0 +1,65 @@
+<!-- <ion-header class="ion-no-border">
+  <ion-toolbar class="white-toolbar" class="ion-no-border white-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button color="primary" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Log in</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content class="ion-padding">
+  <div style="height: 100%; display: flex; flex-direction: column; justify-content: center;">
+    <ion-text color="primary">
+      <h3 class="stepper-title ion-text-center">
+        Welcome, {{user?.borrower_firstname}}
+      </h3>
+    </ion-text>
+    <form autocomplete="off" [formGroup]="loginForm">
+      <p *ngIf="loginForm.errors" class="ion-text-center">
+        <ion-text color="danger">
+          <small>{{loginForm.errors.message}}</small>
+        </ion-text>
+      </p>
+      <ion-item class="ion-no-padding ion-margin-bottom">
+        <ion-label color="medium" position="stacked">
+          Password
+        </ion-label>
+        <div class="has-password-input">
+          <ion-input name="xyz123" id="xyz123" autocomplete="xyz123" formControlName="password"
+            (keyup.enter)="performManualLogin()" enterkeyhint="done" #b autocapitalize="off"
+            [type]="showPassword ? 'text':  'password'" class="form-input password-input"></ion-input>
+          <ion-button (click)="togglePasswordInput()" class="password-toggle ion-no-margin" fill="clear"
+            slot="icon-only">
+            <ion-icon color="medium" class="ion-no-margin" slot="icon-only" slot="start"
+              [name]="showPassword ? 'eye-off' : 'eye'"></ion-icon>
+          </ion-button>
+        </div>
+        <small *ngIf="(formControls.password.dirty || formControls.password.touched) && formControls.password.errors"
+          slot="error">Enter your passowrd</small>
+      </ion-item>
+      <ion-button type="button" (click)="performManualLogin()" expand="block" color="secondary">Log In</ion-button>
+    </form>
+    <div class="ion-text-center">
+      <ion-button *ngIf="hasFingerPrint || hasTouchId" fill="clear" (click)="openBioAuth()" slot="icon-only">
+        <ion-icon icon-only size="large" color="primary" name="finger-print-outline"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="hasFaceID" fill="clear" (click)="openBioAuth()" slot="icon-only">
+        <ion-icon icon-only size="large" color="primary" name="scan-circle-outline"></ion-icon>
+      </ion-button>
+    </div>
+    <p class="ion-text-center">
+      Not {{user?.borrower_firstname}}?&nbsp;<ion-text color="secondary">
+        <span style="cursor: pointer;" class="remove-focus" (click)="switchAccount()" type="button" fill="clear" color="secondary">
+        Switch Account
+      </span>
+    </ion-text>
+    </p>
+    <p class="ion-text-center">
+     <ion-text color="secondary">
+      <span style="cursor: pointer;" (click)="presentResetPasswordModal()" class="remove-focus">
+        Forgot Password?
+      </span>
+     </ion-text>
+    </p>
+  </div>
+</ion-content>

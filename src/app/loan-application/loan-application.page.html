@@ -1,0 +1,120 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="white-toolbar">
+    <ion-buttons slot="start">
+      <ion-button color="secondary" slot="icon-only" (click)="presentCancelAlert()" *ngIf="currentStep == 1">
+        <ion-icon color="primary" name="close"></ion-icon>
+      </ion-button>
+      <ion-button (click)="goToPrevious()" *ngIf="currentStep > 1 && currentStep < 9">
+        <ion-icon color="primary" slot="icon-only" name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title style="font-size: 14px;" color="primary">{{stepperTitle}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="secondary" slot="icon-only" (click)="presentCancelAlert()"
+        *ngIf="currentStep > 1 && currentStep < 9">
+        <ion-icon color="primary" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar class="white-toolbar">
+    <div class="stepper-steps">
+      <span class="stepper-step" [ngClass]="{'currentstep': currentStep ==1, 'activestep': currentStep >=1}">
+
+      </span>
+      <span class="stepper-step" [ngClass]="{'currentstep': currentStep ==2, 'activestep': currentStep >=2}">
+
+      </span>
+      <span class="stepper-step" [ngClass]="{'currentstep': currentStep ==3, 'activestep': currentStep >=3}">
+
+      </span>
+      <span class="stepper-step" [ngClass]="{'currentstep': currentStep ==4, 'activestep': currentStep >=4}">
+
+      </span>
+      <span class="stepper-step" [ngClass]="{'currentstep': currentStep ==5, 'activestep': currentStep >=5}">
+
+      </span>
+      <span class="stepper-step" [ngClass]="{'currentstep': currentStep ==6, 'activestep': currentStep >=6}">
+
+      </span>
+      <span class="stepper-step" [ngClass]="{'currentstep': currentStep ==7, 'activestep': currentStep >=7}">
+
+      </span>
+      <span class="stepper-step" [ngClass]="{'currentstep': currentStep ==8, 'activestep': currentStep >=8}">
+
+      </span>
+      <!-- <span class="stepper-step" [ngClass]="{'currentstep': currentStep ==6, 'activestep': currentStep >=6}">
+  
+      </span> -->
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+
+  <div *ngIf="(pageData$ | async) as pageData" style="position: relative; height: 100%;">
+    <!-- <div *ngIf="pageData.page == 1" style="height: 100%;" class="ion-padding"
+      [@fadeSlideInOut]="{value: true, params: {enter: enterPercentage, leave: leavePercentage}}">
+      <app-loan-amount-stepper (goNextEmitter)="goToNextPage($event)"></app-loan-amount-stepper>
+    </div> -->
+    <div *ngIf="pageData.page == 1" style="height: 100%;" class="ion-padding"
+      [@fadeSlideInOut]="{value: true, params: {enter: enterPercentage, leave: leavePercentage}}">
+      <stepper-one (goNextEmitter)="goToNextPage($event)"></stepper-one>
+    </div>
+    <div *ngIf="pageData.page == 2" style="height: 100%;" class="ion-padding"
+      [@fadeSlideInOut]="{value: true, params: {enter: enterPercentage, leave: leavePercentage}}">
+      <stepper-two (goNextEmitter)="goToNextPage($event)"></stepper-two>
+    </div>
+    <div *ngIf="pageData.page == 3" style="height: 100%;" class="ion-padding"
+      [@fadeSlideInOut]="{value: true, params: {enter: enterPercentage, leave: leavePercentage}}">
+      <stepper-three (goNextEmitter)="goToNextPage($event)"></stepper-three>
+    </div>
+    <div *ngIf="pageData.page == 4" style="height: 100%;" class="ion-padding"
+      [@fadeSlideInOut]="{value: true, params: {enter: enterPercentage, leave: leavePercentage}}">
+      <stepper-four (goNextEmitter)="getLoanOffer($event)"></stepper-four>
+    </div>
+    <div *ngIf="pageData.page == 5" style="height: 100%;" class="ion-padding"
+      [@fadeSlideInOut]="{value: true, params: {enter: enterPercentage, leave: leavePercentage}}">
+      <loan-breakdown-stepper [loanBreakdownData]="loanDetails" (goNextEmitter)="goToNextPage($event)">
+      </loan-breakdown-stepper>
+    </div>
+    <div *ngIf="pageData.page == 6" style="height: 100%;" class="ion-padding"
+      [@fadeSlideInOut]="{value: true, params: {enter: enterPercentage, leave: leavePercentage}}">
+      <app-personal-information-stepper *ngIf="loanDetails.type == 2" [referralCode]="code"
+        (goNextEmitter)="goToNextPage($event)"></app-personal-information-stepper>
+      <app-auto-disburse-personal-stepper *ngIf="loanDetails.type == 1" [referralCode]="code"
+        [loanDetails]="loanDetails" (goNextEmitter)="goToNextPage($event)"></app-auto-disburse-personal-stepper>
+    </div>
+    <div *ngIf="pageData.page == 7" style="height: 100%;" class="ion-padding"
+      [@fadeSlideInOut]="{value: true, params: {enter: enterPercentage, leave: leavePercentage}}">
+      <app-contact-information-stepper *ngIf="loanDetails.type == 2" (goNextEmitter)="goToNextPage($event)">
+      </app-contact-information-stepper>
+      <app-image-capture *ngIf="loanDetails.type == 1" [loadDetails]="loanDetails"
+        (goNextEmitter)="goToNextPage($event)"></app-image-capture>
+    </div>
+    <div *ngIf="pageData.page == 8" style="height: 100%;" class="ion-padding"
+      [@fadeSlideInOut]="{value: true, params: {enter: enterPercentage, leave: leavePercentage}}">
+      <app-employment-information-stepper *ngIf="loanDetails.type == 2" (goNextEmitter)="submitApplication($event)">
+      </app-employment-information-stepper>
+      <video-capture *ngIf="loanDetails.type == 1" [loanDetails]="loanDetails" (goNextEmitter)="goToNextPage($event)">
+      </video-capture>
+    </div>
+    <div *ngIf="pageData.page == 9" style="height: 100%;" class="ion-padding"
+      [@fadeSlideInOut]="{value: true, params: {enter: enterPercentage, leave: leavePercentage}}">
+      <div class="loan-success">
+        <div class="loan-success-img">
+          <ion-img src="assets/images/tick.png">
+
+          </ion-img>
+        </div>
+        <p class="loan-success-text">
+          You have sucessfully applied for a loan. Please await a feedback from our team
+        </p>
+
+        <ion-button (click)="close()" class="loan-success-btn" color="secondary">
+          Okay
+        </ion-button>
+      </div>
+
+    </div>
+  </div>
+</ion-content>

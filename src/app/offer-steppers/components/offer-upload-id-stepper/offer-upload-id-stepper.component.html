@@ -1,0 +1,22 @@
+<div class="stepper-content">
+  <ion-text color="primary">
+    <h3 class="stepper-title ion-text-center">
+      Please upload a copy of a valid identification document (Driver’s Licence, International Passport, National ID, Voter’s or Staff ID)
+    </h3>
+  </ion-text>
+  <div style="display: flex; flex-direction: column; flex: 1;">
+    <div class="ion-text-center">
+      <ion-button (click)="selectFile()" class="stepper-progress-btn" color="secondary">
+        Select File
+      </ion-button>
+     <ion-text color="secondary">
+      <p *ngIf="selectedFile" class="ion-text-center">
+        {{selectedFile.name}}
+      </p>
+     </ion-text>
+    </div>
+    <ion-button (click)="selectedFile ? uploadIdCard() : acceptLoanOffer()" class="stepper-progress-btn" color="secondary">
+      {{selectedFile ? 'Proceed' : 'Skip and Proceed'}}
+    </ion-button>
+  </div>
+</div>

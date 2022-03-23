@@ -1,0 +1,12 @@
+.landing-title {
+    font-size: 25px;
+    &:not(:last-of-type) {
+        margin: 0;
+        margin-bottom: 5px;
+    }
+}
+
+.landing-text {
+    font-size: 16px;
+    font-weight: 200;
+}

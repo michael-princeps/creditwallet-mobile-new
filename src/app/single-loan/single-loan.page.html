@@ -1,0 +1,250 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="white-toolbar">
+    <ion-title>Loan Details</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/main/loans" text="" color="primary">
+      </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" pullFactor="0.5" pullMin="100" pullMax="200" (ionRefresh)="refreshLoanDetails($event)">
+    <ion-refresher-content>
+    </ion-refresher-content>
+  </ion-refresher>
+ <ng-container *ngIf="singleLoan">
+  <ion-card color="secondary">
+    <ion-card-header>
+      <ion-item color="secondary" lines="none" class="ion-no-padding">
+        <ion-card-subtitle>{{loanObject.loan_application_id}}</ion-card-subtitle>
+        <ion-badge *ngIf="loanDetails.loan_status == 1" slot="end" color="success">
+          Open
+        </ion-badge>
+        <ion-badge *ngIf="loanDetails.loan_status == 2" slot="end" color="primary">
+          Closed
+        </ion-badge>
+      </ion-item>
+      <ion-card-title>{{loanObject.loan_principal_amount | currency: '₦'}}</ion-card-title>
+    </ion-card-header>
+    
+    <div class="ion-padding-bottom">
+    <ion-item  color="secondary" lines="none" class="item">
+      <ion-label class="item-title" slot="start">
+        Duration
+      </ion-label>
+      <ion-note class="item-value" slot="end" color="light">
+        {{loanObject.loan_duration}} months
+      </ion-note>
+    </ion-item>
+    <ion-item  color="secondary" lines="none" class="item">
+      <ion-label class="item-title" slot="start">
+        Monthly Repayment
+      </ion-label>
+      <ion-note class="item-value" slot="end" color="light">
+        {{loanObject.first_repayment_amount | currency: '₦'}}
+      </ion-note>
+    </ion-item>
+    <ion-item  color="secondary" lines="none" class="item">
+      <ion-label class="item-title" slot="start">
+        Start Date
+      </ion-label>
+      <ion-note class="item-value" slot="end" color="light">
+        {{loanObject.loan_released_date}}
+      </ion-note>
+    </ion-item>
+    <ion-item  color="secondary" lines="none" class="item">
+      <ion-label class="item-title" slot="start">
+        Maturity Date
+      </ion-label>
+      <ion-note class="item-value" slot="end" color="light">
+        {{loanObject.loan_override_maturity_date}}
+      </ion-note>
+    </ion-item>
+    <ion-item  color="secondary" lines="none" class="item">
+      <ion-label class="item-title" slot="start">
+        Outstanding Amount
+      </ion-label>
+      <ion-note class="item-value" slot="end" color="light">
+        {{loanDetails.outstanding_amount | currency: '₦'}}
+      </ion-note>
+    </ion-item>
+    <ion-item  color="secondary" lines="none" class="item">
+      <ion-label class="item-title" slot="start">
+        Total Paid
+      </ion-label>
+      <ion-note class="item-value" slot="end" color="light">
+        {{loanObject.total_paid | currency: '₦'}}
+      </ion-note>
+    </ion-item>
+    <ion-item  color="secondary" lines="none" class="item">
+      <ion-label class="item-title" slot="start">
+        Cumulative Penalty
+      </ion-label>
+      <ion-note class="item-value" slot="end" color="light">
+        {{loanDetails.cummulative_penalty | currency: '₦'}}
+      </ion-note>
+    </ion-item>
+    <ion-item  color="secondary" lines="none" class="item">
+      <ion-label slot="start" >
+       <ion-text>
+        <h3 class="item-title">
+          Balance
+        </h3>
+       </ion-text>
+       <!-- <ion-text color="medium">
+        <p style="font-size: 12px; white-space: pre-wrap;">
+          (Total Due + Late Fess - Total Paid)
+        </p>
+       </ion-text> -->
+      </ion-label>
+      <ion-note class="item-value" slot="end" color="light">
+        ₦{{loanDetails.balance_on_loan}}
+      </ion-note>
+    </ion-item>
+    </div>
+  </ion-card>
+
+  <!-- <div *ngIf="loanDetails.loan_status == 1 && loanDetails.liquidated == 0" class="ion-padding-start ion-padding-end">
+    <ion-button (click)="showLiquidationModal = true" expand="block" color="primary">
+      Apply for Liquidation
+    </ion-button>
+  </div> -->
+  <div class="ion-padding-start ion-padding-end" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 5px;">
+    <span *ngIf="loanDetails.loan_status == 1 && loanDetails.liquidated == 0" (click)="showLiquidationModal = true" class="dashboard-cta">
+      <div class="dashboard-cta-icon">
+        <ion-icon name="wallet" slot="icon-only" color="primary"></ion-icon>
+      </div>
+      <span>
+        Liquidate
+      </span>
+    </span>
+    <span (click)="statementModal = true" class="dashboard-cta remove-focus">
+      <div class="dashboard-cta-icon">
+        <ion-icon name="document-text-outline" color="primary"></ion-icon>
+      </div>
+      <span>
+        Account Statement
+      </span>
+    </span>
+   </div>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>RepaymentHistory</ion-card-subtitle>
+    </ion-card-header>
+    <div class="ion-padding-bottom">
+      <ion-list lines="none">
+        <ng-container *ngFor="let repayment of repayments">
+          <!-- <ion-item class="transaction">
+            <ion-label slot="start">
+              <ion-text color="success">
+                <h3 style="font-size: 15px; font-weight: bold;">{{repayment.repayment_amount | currency: '₦'}}</h3>
+              </ion-text>
+              <ion-text color="medium">
+                <p style="font-size: 12px;">
+                  {{repayment.custom_field_8338}}
+                </p>
+              </ion-text>
+            </ion-label>
+            <ion-note slot="end" style="font-size: 13px;">
+              {{repayment.repayment_collected_date}}
+            </ion-note>
+          </ion-item> -->
+          <ion-item class="">
+            <!-- <ion-icon slot="start" color="secondary" name="checkmark-circle-outline"></ion-icon> -->
+            <ion-label>
+              <ion-text color="medium">
+                <h3 style="font-size: 15px; font-weight: 500;">
+                  <!-- {{repayment.custom_field_8338}} -->
+                  {{getRepaymentType(repayment.loan_repayment_method_id)}}
+                </h3>
+               </ion-text>
+               <ion-text color="medium">
+                <p style="font-size: 12px; font-weight: 300;">
+                  {{repayment.repayment_collected_date}}
+                </p>
+               </ion-text>
+            </ion-label>
+            <ion-label slot="end">
+              <ion-note color="tertiary">
+                <span style="font-size: 15px; font-weight: bold;">
+                 {{repayment.repayment_amount | currency: '₦'}}
+                </span>
+               </ion-note>
+            </ion-label>
+          </ion-item>
+        </ng-container>
+      </ion-list>
+      
+    </div>
+  </ion-card>
+ </ng-container>
+</ion-content>
+
+
+<ion-modal
+(didDismiss)="closeModal()"
+[backdropDismiss]="shouldBackdropDismiss"
+  [isOpen]="showLiquidationModal"
+  [breakpoints]="[0, 0.5, 1]"
+  [initialBreakpoint]="0.5"
+>
+  <ng-template>
+    <ion-content class="ion-padding">
+    <ion-text color="primary">
+      <h4 class="ion-text-center">
+        Liquidate your loan
+      </h4>
+    </ion-text>
+    <form [formGroup]="emailForm" class="ion-margin-top" autocomplete="off">
+      <ion-item class="ion-no-padding ion-margin-bottom">
+        <ion-label color="medium" position="stacked">
+          Enter preferred email
+        </ion-label>
+       <ion-input formControlName="email" autocapitalize="off" autocomplete="off" class="form-input"></ion-input>
+       <small *ngIf="(formControls.email.dirty || formControls.email.touched) && formControls.email.errors" slot="error">Provide a valid email</small>
+      </ion-item>
+      <ion-button  [disabled]="loading" type="button" expand="block" class="ion-margin-top" color="secondary" (click)="handleRequestLiquidation()">
+        <ion-spinner *ngIf="loading; else showText" name="bubbles"></ion-spinner>
+      </ion-button>
+     </form>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<ion-modal
+(didDismiss)="closeModal()"
+[backdropDismiss]="shouldBackdropDismiss"
+  [isOpen]="statementModal"
+  [breakpoints]="[0, 0.5, 1]"
+  [initialBreakpoint]="0.5"
+>
+  <ng-template>
+    <ion-content class="ion-padding">
+    <ion-text color="primary">
+      <h4 class="ion-text-center">
+        Account Statement
+      </h4>
+    </ion-text>
+    <form [formGroup]="emailForm" class="ion-margin-top" autocomplete="off">
+      <ion-item class="ion-no-padding ion-margin-bottom">
+        <ion-label color="medium" position="stacked">
+          Enter preferred email
+        </ion-label>
+       <ion-input formControlName="email" autocapitalize="off" autocomplete="off" class="form-input"></ion-input>
+       <small *ngIf="(formControls.email.dirty || formControls.email.touched) && formControls.email.errors" slot="error">Provide a valid email</small>
+      </ion-item>
+      <ion-button  [disabled]="loading" type="button" expand="block" class="ion-margin-top" color="secondary" (click)="handleRequestStatement()">
+        <ion-spinner *ngIf="loading; else showText" name="bubbles"></ion-spinner>
+      </ion-button>
+     </form>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<ng-template #showText>
+  Proceed
+</ng-template>
+

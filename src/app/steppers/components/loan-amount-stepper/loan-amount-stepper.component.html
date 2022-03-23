@@ -1,0 +1,37 @@
+<div class="stepper-content">
+  <ion-text color="primary">
+    <h3 class="stepper-title ion-text-center">
+      How much loan do you want?
+    </h3>
+  </ion-text>
+ <form style="display: flex; flex-direction: column; flex: 1;" [formGroup]="loanForm">
+    <!-- <ion-text color="medium">
+    <p class="stepper-bigtext">
+      Enter the amount you would like to borrow.
+    </p>
+  </ion-text> -->
+  <ion-item class="ion-no-padding ion-margin-bottom">
+    <ion-label color="medium" position="stacked">
+      Enter the amount you would like to borrow.
+    </ion-label>
+    <!-- <ion-icon style="color: rgba(32, 27, 27, .5);" slot="start" name="keypad"></ion-icon> -->
+   <ion-input type="number" enterkeyhint="next" formControlName="loan_amount" #a (keyup.enter)="setFocus(b)" class="form-input"></ion-input>
+   <small *ngIf="(formControls.loan_amount.dirty || formControls.loan_amount.touched) && formControls.loan_amount.errors" slot="error">Enter the amount you want</small>
+  </ion-item>
+  <!-- <ion-text color="medium">
+    <p class="stepper-bigtext">
+      Select how long
+    </p>
+  </ion-text> -->
+  <ion-item class="ion-no-padding">
+    <ion-label color="medium" position="stacked">
+      Select duration
+    </ion-label>
+    <ion-select formControlName="tenor" #b [interfaceOptions]="customActionSheetOptions"  okText="Okay" cancelText="Dismiss" interface="alert">
+      <ion-select-option *ngFor="let tenor of tenors" [value]="tenor.value">{{tenor.label}}</ion-select-option>
+    </ion-select>
+    <small *ngIf="(formControls.tenor.dirty || formControls.tenor.touched) && formControls.tenor.errors" slot="error">Select Duration</small>
+  </ion-item>
+  <ion-button (click)="goToNext()" class="stepper-progress-btn" color="secondary">next</ion-button>
+ </form>
+</div>

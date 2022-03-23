@@ -1,0 +1,17 @@
+.has-password-input {
+    position: relative;
+    width: 100%;
+
+    .password-toggle {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        margin: 0;
+        right: 0px;
+        z-index: 2;
+    }
+
+    .password-input {
+        --padding-end: 50px;
+    }
+}

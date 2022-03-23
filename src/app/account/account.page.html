@@ -1,0 +1,58 @@
+<ion-header translucent class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Account</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+ <div class="ion-margin-top ion-padding-top">
+  <ion-item lines="none">
+    <ion-label>
+     <ion-img [src]="user.borrower_photo || 'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y'"></ion-img>
+     <h2 class="ion-text-center" style="margin: 10px 0 5px; font-size: 20px;">{{user?.borrower_firstname}} {{user.borrower_lastname}}</h2>
+     <p class="ion-text-center" style="margin: 5px 0;">{{user?.borrower_email}}</p>
+    </ion-label>
+  </ion-item>
+  <ion-list class="ion-margin-top" lines="full">
+    <ion-item button [routerLink]="['/main/statement-account']">
+      <ion-icon size="small" color="primary" name="document-outline" slot="start"></ion-icon>
+      <ion-label>
+        Request Statment
+      </ion-label>
+    </ion-item>
+ 
+    <ion-item button (click)="presentActionSheet()">
+      <ion-icon size="small" color="primary" name="help-circle-outline" slot="start"></ion-icon>
+      <ion-label>
+        Support
+      </ion-label>
+    </ion-item>
+    <ion-item [routerLink]="['/main/security-settings']" button>
+      <ion-icon size="small" color="primary" name="lock-closed-outline" slot="start"></ion-icon>
+      <ion-label>
+        Security Settings
+      </ion-label>
+    </ion-item>
+    <ion-item (click)="logUserOut()" button>
+      <ion-icon size="small" color="primary" color="danger" name="exit-outline" slot="start"></ion-icon>
+      <ion-label>
+        Sign Out
+      </ion-label>
+    </ion-item>
+  </ion-list>
+ </div>
+</ion-content>
+
+
+<ion-modal
+(didDismiss)="showSupportModal = false"
+  [isOpen]="showSupportModal"
+  [breakpoints]="[0, 0.2, 0.5]"
+  [initialBreakpoint]="0.2"
+>
+  <ng-template>
+    <ion-content class="ion-padding">
+      <support-methods></support-methods>
+    </ion-content>
+  </ng-template>
+</ion-modal>

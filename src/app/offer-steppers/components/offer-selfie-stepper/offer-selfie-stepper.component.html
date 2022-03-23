@@ -1,0 +1,35 @@
+<div class="stepper-content">
+  <ion-text color="primary">
+    <h3 class="stepper-title ion-text-center">
+      Take a selfie
+    </h3>
+  </ion-text>
+  <div style="display: flex; flex-direction: column; flex: 1;">
+    <ng-container *ngIf="imageSrc; else showRules">
+      <img *ngIf="imageSrc" [src]="imageSrc" alt="User Passport Photo" style="object-fit: cover; margin-left: auto; margin-right: auto; border-radius: 10px;" width="300" height="300"/>
+      <ion-button *ngIf="imageSrc" class="stepper-progress-btn" color="primary" (click)="performVerification()">
+        Proceed
+      </ion-button>
+      <ion-button (click)="takePicture()" class="stepper-progress-btn" color="secondary">
+        <ion-icon name="camera-outline"></ion-icon>&nbsp;Retake Picture
+      </ion-button>
+    </ng-container>
+  </div>
+</div>
+<ng-template #showRules>
+  <div>
+    <ion-text color="secondary">
+      <p>To proceed you need to take a selfie for verification
+      </p>
+    </ion-text>
+    <ion-text color="secondary">
+      <ol>
+        <li>Make sure you are in a well light environment and ears are uncovered</li>
+        <li>Hold your device at eye level and look straight to the camera</li>
+      </ol>
+    </ion-text>
+  </div>
+  <ion-button (click)="takePicture()" class="stepper-progress-btn" color="secondary">
+    <ion-icon name="camera-outline"></ion-icon>&nbsp;Take Picture
+  </ion-button>
+</ng-template>

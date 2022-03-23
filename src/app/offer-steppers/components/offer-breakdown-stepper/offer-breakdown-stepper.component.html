@@ -1,0 +1,85 @@
+<div class="stepper-content">
+  <ion-text color="primary">
+    <h3 class="stepper-title ion-text-center">
+      We are pleased to inform you that your loan request has been approved under the following terms and conditions    
+    </h3>
+  </ion-text>
+  <div style="display: flex; flex-direction: column; flex: 1;">
+   <ng-container *ngIf="loanDetails">
+    <ion-card class="ion-no-margin">
+      <ion-item lines="none" class="item">
+        <ion-label class="item-title" slot="start">
+          Loan Amount
+        </ion-label>
+        <ion-note class="item-value" slot="end" color="primary">
+          {{loanDetails.loan_amount | currency: '₦'}}
+        </ion-note>
+      </ion-item>
+      <div class="ion-padding-bottom">
+      <ion-item lines="none" class="item">
+        <ion-label class="item-title" slot="start">
+          Duration
+        </ion-label>
+        <ion-note class="item-value" slot="end" color="primary">
+          {{loanDetails.tenor}} months
+        </ion-note>
+      </ion-item>
+      <ion-item lines="none" class="item">
+        <ion-label class="item-title" slot="start">
+          Monthly Repayment
+        </ion-label>
+        <ion-note class="item-value" slot="end" color="primary">
+          {{loanDetails.monthly_repayment | currency: '₦'}}
+        </ion-note>
+      </ion-item>
+      <ion-item lines="none" class="item">
+        <ion-label class="item-title" slot="start">
+          Interest rate
+        </ion-label>
+        <ion-note class="item-value" slot="end" color="primary">
+          7.5% per month (0.25% per day prorated)
+        </ion-note>
+      </ion-item>
+      <ion-item lines="none" class="item">
+        <ion-label class="item-title" slot="start">
+          Number of repaayments
+        </ion-label>
+        <ion-note class="item-value" slot="end" color="primary">
+          {{loanDetails.tenor}}
+        </ion-note>
+      </ion-item>
+      <ion-item lines="none" class="item">
+        <ion-label class="item-title" slot="start">
+          Insurance
+        </ion-label>
+        <ion-note class="item-value" slot="end" color="primary">
+          {{loanDetails.insurance | currency: '₦'}}
+        </ion-note>
+      </ion-item>
+      <ion-item lines="none" class="item">
+        <ion-label class="item-title" slot="start">
+          Disbursement Fee
+        </ion-label>
+        <ion-note class="item-value" slot="end" color="primary">
+          {{loanDetails.disbursementfee | currency: '₦'}}
+        </ion-note>
+      </ion-item>
+      </div>
+    </ion-card>
+    <ion-text color="medium">
+      <p style="font-size: 13px;" class="ion-margin-top ion-margin-bottom">
+        By clicking '<ion-text color="primary">continue</ion-text>' I, {{loanDetails.firstname}} {{loanDetails.lastname}} accept the Credit Offer with a full understanding of the Loans
+        Terms and Conditions
+      </p>
+    </ion-text>
+   </ng-container>
+   <ng-container *ngIf="showError">
+     <div style="min-height: 150px; display: flex; justify-content: center; align-items: center;">
+        No loan offer found. Either loan has expired or does not exist. Please contact admin
+     </div>
+   </ng-container>
+    <ion-button (click)="goNext()" expand="block"  class="stepper-progress-btn" color="secondary">
+      Continue
+    </ion-button>
+  </div>
+</div>

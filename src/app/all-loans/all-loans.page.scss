@@ -1,0 +1,47 @@
+ion-toolbar{
+    --padding-end: 16px;
+    --padding-start: 16px;
+}
+
+.loan-card {
+    padding:15px 20px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    // background-color: rgba(0, 46, 91, .2);
+            // background-color: rgba(245, 108, 42, .05) !important;
+    // -webkit-box-shadow: 4px 3px 2px 0px #CCCCCC; 
+    box-shadow: 1px 1px 2px 0px #cccccc94;
+
+    hr {
+        background-color: #cccccc94;
+    }
+
+    &.completed {
+        border: 0.45px solid rgba(45, 211, 111, .075);
+        background-color: rgba(45, 211, 111, .075) !important;
+    }
+
+    &.active {
+        border: 0.45px solid rgba(245, 108, 42, .075);
+        background-color: rgba(245, 108, 42, .075) !important;
+    }
+}
+
+.loan-amount {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+    padding: 5px 0;
+}
+
+.monthly-payment {
+    font-size: 15px;
+    // padding: 5px 0;
+    font-weight: 500;
+    display: block;
+}
+
+ion-item {
+    --background: transparent
+}
