@@ -15,7 +15,7 @@
       Enter the amount you would like to borrow.
     </ion-label>
     <!-- <ion-icon style="color: rgba(32, 27, 27, .5);" slot="start" name="keypad"></ion-icon> -->
-   <ion-input type="number" enterkeyhint="next" formControlName="loan_amount" #a (keyup.enter)="setFocus(b)" class="form-input"></ion-input>
+   <ion-input type="tel" inputmode="numeric" pattern="[-+]?[0-9]*[.,]?[0-9]+" enterkeyhint="next" formControlName="loan_amount" #a (keyup.enter)="setFocus(b)" class="form-input"></ion-input>
    <small *ngIf="(formControls.loan_amount.dirty || formControls.loan_amount.touched) && formControls.loan_amount.errors" slot="error">Enter the amount you want</small>
   </ion-item>
   <!-- <ion-text color="medium">

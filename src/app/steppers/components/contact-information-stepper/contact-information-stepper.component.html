@@ -17,7 +17,7 @@
       Email
     </ion-label>
     <!-- <ion-icon style="color: rgba(32, 27, 27, .5);" slot="start" name="keypad"></ion-icon> -->
-    <ion-input enterkeyhint="next" #a (keyup.enter)="setFocus(c)" formControlName="email" type="email" class="form-input"></ion-input>
+    <ion-input inputmode="email" enterkeyhint="next" #a (keyup.enter)="setFocus(c)" formControlName="email" type="email" class="form-input"></ion-input>
     <small *ngIf="(formControls.email.dirty || formControls.email.touched) && formControls.email.errors"
     slot="error">Enter valid email</small>
   </ion-item>

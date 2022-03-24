@@ -9,7 +9,7 @@
     <ion-label color="medium" position="stacked">
       Enter phone number
     </ion-label>
-   <ion-input type="tel" enterkeyhint="done" formControlName="telephone" class="form-input"></ion-input>
+   <ion-input type="tel" inputmode="tel" enterkeyhint="done" formControlName="telephone" class="form-input"></ion-input>
    <!-- <ion-icon src="assets/icon/phone-icon.svg" slot="end" size="small" ></ion-icon> -->
    <small *ngIf="(formControls.telephone.dirty || formControls.telephone.touched) && formControls.telephone.errors" slot="error">Enter your phone number</small>
   </ion-item>

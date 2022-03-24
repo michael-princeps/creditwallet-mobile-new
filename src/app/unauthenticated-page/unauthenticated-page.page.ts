@@ -35,7 +35,7 @@ export class UnauthenticatedPagePage implements OnInit, AfterViewInit {
       username: [null, Validators.required],
       password: [null, Validators.required]
     })
-    this.authService.userObject.subscribe((user) => this.user = user)
+    this.authService.userObject.subscribe((user) => this.user = user.user)
   }
 
   async ngOnInit() {
@@ -84,15 +84,12 @@ export class UnauthenticatedPagePage implements OnInit, AfterViewInit {
         reason: 'Log in to your account',
         title: 'Log in to your account'
       }).then(() => {
-        console.log(credential)
         this.performBioLogin(credential.username, credential.password)
       }, () => {
-        console.log('couldn verify credentials')
       }).catch((e) => console.log(e))
     }, () => {
       this.presentNoCredentialsAuth()
     }).catch((e) => {
-      console.log(e);
       this.performManualLogin();
     })
   }
@@ -159,7 +156,8 @@ export class UnauthenticatedPagePage implements OnInit, AfterViewInit {
   switchAccount() {
     this.authService.clearStorage().then(() => {
       this.router.navigate(['/'], { replaceUrl: true })
-    })
+    }, () => this.router.navigate(['/'], { replaceUrl: true })
+    ).catch((e) => console.log(e))
   }
 
   async presentResetPasswordModal() {

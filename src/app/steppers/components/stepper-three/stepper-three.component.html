@@ -9,7 +9,7 @@
       <ion-label color="medium" position="stacked">
         Loan Amount
       </ion-label>
-      <ion-input type="number" enterkeyhint="next" formControlName="loanamount" class="form-input"></ion-input>
+      <ion-input type="tel" inputmode="numeric" pattern="[-+]?[0-9]*[.,]?[0-9]+" enterkeyhint="next" formControlName="loanamount" class="form-input"></ion-input>
       <small
         *ngIf="(formControls.loanamount.dirty || formControls.loanamount.touched) && formControls.loanamount.errors"
         slot="error">Enter your loan amount</small>

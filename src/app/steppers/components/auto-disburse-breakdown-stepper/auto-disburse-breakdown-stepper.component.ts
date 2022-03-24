@@ -64,7 +64,6 @@ export class AutoDisburseBreakdownStepperComponent implements OnInit, AfterViewI
     }
     this.loader.simpleLoader();
     this.service.recalculateLoanOffer(params).pipe().subscribe((data: any) => {
-      console.log(data);
       this.newDetails = data;
       this.newData = { ...this.loanBreakdownData, tenor: data.tenor, fees: data.fees, loan_amount: data.amount, monthly_repayment: data.monthlyrepayment }
       // console.log(this.newData);

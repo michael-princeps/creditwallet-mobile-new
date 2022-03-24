@@ -20,7 +20,7 @@ export class SupportMethodsComponent implements OnInit {
   openDialer() {
     this.callNumber.callNumber("07085698828", true)
       .then(res => this.modalController.dismiss())
-      .catch(err => console.log('Error launching dialer', err));
+      // .catch(err => console.log('Error launching dialer', err));
   }
 
   async openEmail() {

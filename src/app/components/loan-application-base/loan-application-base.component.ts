@@ -7,12 +7,8 @@ import { LoanAutoDisburseApplicationPage } from 'src/app/loan-auto-disburse-appl
   templateUrl: './loan-application-base.component.html',
   styleUrls: ['./loan-application-base.component.scss'],
 })
-export class LoanApplicationBaseComponent implements OnInit {
+export class LoanApplicationBaseComponent {
   rootPage;
   constructor() { }
-
-  ngOnInit() {
-    console.log('loan base')
-  }
 
 }

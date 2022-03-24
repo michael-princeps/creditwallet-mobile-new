@@ -35,6 +35,7 @@ export class StepperTwoComponent implements OnInit {
     } else {
       this.loanForm.get('ippis_number').removeValidators([Validators.required])
     }
+    this.loanForm.markAsPristine();
     this.loanForm.updateValueAndValidity({onlySelf: true})
   }
 

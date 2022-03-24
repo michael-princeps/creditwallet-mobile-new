@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { ViewLoanResolverService } from './resolvers/view-loan-resolver.service';
 import { AuthGuard } from './services/auth.guard';
+import { HasUserLogInGuard } from './services/has-user-log-in.guard';
+import { HasUserGuard } from './services/has-user.guard';
 import { IsLoggedInGuard } from './services/is-logged-in.guard';
 
 const routes: Routes = [
@@ -28,6 +30,7 @@ const routes: Routes = [
   },
   {
     path: 'unauthenticated',
+    canLoad: [HasUserLogInGuard],
     loadChildren: () => import('./unauthenticated-page/unauthenticated-page.module').then( m => m.UnauthenticatedPagePageModule)
   },
   {
@@ -43,9 +46,14 @@ const routes: Routes = [
     loadChildren: () => import('./view-offer/view-offer.module').then( m => m.ViewOfferPageModule)
   },
   {
-    path: '',
-    canLoad: [IsLoggedInGuard],
+    path: 'landing',
+    canLoad: [IsLoggedInGuard, HasUserGuard],
     loadChildren: () => import('./landing/landing.module').then( m => m.LandingPageModule)
+  },
+  {
+    path: '',
+    redirectTo: 'landing',
+    pathMatch: 'full'
   },
   {
     path: '**',

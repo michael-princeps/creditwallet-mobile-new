@@ -18,7 +18,24 @@ const routes: Routes = [
       },
       {
         path: 'account',
-        loadChildren: () => import('../account/account.module').then(m => m.AccountPageModule)
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../account/account.module').then(m => m.AccountPageModule)
+          },
+          {
+            path: 'security-settings',
+            loadChildren: () => import('../security-settings/security-settings.module').then(m => m.SecuritySettingsPageModule)
+          },
+          {
+            path: 'change-password',
+            loadChildren: () => import('../change-password/change-password.module').then(m => m.ChangePasswordPageModule)
+          },
+          {
+            path: 'statement-account',
+            loadChildren: () => import('../statement-account/statement-account.module').then(m => m.StatementAccountPageModule)
+          },
+        ]
       },
       {
         path: 'single-loan/:id',
@@ -26,18 +43,6 @@ const routes: Routes = [
           loanDetails: ViewLoanResolverService
         },
         loadChildren: () => import('../single-loan/single-loan.module').then(m => m.SingleLoanPageModule)
-      },
-      {
-        path: 'security-settings',
-        loadChildren: () => import('../security-settings/security-settings.module').then(m => m.SecuritySettingsPageModule)
-      },
-      {
-        path: 'change-password',
-        loadChildren: () => import('../change-password/change-password.module').then(m => m.ChangePasswordPageModule)
-      },
-      {
-        path: 'statement-account',
-        loadChildren: () => import('../statement-account/statement-account.module').then(m => m.StatementAccountPageModule)
       },
       {
         path: 'loan-top-up',

@@ -7,16 +7,18 @@ import { addToStorage, clearStorage, getFromStorage, removeFromStorage, TOKEN_KE
 import {
   NativeBiometric,
 } from 'capacitor-native-biometric';
+import { Capacitor } from '@capacitor/core';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthenticationService {
-  userObject = new BehaviorSubject(null);
+  userObject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
   constructor(private http: HttpClient) {
-    getFromStorage(USER_KEY).then(value => this.userObject.next(value))
+    // getFromStorage(USER_KEY).then(value => this.userObject.next(value))
+    // this.checkIfUserExists()
     this.checkIfAuthenticated();
   }
 
@@ -28,8 +30,12 @@ export class AuthenticationService {
     return this.http.post<any>(`${environment.baseUrl}customer/password/reset`, params)
   }
 
-  clearStorage() {
-    return NativeBiometric.deleteCredentials({server: 'accounts.creditwallet.ng'}).then(() => clearStorage(), () => () => clearStorage())
+  async clearStorage() {
+    if (Capacitor.getPlatform() != 'web') {
+      return NativeBiometric.deleteCredentials({server: 'accounts.creditwallet.ng'}).then(() => clearStorage(), () => () => clearStorage())
+    } else {
+      await clearStorage()
+    }
   }
 
   async checkIfAuthenticated() {
@@ -41,8 +47,17 @@ export class AuthenticationService {
     }
   }
 
+  async checkIfUserExists() {
+    const user = await getFromStorage(USER_KEY);
+    if (user) {
+      this.userObject.next({user: user})
+    } else {
+      this.userObject.next({user: null})
+    }
+  }
+
   async logUserOut() {
-    await removeFromStorage(TOKEN_KEY)
+    await removeFromStorage(TOKEN_KEY);
     this.isAuthenticated.next(false)
   }
 
@@ -50,7 +65,7 @@ export class AuthenticationService {
     addToStorage(TOKEN_KEY, authResult.token);
     removeFromStorage(USER_KEY).then(() => addToStorage(USER_KEY, authResult.borrower), () => addToStorage(USER_KEY, authResult.borrower));
     this.isAuthenticated.next(true);
-    this.userObject.next(authResult.borrower);
+    this.userObject.next({user: authResult.borrower});
   }
 
   async getUserObject() {

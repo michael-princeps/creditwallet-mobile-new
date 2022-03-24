@@ -34,7 +34,6 @@ export class SingleLoanPage implements OnInit, ViewDidLeave {
   }
 
   ngOnInit() {
-    console.log(this.activatedRoute.snapshot)
     this.singleLoan = this.activatedRoute.snapshot.data['loanDetails'];
     this.loanDetails = this.singleLoan.loan_operation;
     this.loanObject = this.singleLoan.loan_operation.loan;
@@ -66,7 +65,6 @@ export class SingleLoanPage implements OnInit, ViewDidLeave {
   viewLoanDetails() {
     this.loaderService.simpleLoader();
     this.service.getSingleLoanDetails(this.loan_id).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
-      console.log(data)
       this.loaderService.dismissLoader();
       this.loanDetails = data.loan_operation;
       this.loanObject = data.loan_operation.loan;
@@ -77,7 +75,6 @@ export class SingleLoanPage implements OnInit, ViewDidLeave {
   refreshLoanDetails(event) {
     this.refresherEvent = event;
     this.service.getSingleLoanDetails(this.loanObject.loan_id).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
-      console.log(data)
       this.loanDetails = data.loan_operation;
       this.loanObject = data.loan_operation.loan;
       this.repayments = data.loan_operation.repayments;

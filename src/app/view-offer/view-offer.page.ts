@@ -46,10 +46,8 @@ export class ViewOfferPage implements OnInit, ViewDidEnter {
     this.route.params.subscribe((param: Params) => {
       this.offerId = param.id;
       alert(this.offerId)
-      console.log('enter')
       this.currentPageSubject.next({ page: 1 })
     })
-    console.log('enter init')
     // this.offerId = this.route.snapshot.paramMap.get('id');
   }
 

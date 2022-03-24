@@ -29,8 +29,8 @@ export class OfferSelfieStepperComponent implements OnInit {
       quality: 40,
       direction: CameraDirection.Front
     });
-    console.log('image')
-    console.log(capturedPhoto)
+    // console.log('image')
+    // console.log(capturedPhoto)
 
     this.imageSrc = 'data:image/jpeg;base64,' + capturedPhoto.base64String;
    this.convertToBlob(this.imageSrc).then(v =>  this.liveDetect = v)

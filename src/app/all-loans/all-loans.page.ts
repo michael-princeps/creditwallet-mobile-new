@@ -36,7 +36,7 @@ export class AllLoansPage implements OnInit, ViewDidLeave {
   fetchAllLoans() {
     this.service.getAllLoans().subscribe((data: any) => {
       this.allLoans = data.loans;
-      console.log(this.allLoans)
+      // console.log(this.allLoans)
     })
   }
 
@@ -44,7 +44,7 @@ export class AllLoansPage implements OnInit, ViewDidLeave {
     this.refresherEvent = event;
     this.service.getAllLoans().pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
       this.allLoans = data.loans;
-      console.log(this.allLoans)
+      // console.log(this.allLoans)
       event.target.complete();
     }, () => event.target.complete())
   }

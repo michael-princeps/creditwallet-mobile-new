@@ -53,7 +53,7 @@ export class AuthLandingPage implements OnInit {
 
 
   closeAndNavigate(url) {
-    console.log(url)
+    // console.log(url)
     this.modalController.dismiss().then(() => this.router.navigate([`/${url}`]))
   }
 

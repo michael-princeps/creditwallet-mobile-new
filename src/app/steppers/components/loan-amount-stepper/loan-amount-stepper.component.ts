@@ -35,7 +35,7 @@ export class LoanAmountStepperComponent implements OnInit {
       this.loaderService.simpleLoader();
       this.service.calculateLoanOffer(formValue).subscribe((data) => {
         this.loaderService.dismissLoader();
-        const loanBreakdown = {monthly_repayment: data.monthlyrepayment, loan_amount: formValue.amount,  tenor: formValue.tenor, ...data,  page: 2};
+        const loanBreakdown = {monthly_repayment: data.monthlyrepayment, loan_amount: formValue.amount,  tenor: formValue.tenor, ...data,  page: 2, type: 2};
       this.goNextEmitter.emit(loanBreakdown);
       }, () => this.loaderService.dismissLoader())
     } else {

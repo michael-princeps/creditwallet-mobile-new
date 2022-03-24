@@ -20,10 +20,10 @@ export class LandingPage implements OnInit {
   }
 
   changeActiveClass(swiper) {
-    console.log(swiper)
+    // console.log(swiper)
     this.activeIndex = swiper.swiperRef.activeIndex;
     this.chref.detectChanges();
-    console.log(this.activeIndex)
+    // console.log(this.activeIndex)
   }
 
   goToSlide(index: number) {

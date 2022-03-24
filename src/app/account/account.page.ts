@@ -16,7 +16,7 @@ export class AccountPage implements OnInit {
   constructor(private callNumber: CallNumber, private authService: AuthenticationService, public actionSheetController: ActionSheetController, private router: Router) { }
 
   ngOnInit() {
-    this.authService.userObject.subscribe((user) => this.user = user)
+    this.authService.userObject.subscribe((user) => this.user = user.user)
   }
 
   logUserOut() {
@@ -49,7 +49,7 @@ export class AccountPage implements OnInit {
         // icon: 'close',
         role: 'cancel',
         handler: () => {
-          console.log('Cancel clicked');
+          // console.log('Cancel clicked');
         }
       }
     ]
@@ -62,8 +62,8 @@ export class AccountPage implements OnInit {
 
   openDialer() {
     this.callNumber.callNumber("07085698828", true)
-      .then(res => console.log('Call placed', res))
-      .catch(err => console.log('Error launching dialer', err));
+      // .then(res => console.log('Call placed', res))
+      // .catch(err => console.log('Error launching dialer', err));
   }
 
   async openEmail() {

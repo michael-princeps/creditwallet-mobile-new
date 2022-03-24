@@ -32,7 +32,7 @@ export class OfferUploadIdStepperComponent implements OnInit, ViewDidLeave {
     const file = await this.chooser.getFile('image/*, application/pdf');
     this.selectedFile = file;
     this.blobFile = await this.convertToBlob(file.dataURI);
-    console.log(file);
+    // console.log(file);
   }
 
   private async convertToBlob(base64Url) {

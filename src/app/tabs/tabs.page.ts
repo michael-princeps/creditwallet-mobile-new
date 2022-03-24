@@ -1,5 +1,6 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
@@ -7,15 +8,20 @@ import { AuthenticationService } from '../services/authentication.service';
   templateUrl: 'tabs.page.html',
   styleUrls: ['tabs.page.scss']
 })
-export class TabsPage {
+export class TabsPage implements OnInit {
   idleLogoutTimer: any;
 
-  constructor(private authservice: AuthenticationService, private router: Router) { }
+  constructor(private modalController: ModalController,private authservice: AuthenticationService, private router: Router) { }
 
   @HostListener('touchstart')
   onTouchStart() {
     this.restartIdleLogoutTimer();
   }
+
+  ngOnInit(): void {
+    this.restartIdleLogoutTimer();
+  }
+
   restartIdleLogoutTimer() {
     clearTimeout(this.idleLogoutTimer);
     this.idleLogoutTimer = setTimeout(() => {
@@ -23,10 +29,11 @@ export class TabsPage {
     }, 3600000);
   }
 
+
   logUserOut() {
-    this.authservice.logUserOut().then(() => {
+    this.authservice.logUserOut().then(async () => {
       clearTimeout(this.idleLogoutTimer);
-      this.router.navigate(['/unauthenticated'], { replaceUrl: true })
+      await this.modalController.dismiss().then(() => this.router.navigate(['/unauthenticated'], { replaceUrl: true }), () => this.router.navigate(['/unauthenticated'], { replaceUrl: true }));
     })
   }
 }

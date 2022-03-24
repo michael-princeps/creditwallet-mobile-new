@@ -60,7 +60,7 @@ export class LoanTopUpPage implements OnInit {
     this.currentStep = currentData.page + 1;
     const newObject = { ...currentData, page: this.currentStep, ...pageData }
     this.loanDetails = newObject;
-    console.log(newObject)
+    // console.log(newObject)
     this.currentPageSubject.next(newObject)
   }
 
@@ -94,7 +94,7 @@ export class LoanTopUpPage implements OnInit {
           cssClass: 'secondary',
           id: 'cancel-button',
           handler: (blah) => {
-            console.log('Confirm Cancel: blah');
+            // console.log('Confirm Cancel: blah');
           }
         }, {
           text: 'Yes',
@@ -109,7 +109,7 @@ export class LoanTopUpPage implements OnInit {
     await alert.present();
 
     const { role } = await alert.onDidDismiss();
-    console.log('onDidDismiss resolved with role', role);
+    // console.log('onDidDismiss resolved with role', role);
   }
   
 

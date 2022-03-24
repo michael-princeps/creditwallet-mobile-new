@@ -43,7 +43,7 @@
       <ion-label color="medium" position="stacked">
         First Name
       </ion-label>
-      <ion-input autocapitalize="on" enterkeyhint="next" formControlName="firstname" #a (keyup.enter)="setFocus(b)" class="form-input">
+      <ion-input type="text" inputmode="text" autocapitalize="on" enterkeyhint="next" formControlName="firstname" #a (keyup.enter)="setFocus(b)" class="form-input">
       </ion-input>
       <small *ngIf="(formControls.firstname.dirty || formControls.firstname.touched) && formControls.firstname.errors"
         slot="error">Enter First Name</small>
@@ -52,7 +52,7 @@
       <ion-label color="medium" position="stacked">
         Last Name
       </ion-label>
-      <ion-input autocapitalize="on" enterkeyhint="next" formControlName="lastname" #b class="form-input">
+      <ion-input inputmode="text" type="text" autocapitalize="on" enterkeyhint="next" formControlName="lastname" #b class="form-input">
       </ion-input>
       <small *ngIf="(formControls.lastname.dirty || formControls.lastname.touched) && formControls.lastname.errors"
         slot="error">Enter Last Name</small>
@@ -98,7 +98,7 @@
         Email
       </ion-label>
       <!-- <ion-icon style="color: rgba(32, 27, 27, .5);" slot="start" name="keypad"></ion-icon> -->
-      <ion-input enterkeyhint="next" #d (keyup.enter)="setFocus(e)" formControlName="email" type="email"
+      <ion-input inputmode="email" enterkeyhint="next" #d (keyup.enter)="setFocus(e)" formControlName="email" type="email"
         class="form-input"></ion-input>
       <small *ngIf="(formControls.email.dirty || formControls.email.touched) && formControls.email.errors"
         slot="error">Enter valid email</small>

@@ -28,7 +28,7 @@ export class DashboardPage implements OnInit, ViewDidLeave {
   constructor(private callNumber: CallNumber, private authService: AuthenticationService, public actionSheetController: ActionSheetController, public modalController: ModalController, private service: MainService, private loaderService: LoaderService) { }
 
   ngOnInit() {
-    this.authService.userObject.subscribe((user) => this.user = user)
+    this.authService.userObject.subscribe((user) => this.user = user.user)
     this.fetchDashboard()
   }
 
@@ -51,7 +51,7 @@ export class DashboardPage implements OnInit, ViewDidLeave {
   fetchDashboard() {
     this.loaderService.simpleLoader();
     this.service.getDashboard().subscribe((data: any) => {
-      console.log(data);
+      // console.log(data);
       this.loaderService.dismissLoader();
       this.dashboardData = data;
       this.openLoans = data.open_loan;
@@ -62,7 +62,7 @@ export class DashboardPage implements OnInit, ViewDidLeave {
   refreshDashboard(event) {
     this.refresherEvent = event
     this.service.getDashboard().pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
-      console.log(data);
+      // console.log(data);
       this.dashboardData = data;
       this.openLoans = data.open_loan;
       this.repayments = data.repayments;
@@ -140,7 +140,7 @@ export class DashboardPage implements OnInit, ViewDidLeave {
         // icon: 'close',
         role: 'cancel',
         handler: () => {
-          console.log('Cancel clicked');
+          // console.log('Cancel clicked');
         }
       }
     ]
@@ -153,8 +153,8 @@ export class DashboardPage implements OnInit, ViewDidLeave {
 
   openDialer() {
     this.callNumber.callNumber("07085698828", true)
-      .then(res => console.log('Call placed'))
-      .catch(err => console.log('Error launching dialer', err));
+      // .then(res => console.log('Call placed'))
+      // .catch(err => console.log('Error launching dialer', err));
   }
 
   async openEmail() {

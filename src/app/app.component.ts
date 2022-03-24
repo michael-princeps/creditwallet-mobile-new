@@ -10,6 +10,7 @@ import { App, URLOpenListenerEvent } from '@capacitor/app';
 })
 export class AppComponent {
   constructor(private authService: AuthenticationService, private router: Router, private zone: NgZone) {
+    this.authService.checkIfUserExists();
     this.initializeApp()
   }
 

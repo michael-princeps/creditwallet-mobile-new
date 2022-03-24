@@ -61,7 +61,7 @@ export class LoanApplicationPage implements OnInit {
     this.currentStep = currentData.page + 1;
     const newObject = { ...currentData, page: this.currentStep, ...pageData }
     this.loanDetails = newObject;
-    console.log(newObject)
+    // console.log(newObject)
     this.currentPageSubject.next(newObject)
   }
 
@@ -116,7 +116,7 @@ export class LoanApplicationPage implements OnInit {
           cssClass: 'secondary',
           id: 'cancel-button',
           handler: (blah) => {
-            console.log('Confirm Cancel: blah');
+            // console.log('Confirm Cancel: blah');
           }
         }, {
           text: 'Yes',
@@ -131,7 +131,7 @@ export class LoanApplicationPage implements OnInit {
     await alert.present();
 
     const { role } = await alert.onDidDismiss();
-    console.log('onDidDismiss resolved with role', role);
+    // console.log('onDidDismiss resolved with role', role);
   }
 
   submitApplication(data) {
@@ -150,7 +150,7 @@ export class LoanApplicationPage implements OnInit {
     let currentData = this.currentPageSubject.getValue();
     let newLoanObject = { ...currentData, ...durationStepperData };
     const { ippis_number, telephone } = newLoanObject;
-    console.log(newLoanObject)
+    // console.log(newLoanObject)
     this.loaderService.simpleLoader();
     this.service.calculateAutoDisburseLoanOffer({ ippis_number, telephone }).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
       this.loanDetails = null;
@@ -170,7 +170,7 @@ export class LoanApplicationPage implements OnInit {
         this.currentStep = currentData.page + 1;
         const loanBreakdown = { ...currentData, page: this.currentStep, ...durationStepperData, type: 2, monthly_repayment: data.monthlyrepayment, loan_amount: param.amount, tenor: param.tenor, ...data };
         this.loanDetails = loanBreakdown;
-        console.log(loanBreakdown)
+        // console.log(loanBreakdown)
         this.currentPageSubject.next(loanBreakdown)
       }, () => this.loaderService.dismissLoader())
     })

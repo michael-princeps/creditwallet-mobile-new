@@ -14,7 +14,7 @@
       <ion-label color="medium" position="stacked">
         Place of work
       </ion-label>
-      <ion-textarea enterkeyhint="next" formControlName="place_of_work" #a (keyup.enter)="openSelect(c)" class="form-input"></ion-textarea>
+      <ion-textarea enterkeyhint="next" inputmode="text" formControlName="place_of_work" #a (keyup.enter)="openSelect(c)" class="form-input"></ion-textarea>
       <small
         *ngIf="(formControls.place_of_work.dirty || formControls.place_of_work.touched) && formControls.place_of_work.errors"
         slot="error">Enter place of work</small>
@@ -45,7 +45,7 @@
       <ion-label color="medium" position="stacked">
         Salary Account Number
       </ion-label>
-      <ion-input formControlName="salary_bank_account" enterkeyhint="done" (keyup.enter)="goToNext()" type="tel"
+      <ion-input type="text" inputmode="numeric" pattern="[-+]?[0-9]*[.,]?[0-9]+" formControlName="salary_bank_account" enterkeyhint="done" (keyup.enter)="goToNext()" type="tel"
         class="form-input"></ion-input>
       <small
         *ngIf="(formControls.salary_bank_account.dirty || formControls.salary_bank_account.touched) && formControls.salary_bank_account.errors"
