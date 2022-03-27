@@ -33,9 +33,10 @@
             ],
             "styles": [
               "src/theme/variables.scss", 
-              "src/global.scss",
-              "src/reset.scss",
-              "src/form.scss"
+              "src/styles/global.scss",
+              "src/styles/reset.scss",
+              "src/styles/form.scss",
+              "src/styles/swiper.scss"
             ],
             "scripts": [],
             "aot": false,

@@ -45,7 +45,6 @@ export class ViewOfferPage implements OnInit, ViewDidEnter {
     this.loader.dismissLoader();
     this.route.params.subscribe((param: Params) => {
       this.offerId = param.id;
-      alert(this.offerId)
       this.currentPageSubject.next({ page: 1 })
     })
     // this.offerId = this.route.snapshot.paramMap.get('id');

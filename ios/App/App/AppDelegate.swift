@@ -57,4 +57,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        let webView = self.window?.rootViewController?.view as? WKWebView;
+                
+        webView?.evaluateJavaScript("window.shortcutItemType = '\(shortcutItem.type)'")
+    }
+
 }

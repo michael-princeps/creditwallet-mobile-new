@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 
 import { TokenInterceptor } from './services/token-interceptor';
 import { ErrorInterceptor } from './services/error-interceptor';
+import { ThreeDeeTouch } from '@awesome-cordova-plugins/three-dee-touch/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +24,7 @@ import { ErrorInterceptor } from './services/error-interceptor';
     AppRoutingModule
   ],
   providers: [
+    ThreeDeeTouch,
     {
       provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true
     },

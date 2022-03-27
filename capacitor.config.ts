@@ -10,6 +10,14 @@ const config: CapacitorConfig = {
       resize: "body",
       resizeOnFullScreen: true,
     },
+    SplashScreen: {
+      backgroundColor: "#F56B2A",
+      androidScaleType: "CENTER_CROP",
+      launchAutoHide: false,
+      launchShowDuration: 7000,
+      splashFullScreen: true,
+      splashImmersive: true,
+    }
   }
 };
 
