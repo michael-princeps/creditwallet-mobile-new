@@ -8,9 +8,17 @@ ion-toolbar {
 
 
 .balance-card {
-    border-radius: 30px 30px 0 0;
-    background-color: rgba(245, 108, 42, 0.21);
-    padding: 40px 20px;
+    border-radius: 17px;
+    // background-color: rgba(245, 108, 42, 0.21);
+    background:url('/assets/images/card-ellipse-bg.svg'), linear-gradient(199.65deg, #F56B2A 13.16%, #FFB067 76.51%);
+    min-height: 140px;
+    // background-image: url('/assets/images/card-ellipse-bg.svg');
+    background-repeat: no-repeat;
+    background-position: 100%;
+    padding: 30px 20px 15px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     position: relative;
 
     // &::after {
@@ -28,7 +36,7 @@ ion-toolbar {
 .balance {
     display: inline-block;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 35px;
     line-height: 40px;
     // margin-right: 5px;
 }
@@ -36,15 +44,29 @@ ion-toolbar {
 .balance-info {
     display: flex;
     align-items: center;
-    justify-content: center;
+    // justify-content: center;
     margin-top: 5px;
+    color: #ffffff;
 }
 
 .balance-title {
     font-weight: 500;
     font-size: 15px;
-    text-align: center;
+    // text-align: center;
+    color: #ffffff;
+    text-transform: uppercase;
     margin: 0;
+}
+
+.balance-penalty {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.balance-text {
+    font-size: 10px;
+    margin: 0;
+    text-transform: uppercase;
 }
 
 .balance-card-bottom {

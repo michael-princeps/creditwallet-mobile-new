@@ -14,9 +14,33 @@ ion-input.input-element {
 ion-select{
     width: 100%;
     justify-content: center;
+
+    &::part(icon) {
+            // opacity: 1;
+            // margin-left: 1em;
+            // color: red;
+            // background: url('/assets/icon/chevron-down-icon.svg') no-repeat center;
+
+            content: url('/assets/icon/chevron-down-icon.svg');
+    }
     // --padding-end : 0rem;
     // --padding-start: 0
 }
+
+ion-item.form-item {
+    --border-radius: 10px;
+    --background: rgba(196, 196, 196, 0.27);
+    --padding-start: 0;
+    --padding-end: 0;
+    --padding-top: 0;
+    --padding-bottom: 0;
+    --inner-padding-start: 20px;
+    --inner-padding-end: 14px;
+    --inner-padding-top: 5px;
+    --inner-padding-bottom: 5px;
+    --min-height: 45px;
+    // --border-width: 0
+  }
 
 // ion-select::part(icon) {
 //     // opacity: 1;
@@ -24,3 +48,32 @@ ion-select{
 //     // color: red;
 //     background: url('/assets/icon/chevron-down-icon.svg') no-repeat center;
 // }
+
+.ionic-selectable-icon-template {
+    margin-right: 15px !important;
+}
+
+.selectable-icon {
+    width: 12px;
+    height: 18px;
+    opacity: 0.33;
+    content: url('/assets/icon/chevron-down-icon.svg');
+}
+
+.selectable-icon-inner {
+    left: 5px;
+    top: 50%;
+    margin-top: -2px;
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    border-top: 5px solid;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+    color: currentcolor;
+    pointer-events: none;
+}
+
+.page-padding {
+    padding: 16px 16px 35px 16px;
+  }

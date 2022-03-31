@@ -18,7 +18,7 @@ export class PersonalInformationStepperComponent implements OnInit {
     header: 'Select Gender',
   };
   detailsForm: FormGroup;
-  dateValue = ''
+  dateValue = '1970-01-01';
   selectedDate: string = '';
   constructor(private fb: FormBuilder) { }
 
@@ -74,6 +74,7 @@ formatDate(value: string) {
   console.log(value)
   this.selectedDate = format(parseISO(value), 'MMM dd yyyy')
   const dob = format(parseISO(value), 'yyyy-MM-dd')
+  // console.log('dob is ' +dob)
   this.detailsForm.patchValue({dob: dob}, {onlySelf: true})
   this.detailsForm.controls['dob'].markAsDirty()
   this.detailsForm.controls['dob'].updateValueAndValidity({onlySelf: true})
@@ -85,6 +86,8 @@ cancelPicker(modal:IonModal, datePicker: IonDatetime) {
 }
 
 closeDatePicker(modal:IonModal, datePicker: IonDatetime) {
+  const dob = this.detailsForm.get('dob').value;
+  !!dob && this.detailsForm.patchValue({dob: this.dateValue})
   datePicker.confirm().then(() => modal.dismiss())
 }
 }

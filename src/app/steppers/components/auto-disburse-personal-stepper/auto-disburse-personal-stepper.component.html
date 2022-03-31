@@ -10,11 +10,11 @@
     </p>
   </ion-text>
   <form [formGroup]="detailsForm" style="flex: 1; display: flex; flex-direction: column">
-    <ion-item class="ion-no-padding ion-margin-bottom">
-      <ion-label color="medium" position="stacked">
+    <ion-item lines="none" class="form-item ion-margin-bottom">
+      <!-- <ion-label color="medium" position="stacked">
         Title
-      </ion-label>
-      <ion-select formControlName="title" [interfaceOptions]="customActionSheetOptions" interface="alert">
+      </ion-label> -->
+      <ion-select formControlName="title" placeholder="Title" [interfaceOptions]="customActionSheetOptions" interface="alert">
         <ion-select-option value="Mr">Mr</ion-select-option>
         <ion-select-option value="Mrs">Mrs</ion-select-option>
         <ion-select-option value="Alhaji">Alhaji</ion-select-option>
@@ -28,31 +28,33 @@
       <small *ngIf="(formControls.title.dirty || formControls.title.touched) && formControls.title.errors"
         slot="error">Select Title</small>
     </ion-item>
-    <ion-item class="ion-no-padding ion-margin-bottom">
-      <ion-label color="medium" position="stacked">
+    <ion-item lines="none" class="form-item ion-margin-bottom">
+      <!-- <ion-label color="medium" position="stacked">
         Gender
-      </ion-label>
-      <ion-select formControlName="gender" [interfaceOptions]="customGenderActionSheetOptions" interface="alert">
+      </ion-label> -->
+      <ion-select formControlName="gender" placeholder="Gender" [interfaceOptions]="customGenderActionSheetOptions" interface="alert">
         <ion-select-option value="female">Female</ion-select-option>
         <ion-select-option value="male">Male</ion-select-option>
       </ion-select>
       <small *ngIf="(formControls.gender.dirty || formControls.gender.touched) && formControls.gender.errors"
         slot="error">Select Gender</small>
     </ion-item>
-    <ion-item class="ion-no-padding ion-margin-bottom">
-      <ion-label color="medium" position="stacked">
+    <ion-item lines="none" class="form-item ion-margin-bottom">
+      <!-- <ion-label color="medium" position="stacked">
         First Name
-      </ion-label>
-      <ion-input type="text" inputmode="text" autocapitalize="on" enterkeyhint="next" formControlName="firstname" #a (keyup.enter)="setFocus(b)" class="form-input">
+      </ion-label> -->
+      <ion-icon color="icon" size="small" slot="end" src="assets/icon/person-icon.svg"></ion-icon>
+      <ion-input type="text" placeholder="First Name" inputmode="text" autocapitalize="on" enterkeyhint="next" formControlName="firstname" #a (keyup.enter)="setFocus(b)" class="form-input">
       </ion-input>
       <small *ngIf="(formControls.firstname.dirty || formControls.firstname.touched) && formControls.firstname.errors"
         slot="error">Enter First Name</small>
     </ion-item>
-    <ion-item class="ion-no-padding ion-margin-bottom">
-      <ion-label color="medium" position="stacked">
+    <ion-item lines="none" class="form-item ion-margin-bottom">
+      <!-- <ion-label color="medium" position="stacked">
         Last Name
-      </ion-label>
-      <ion-input inputmode="text" type="text" autocapitalize="on" enterkeyhint="next" formControlName="lastname" #b class="form-input">
+      </ion-label> -->
+      <ion-icon color="icon" slot="end" size="small" src="assets/icon/person-icon.svg"></ion-icon>
+      <ion-input placeholder="Last Name" inputmode="text" type="text" autocapitalize="on" enterkeyhint="next" formControlName="lastname" #b class="form-input">
       </ion-input>
       <small *ngIf="(formControls.lastname.dirty || formControls.lastname.touched) && formControls.lastname.errors"
         slot="error">Enter Last Name</small>
@@ -67,9 +69,10 @@
         date of birth</small>
     </ion-item>
     <div class="ion-margin-bottom">
-      <ion-item class="ion-no-padding ion-no-margin" button="true" detail="false" id="open-date-input">
-        <ion-label position="stacked" color="medium">Date of Birth</ion-label>
-        <ion-text style="min-height: 20px;">{{ selectedDate }}</ion-text>
+      <ion-item lines="none" class="form-item ion-no-margin" button="true" detail="false" id="open-date-input">
+        <!-- <ion-label position="stacked" color="medium">Date of Birth</ion-label> -->
+        <ion-label style="min-height: 24.5px;">{{ selectedDate ? selectedDate : 'Date of Birth' }}</ion-label>
+        <ion-icon color="icon" size="small" slot="end" src="assets/icon/calendar-icon.svg"></ion-icon>
       </ion-item>
      <ion-text color="danger">
       <small *ngIf="(formControls.dob.dirty || formControls.dob.touched) && formControls.dob.errors">Select
@@ -83,63 +86,68 @@
       <ion-input autocapitalize="on" enterkeyhint="next" class="form-input">
       </ion-input>
     </ion-item> -->
-    <ion-item class="ion-no-padding ion-margin-bottom">
-      <ion-label color="medium" position="stacked">
+    <ion-item lines="none" class="form-item ion-margin-bottom">
+      <!-- <ion-label color="medium" position="stacked">
         Place of work (Employer name)
-      </ion-label>
-      <ion-textarea autocapitalize="on" enterkeyhint="next" formControlName="place_of_work" (keyup.enter)="setFocus(d)" class="form-input">
+      </ion-label> -->
+      <ion-icon color="icon" slot="end" size="small" src="assets/icon/employment-icon.svg"></ion-icon>
+      <ion-textarea placeholder="Place of work" autocapitalize="on" enterkeyhint="next" formControlName="place_of_work" (keyup.enter)="setFocus(d)" class="form-input">
       </ion-textarea>
       <small
         *ngIf="(formControls.place_of_work.dirty || formControls.place_of_work.touched) && formControls.place_of_work.errors"
         slot="error">Enter place of work</small>
     </ion-item>
-    <ion-item class="ion-no-padding ion-margin-bottom">
-      <ion-label color="medium" position="stacked">
+    <ion-item lines="none" class="form-item ion-margin-bottom">
+      <!-- <ion-label color="medium" position="stacked">
         Email
-      </ion-label>
-      <!-- <ion-icon style="color: rgba(32, 27, 27, .5);" slot="start" name="keypad"></ion-icon> -->
-      <ion-input inputmode="email" enterkeyhint="next" #d (keyup.enter)="setFocus(e)" formControlName="email" type="email"
+      </ion-label> -->
+      <ion-icon color="icon" slot="end" size="small" name="mail-outline"></ion-icon>
+      <ion-input placeholder="Email" inputmode="email" enterkeyhint="next" #d (keyup.enter)="setFocus(e)" formControlName="email" type="email"
         class="form-input"></ion-input>
       <small *ngIf="(formControls.email.dirty || formControls.email.touched) && formControls.email.errors"
         slot="error">Enter valid email</small>
     </ion-item>
-    <ion-item class="ion-no-padding ion-margin-bottom">
-      <ion-label color="medium" position="stacked">
+    <ion-item lines="none" class="form-item ion-margin-bottom">
+      <!-- <ion-label color="medium" position="stacked">
         House Address
-      </ion-label>
-      <!-- <ion-icon style="color: rgba(32, 27, 27, .5);" slot="start" name="keypad"></ion-icon> -->
-      <!-- <ion-input type="text" ></ion-input> -->
-      <ion-textarea autocapitalize="on" enterkeyhint="next" #e (keyup.enter)="setFocus(f)" formControlName="house_address"
+      </ion-label> -->
+      <ion-icon color="icon" slot="end" size="small" src="assets/icon/address-icon.svg"></ion-icon>
+      <ion-textarea placeholder="House Address" autocapitalize="on" enterkeyhint="next" #e (keyup.enter)="setFocus(f)" formControlName="house_address"
         class="form-input"></ion-textarea>
       <small
         *ngIf="(formControls.house_address.dirty || formControls.house_address.touched) && formControls.house_address.errors"
         slot="error">Enter house address</small>
     </ion-item>
-    <ion-item class="ion-no-padding ion-margin-bottom">
-      <ion-label color="medium" position="stacked">
+    <ion-item lines="none" class="form-item ion-margin-bottom">
+      <!-- <ion-label color="medium" position="stacked">
         City
-      </ion-label>
-      <!-- <ion-icon style="color: rgba(32, 27, 27, .5);" slot="start" name="keypad"></ion-icon> -->
-      <ion-input autocapitalize="on" enterkeyhint="next" #f (keyup.enter)="openSelect(g)" formControlName="city" type="text"
+      </ion-label> -->
+      <ion-icon color="icon" slot="end" size="small" src="assets/icon/city-icon.svg"></ion-icon>
+      <ion-input placeholder="City" autocapitalize="on" enterkeyhint="next" #f (keyup.enter)="openSelect(g)" formControlName="city" type="text"
         class="form-input"></ion-input>
       <small *ngIf="(formControls.city.dirty || formControls.city.touched) && formControls.city.errors"
         slot="error">Enter city</small>
     </ion-item>
-    <ion-item class="ion-no-padding ion-margin-bottom">
-      <ion-label color="medium" position="stacked">
+    <ion-item lines="none" class="form-item ion-margin-bottom">
+      <!-- <ion-label color="medium" position="stacked">
         State
-      </ion-label>
-      <ionic-selectable #g formControlName="state" [items]="states" itemValueField="name" itemTextField="name"
+      </ion-label> -->
+      <ionic-selectable placeholder="State" #g formControlName="state" [items]="states" itemValueField="name" itemTextField="name"
         [canSearch]="true">
+        <ng-template ionicSelectableIconTemplate>
+          <div class="selectable-icon" role="presentation">
+            <div class="selectable-icon-inner"></div>
+          </div>
+        </ng-template>
       </ionic-selectable>
       <small *ngIf="(formControls.state.dirty || formControls.state.touched) && formControls.state.errors"
         slot="error">Select state</small>
     </ion-item>
-    <ion-item class="ion-no-padding ion-margin-bottom">
-      <ion-label color="medium" position="stacked">
+    <ion-item lines="none" class="form-item ion-margin-bottom">
+      <!-- <ion-label color="medium" position="stacked">
         Referral Code (optional)
-      </ion-label>
-      <ion-input autocapitalize="on" formControlName="refferalcode" enterkeyhint="next" class="form-input">
+      </ion-label> -->
+      <ion-input placeholder="Referral Code (optional)" autocapitalize="on" formControlName="refferalcode" enterkeyhint="next" class="form-input">
       </ion-input>
     </ion-item>
     <ion-button (click)="goToNext()" type="button" class="stepper-progress-btn" color="secondary">next</ion-button>
@@ -149,7 +157,7 @@
 <ion-modal #modal trigger="open-date-input">
   <ng-template>
     <ion-content force-overscroll="false">
-      <ion-datetime max="2000-01-01" doneText="Set" cancelText="Cancel" [value]="dateValue" #popoverDatetime presentation="date"
+      <ion-datetime mode="md" max="1999-12-31" doneText="Set" cancelText="Cancel" [value]="dateValue" #popoverDatetime presentation="date"
         (ionChange)="dateValue = formatDate(popoverDatetime.value)">
         <ion-buttons slot="buttons">
           <ion-button (click)="cancelPicker(modal, popoverDatetime)">Cancel</ion-button>

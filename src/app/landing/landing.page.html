@@ -1,6 +1,51 @@
 <ion-content scrollY="false">
-<div class="onboard">
-  <div class="swiper-container">
+<div class="onboard" [ngStyle]="{'background-position-y': activeIndex == 0 ? '100%' : activeIndex == 1 ? '85%' : '70%'}">
+  <swiper
+  #swiper
+  [slidesPerView]="1"
+  [spaceBetween]="30"
+  [freeMode]="true"
+  class="mySwiper"
+  (slideChange)="changeActiveClass(swiper)"
+>
+  <ng-template swiperSlide>
+    <img src="assets/images/onboard-image1.png" alt="" srcset="">
+  </ng-template>
+  <ng-template swiperSlide>
+    <img src="assets/images/onboard-image2.png" alt="" srcset="">
+  </ng-template>
+  <ng-template swiperSlide>
+    <img src="assets/images/onboard-image3.png" alt="" srcset="">
+  </ng-template>
+</swiper>
+<div class="swiper-paginators">
+  <span (click)="goToSlide(0)" class="swiper-paginator" [ngClass]="{'activeindex': activeIndex == 0}">
+
+  </span>
+  <span (click)="goToSlide(1)" class="swiper-paginator" [ngClass]="{'activeindex': activeIndex == 1}">
+
+  </span>
+  <span (click)="goToSlide(2)" class="swiper-paginator" [ngClass]="{'activeindex': activeIndex == 2}">
+
+  </span>
+</div>
+<div class="ion-padding ion-text-center">
+  <ion-text color="dark">
+    <p class="ion-text-center header ion-no-margin">
+      {{activeIndex == 0 ? 'We have a very easy and fast application process' : activeIndex == 1 ? "You don't need any collateral or paperwork to access our loans": 'Get your money in your account in less than 30 minutes'}}
+    </p>
+  </ion-text>
+ <div>
+  <ion-text color="dark">
+    <p style="margin: 25px 0; font-weight: 300;" class="ion-text-center">Credit wallet is a product of Princeps Credit Systems Limited</p>
+  </ion-text>
+ </div>
+
+  <ion-button [routerLink]="['/start']" expand="block"  color="secondary">Apply for Loan 
+    <ion-icon slot="end" name="chevron-forward"></ion-icon></ion-button>
+    <ion-button [routerLink]="['/login']" fill="clear" color="secondary">Log In</ion-button>
+</div>
+  <!-- <div class="swiper-container">
     <ion-text color="light">
       <p style="font-weight: 700;" class="ion-text-center swiper-header ion-no-margin">
         Get a loan today
@@ -17,48 +62,12 @@
 
       </span>
     </div>
-    <swiper
-    #swiper
-    [slidesPerView]="1"
-    (slideChange)="changeActiveClass(swiper)"
-  >
-    <ng-template swiperSlide>
-      <div class="swiper-item ion-padding">
-        <!-- <h1 class="swiper-header">
-          Fast and Stress-free
-        </h1> -->
-        <p class="swiper-text">
-          We have a very easy and fast application process
-        </p>
-       </div>
-    </ng-template>
-    <ng-template swiperSlide>
-      <div class="swiper-item ion-padding">
-        <!-- <h1 class="swiper-header">
-          No Collateral; No Paperwork
-        </h1> -->
-        <p class="swiper-text">
-          You don't need any collateral or paperwork to access our loans
-        </p>
-       </div>
-    </ng-template>
-    <ng-template swiperSlide>
-      <div class="swiper-item ion-padding">
-        <!-- <h1 class="swiper-header">
-          Quicker Disbursement
-        </h1> -->
-        <p class="swiper-text">
-          Get your money in your account in less than 30 minutes
-        </p>
-       </div>
-    </ng-template>
-  </swiper>
   <div style="padding: 0 20px; margin-top: 20px;">
     <ion-button (click)="presentModal()" class="swiper-cta" color="secondary">get started</ion-button>
   </div>
   <ion-text color="white">
     <p class="ion-padding-start ion-padding-end" style="font-weight: 300; font-size: 13px; color: white;">Credit wallet is a product of Princeps Credit Systems Limited</p>
   </ion-text>
-  </div>
+  </div> -->
 </div>
 </ion-content>

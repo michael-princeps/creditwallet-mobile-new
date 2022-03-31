@@ -13,7 +13,7 @@ export class StepperFourComponent implements OnInit {
   customActionSheetOptions: any = {
     header: 'Select duration',
   };
-  tenors = tenors
+  tenors = tenors.sort((a, b) => a.value - b.value)
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {

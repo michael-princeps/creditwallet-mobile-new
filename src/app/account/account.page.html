@@ -1,19 +1,77 @@
-<ion-header translucent class="ion-no-border">
-  <ion-toolbar>
-    <ion-title>Account</ion-title>
+<ion-header class="ion-no-border">
+  <ion-toolbar class="ion-no-border transparent-toolbar">
+    <ion-buttons slot="end">
+      <ion-button slot="icon-only">
+        <ion-icon color="secondary" name="notifications"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content fullscreen>
- <div class="ion-margin-top ion-padding-top">
-  <ion-item lines="none">
+<ion-content [scrollY]="false" fullscreen fullscreen>
+ <div class="ion-margin-top ion-padding">
+  <ion-item class="avatar-section" lines="none">
     <ion-label>
      <ion-img [src]="user.borrower_photo || 'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y'"></ion-img>
-     <h2 class="ion-text-center" style="margin: 10px 0 5px; font-size: 20px;">{{user?.borrower_firstname}} {{user.borrower_lastname}}</h2>
+     <h2 class="ion-text-center" style="margin: 10px 0 5px; font-size: 24px; font-weight: 700;">{{user?.borrower_firstname}} {{user.borrower_lastname}}</h2>
      <p class="ion-text-center" style="margin: 5px 0;">{{user?.borrower_email}}</p>
     </ion-label>
   </ion-item>
-  <ion-list class="ion-margin-top" lines="full">
+  <ion-grid class="ion-margin-top ion-margin-bottom quicklinks">
+    <ion-row class="ion-margin-bottom">
+      <ion-col class="ion-text-center" size="4">
+        <div class="account-btn remove-focus">
+          <ion-icon style="font-size: 22.5px;" src="assets/icon/account-profile-icon.svg"></ion-icon>
+        </div>
+        <ion-label style="size: 12px;">Edit Profile</ion-label>
+      </ion-col>
+      <ion-col class="ion-text-center" size="4">
+        <div class="account-btn remove-focus">
+          <ion-icon style="font-size: 22.5px;" src="assets/icon/liquidate-loan-icon.svg"></ion-icon>
+        </div>
+        <ion-label style="size: 12px;">Liquidate Loan</ion-label>
+      </ion-col>
+      <ion-col class="ion-text-center" size="4">
+        <div (click)="presentActionSheet()" class="account-btn remove-focus">
+          <ion-icon style="font-size: 22.5px;" src="assets/icon/support-icon.svg"></ion-icon>
+        </div>
+        <ion-label style="size: 12px;">Support</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="ion-text-center" size="4">
+        <div class="account-btn remove-focus">
+          <ion-icon style="font-size: 22.5px;" src="assets/icon/account-letter-icon.svg"></ion-icon>
+        </div>
+        <ion-label style="size: 12px;">Account Letter</ion-label>
+      </ion-col>
+      <ion-col class="ion-text-center" size="4">
+        <div [routerLink]="['/main/account/statement-account']" class="account-btn remove-focus">
+          <ion-icon style="font-size: 22.5px;" src="assets/icon/statement-icon.svg"></ion-icon>
+        </div>
+        <ion-label style="size: 12px;">Statement</ion-label>
+      </ion-col>
+      <ion-col class="ion-text-center" size="4">
+        <div [routerLink]="['/main/account/security-settings']" class="account-btn remove-focus">
+          <ion-icon style="font-size: 22.5px;" src="assets/icon/security-icon.svg"></ion-icon>
+        </div>
+        <ion-label style="size: 12px;">Security</ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-item class="logout-btn" detail="false" color="secondary" (click)="logUserOut()" button>
+    <ion-icon size="small" src="assets/icon/logout-icon.svg" slot="end"></ion-icon>
+    <ion-label>
+      Sign Out
+    </ion-label>
+  </ion-item>
+  <!-- <ion-button  type="button" expand="block" color="secondary">
+    <span slot="start">
+      Sign out
+    </span>
+    <ion-icon slot="end" src="assets/icon/logout-icon.svg"></ion-icon>
+  </ion-button> -->
+  <!-- <ion-list class="ion-margin-top" lines="full">
     <ion-item button [routerLink]="['/main/account/statement-account']">
       <ion-icon size="small" color="primary" name="document-outline" slot="start"></ion-icon>
       <ion-label>
@@ -39,7 +97,7 @@
         Sign Out
       </ion-label>
     </ion-item>
-  </ion-list>
+  </ion-list> -->
  </div>
 </ion-content>
 

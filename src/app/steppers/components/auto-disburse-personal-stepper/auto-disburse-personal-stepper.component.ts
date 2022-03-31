@@ -16,7 +16,7 @@ export class AutoDisbursePersonalStepperComponent implements OnInit {
   @Output() goNextEmitter = new EventEmitter();
   @Input() referralCode: string;
   @Input() loanDetails;
-  dateValue
+  dateValue = '1970-01-01';
   customActionSheetOptions: any = {
     header: 'Select Title',
   };

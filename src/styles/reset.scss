@@ -10,6 +10,24 @@ ion-item{
   --background-focused: transparent
 }
 
+.ion-color-icon {
+	--ion-color-base: var(--ion-color-icon);
+	--ion-color-base-rgb: var(--ion-color-icon-rgb);
+	--ion-color-contrast: var(--ion-color-icon-contrast);
+	--ion-color-contrast-rgb: var(--ion-color-icon-contrast-rgb);
+	--ion-color-shade: var(--ion-color-icon-shade);
+	--ion-color-tint: var(--ion-color-icon-tint);
+}
+
+.ion-color-white {
+	--ion-color-base: var(--ion-color-white);
+	--ion-color-base-rgb: var(--ion-color-white-rgb);
+	--ion-color-contrast: var(--ion-color-white-contrast);
+	--ion-color-contrast-rgb: var(--ion-color-white-contrast-rgb);
+	--ion-color-shade: var(--ion-color-white-shade);
+	--ion-color-tint: var(--ion-color-white-tint);
+}
+
 
 ion-button {
   // --border-radius: 7px;
@@ -57,14 +75,14 @@ ion-toolbar {
 }
 
 .stepper-title {
-  font-size: 22px;
+  font-size: 25px;
   font-weight: 600;
   margin: 0;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 
 .stepper-bigtext {
-  font-weight: 200;
+  font-weight: 500;
   font-size: 16px;
   margin-top: 0;
 }
@@ -167,22 +185,25 @@ ion-select {
 .stepper-steps {
   display: flex;
   // margin: 20px 0;
-  width: 85%;
+  // width: 85%;
   margin-left: auto;
   margin-right: auto;
-  justify-content: center;
+  padding-left: 16px;
+  padding-right: 16px;
+  // justify-content: center;
 }
 
 .stepper-step {
-  width: calc((100% / 12) - 3px);
-  height: 5px;
-  background-color: #C4C4C4;
+  width: 8px;
+  height: 8px;
+  // background-color: #C4C4C4;
+  background-color: rgba(205, 217, 227, 0.99);
   display: inline-block;
-  border-radius: 3px;
+  border-radius: 4px;
   transition: all .3s ease-in-out;
 
   &:not(:last-of-type) {
-    margin-right: 3px;
+    margin-right: 15px;
   }
 
   &.activestep {
@@ -191,7 +212,7 @@ ion-select {
   }
 
   &.currentstep {
-    width: calc((100% / 5) - 3px);
+    width: 30px;
   }
 }
 
@@ -227,4 +248,41 @@ ion-select {
     border: 0;
     outline: 0;
   }
+}
+
+.account-btn {
+  background: rgba(251, 230, 221, 1);
+   width: 45px;
+   height: 45px;
+   border-radius: 100%;
+
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding: 5px;
+   margin: auto;
+   margin-bottom: 10px;
+ }
+
+ion-grid.quicklinks {
+ padding-top: 15px;
+ padding-bottom: 15px;
+ background: rgba(245, 245, 245, 0.5);
+ border-radius: 5px;
+}
+
+
+.shapes-bg::part(scroll) {
+  background-image: url('/assets/images/bubbles-few-bg.svg'), url('/assets/images/ellipse-bg.svg');
+  background-position-y: 0%, 100%;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+ion-input {
+  --background: transparent
+}
+
+.transparent-toolbar {
+  --background: transparent
 }

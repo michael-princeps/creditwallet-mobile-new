@@ -5,11 +5,12 @@
     </h3>
   </ion-text>
  <form style="display: flex; flex-direction: column; flex: 1;" [formGroup]="numberForm">
-  <ion-item class="ion-no-padding ion-margin-bottom">
-    <ion-label color="medium" position="stacked">
+  <ion-item lines="none" class="form-item ion-margin-bottom ion-margin-top">
+    <!-- <ion-label color="medium" position="stacked">
       Enter phone number
-    </ion-label>
-   <ion-input type="tel" inputmode="tel" enterkeyhint="done" formControlName="telephone" class="form-input"></ion-input>
+    </ion-label> -->
+          <ion-icon color="icon" size="small"  slot="end" src="assets/icon/phone-icon.svg"></ion-icon>
+   <ion-input type="tel" placeholder="Phone Number" inputmode="tel" enterkeyhint="done" formControlName="telephone" class="form-input"></ion-input>
    <!-- <ion-icon src="assets/icon/phone-icon.svg" slot="end" size="small" ></ion-icon> -->
    <small *ngIf="(formControls.telephone.dirty || formControls.telephone.touched) && formControls.telephone.errors" slot="error">Enter your phone number</small>
   </ion-item>

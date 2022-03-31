@@ -1,22 +1,46 @@
-ion-toolbar{
-    --padding-end: 16px;
-    --padding-start: 16px;
+ion-toolbar {
+  --padding-end: 16px;
+  --padding-start: 16px;
+}
+
+
+
+.no-scrollbar {
+    &::-webkit-scrollbar {
+  display: none;
+}
+}
+
+/* chrome, safari */
+ion-content::part(scroll)::-webkit-scrollbar {
+  display: none;
+}
+
+/* firefox */
+ion-content::part(scroll) {
+  scrollbar-width: none;
 }
 
 .has-password-input {
-    position: relative;
-    width: 100%;
+  position: relative;
+  width: 100%;
 
-    .password-toggle {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        margin: 0;
-        right: 0px;
-        z-index: 2;
-    }
+  .password-toggle {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;
+    right: 0px;
+    z-index: 2;
+  }
 
-    .password-input {
-        --padding-end: 50px;
-    }
+  .password-input {
+    --padding-end: 50px;
+  }
 }
+
+// ion-input {
+//   // --placeholder-font-style: capitalize
+// }
+
+

@@ -1,12 +1,15 @@
 <ion-header class="ion-no-border">
   <ion-toolbar class="white-toolbar">
-    <ion-title>Your Loans</ion-title>
-
+    <!-- <ion-title>Your Loans</ion-title> -->
+   <ion-buttons>
+    <ion-button class="new-loan-btn" fill="solid" (click)="presentApplyModal()" color="secondary">
+      <ion-icon slot="start" name="add-outline"></ion-icon>
+      New loan
+    </ion-button>
+   </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button (click)="presentApplyModal()">
-        <ion-icon name="add" color="primary">
-
-        </ion-icon>
+      <ion-button>
+        <ion-icon color="secondary" name="notifications"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>

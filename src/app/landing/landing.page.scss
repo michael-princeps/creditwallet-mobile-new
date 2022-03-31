@@ -2,12 +2,13 @@
   height: 100%;
   width: 100%;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  background-image: url('../../assets/images/bubbles-bg.svg');
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: flex-end;
+  background-image: url('/assets/images/bubbles-bg.svg');
   background-repeat: no-repeat;
-  background-position: bottom 50%;
+  background-position-y: 100%;
+  transition: background-position-y .25s ease-in-out;
 
   // &::before {
   //   content: '';
@@ -44,11 +45,11 @@
   padding: 20px 10px 10px;
 }
 
-.swiper-header{
-    color: #ffffff;
-    font-size: 24px;
-    font-weight: 600;
-    margin: 10px 0;
+.header{
+    // color: #ffffff;
+    font-size: 20px;
+    font-weight: 500;
+    margin: 5px 0;
 }
 
 .swiper-text {
@@ -70,18 +71,22 @@
 .swiper-paginator {
     width: 9px;
     height: 9px;
-    border-radius: 100%;
-    background-color: #FFFFFF40;
+    border-radius: 4px;
+    // background-color: #FFFFFF40;
+    background-color: rgba(205, 217, 227, 0.99);
     cursor: pointer;
+    transition: width .25s ease-in-out;
 
     &.activeindex {
         background-color: #F56C2A;
+        width: 30px;
     }
 }
 
 .swiper-paginators{
     display: flex;
     padding: 5px 20px;
+    justify-content: center;
     &>* {
         margin-right: 9px;
     }

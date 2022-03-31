@@ -24,11 +24,9 @@
   </ion-radio-group>
  <ng-container *ngIf="showValue === 'yes' else noIPPIS">
   <form style="display: flex; flex-direction: column; flex: 1;" [formGroup]="loanForm">
-    <ion-item class="ion-no-padding ion-margin-bottom">
-      <ion-label color="medium" position="stacked">
-        IPPIS Number
-      </ion-label>
-      <ion-input type="text" inputmode="text" enterkeyhint="done" formControlName="ippis_number" class="form-input"></ion-input>
+    <ion-item lines="none" class="form-item ion-margin-bottom ion-margin-top">
+          <ion-icon color="icon" size="small"  slot="end" name="keypad"></ion-icon>
+      <ion-input placeholder="IPPIS Number" type="text" inputmode="text" enterkeyhint="done" formControlName="ippis_number" class="form-input"></ion-input>
       <small
         *ngIf="(formControls.ippis_number.dirty || formControls.ippis_number.touched) && formControls.ippis_number.errors"
         slot="error">Enter your IPPIS Number</small>

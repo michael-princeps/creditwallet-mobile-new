@@ -5,11 +5,12 @@
     </h3>
   </ion-text>
   <form style="display: flex; flex-direction: column; flex: 1;" [formGroup]="loanForm">
-    <ion-item class="ion-no-padding ion-margin-bottom">
-      <ion-label color="medium" position="stacked">
+    <ion-item lines="none" class="form-item ion-margin-top ion-margin-bottom">
+      <!-- <ion-label color="medium" position="stacked">
         Loan Amount
-      </ion-label>
-      <ion-input type="tel" inputmode="numeric" pattern="[-+]?[0-9]*[.,]?[0-9]+" enterkeyhint="next" formControlName="loanamount" class="form-input"></ion-input>
+      </ion-label> -->
+      <ion-icon color="icon" size="small"  slot="end" name="keypad"></ion-icon>
+      <ion-input placeholder="Loan Amount" type="tel" inputmode="numeric" pattern="[-+]?[0-9]*[.,]?[0-9]+" enterkeyhint="next" formControlName="loanamount" class="form-input"></ion-input>
       <small
         *ngIf="(formControls.loanamount.dirty || formControls.loanamount.touched) && formControls.loanamount.errors"
         slot="error">Enter your loan amount</small>

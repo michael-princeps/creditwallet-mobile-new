@@ -45,3 +45,12 @@ ion-toolbar{
 ion-item {
     --background: transparent
 }
+
+ion-button.new-loan-btn{
+    width: 60%;
+    --border-radius: 10px
+
+    &::part(native) {
+        justify-content: flex-start !important;
+    }
+}

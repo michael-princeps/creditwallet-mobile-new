@@ -16,7 +16,7 @@ export class LoaderService {
       cssClass: 'my-custom-class',
       message: '',
       mode: 'ios',
-      spinner: 'crescent'
+      // spinner: 'crescent'
     });
     this.loader = loading;
     await loading.present().then(() => {

@@ -1,62 +1,78 @@
-<ion-header class="ion-no-border" translucent>
-  <ion-toolbar class="white-toolbar" class="ion-no-border white-toolbar">
-    <ion-buttons slot="start">
-      <ion-back-button color="primary" icon="arrow-back" text=""></ion-back-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-<ion-content class="ion-padding" fullscreen>
-  <div style="height: 100%; display: flex; flex-direction: column; justify-content: center;">
-    <ion-text color="primary">
-      <h3 class="stepper-title ion-text-center">
-        Hi, Welcome
-      </h3>
-    </ion-text>
-    <ion-text color="medium">
-      <p class="stepper-bigtext ion-text-center">
-        Fill in your credentials to log in.
-      </p>
-    </ion-text>
-    <form autocomplete="off" [formGroup]="loginForm">
-      <p *ngIf="loginForm.errors" class="ion-text-center">
-        <ion-text color="danger">
-          <small>{{loginForm.errors.message}}</small>
-        </ion-text>
-      </p>
-      <ion-item class="ion-no-padding ion-margin-bottom">
-        <ion-label color="medium" position="stacked">
-          Username
-        </ion-label>
-        <ion-input style="text-transform: uppercase;" name="xyz123" id="xyz123" autocomplete="xyz123" type="text" formControlName="username"
-          enterkeyhint="next" (keyup.enter)="setFocus(b)" class="form-input"></ion-input>
-        <small *ngIf="(formControls.username.dirty || formControls.username.touched) && formControls.username.errors"
-          slot="error">Enter your username</small>
-      </ion-item>
-      <ion-item class="ion-no-padding ion-margin-bottom">
-        <ion-label color="medium" position="stacked">
-          Password
-        </ion-label>
-        <div class="has-password-input">
-          <ion-input name="xyz123" id="xyz123" autocomplete="xyz123" formControlName="password"
-            (keyup.enter)="performManualLogin()" enterkeyhint="done" #b autocapitalize="off"
-            [type]="showPassword ? 'text':  'password'" class="form-input password-input"></ion-input>
-          <ion-button (click)="togglePasswordInput()" class="password-toggle ion-no-margin" fill="clear"
-            slot="icon-only">
-            <ion-icon color="medium" class="ion-no-margin" slot="icon-only" slot="start"
-              [name]="showPassword ? 'eye-off' : 'eye'"></ion-icon>
-          </ion-button>
-        </div>
-        <small *ngIf="(formControls.password.dirty || formControls.password.touched) && formControls.password.errors"
-          slot="error">Enter your passowrd</small>
-      </ion-item>
-      <ion-button type="button" (click)="performManualLogin()" expand="block" color="secondary">Log In</ion-button>
-    </form>
-    <p class="ion-text-center">
-      <ion-text color="secondary">
-       <span (click)="presentResetPasswordModal()" class="remove-focus">
-         Forgot Password?
-       </span>
+
+  <ion-header class="ion-no-border">
+    <ion-toolbar class="ion-no-border transparent-toolbar">
+      <ion-buttons slot="start">
+        <ion-back-button color="primary" defaultHref="/" icon="arrow-back" text=""></ion-back-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+<ion-content class="shapes-bg" fullscreen>
+  <div class="page-padding"  style="height: 100%;">
+    <div class="no-scrollbar" style="padding-top: 40px; height: 100%; text-align: center; overflow: auto; display: flex; flex-direction: column; align-items: center;">
+      <img src="assets/images/logo-2.png" alt="" width="70" height="70" style="border-radius: 100%; overflow: hidden; margin-bottom: 20px;" srcset="">
+     <div style="margin-bottom: 10px; width: 100%;">
+      <ion-text color="primary">
+        <h3 class="stepper-title ion-text-center">
+          Welcome to
+        </h3>
       </ion-text>
-     </p>
+      <ion-text color="secondary">
+        <h3 class="stepper-title ion-text-center">
+          Credit Wallet
+        </h3>
+      </ion-text>
+     </div>
+      <ion-text style="width: 100%;" color="medium">
+        <p class="stepper-bigtext ion-text-center">
+          Fill in your credentials to log in.
+        </p>
+      </ion-text>
+      <form autocomplete="off" style="width: 100%;
+      flex: 1;
+      display: flex;
+      flex-direction: column" [formGroup]="loginForm">
+        <p *ngIf="loginForm.errors" class="ion-text-center">
+          <ion-text color="danger">
+            <small>{{loginForm.errors.message}}</small>
+          </ion-text>
+        </p>
+        <ion-item lines="none" class="form-item ion-margin-bottom">
+          <!-- <ion-label color="medium" position="stacked">
+            Username
+          </ion-label> -->
+          <ion-icon color="icon"  size="small"  slot="end" name="keypad"></ion-icon>
+          <ion-input placeholder="Username" style="text-transform: capitalize;" name="xyz123" id="xyz123" autocomplete="xyz123" type="text" formControlName="username"
+            enterkeyhint="next" (keyup.enter)="setFocus(b)" class="form-input"></ion-input>
+          <small *ngIf="(formControls.username.dirty || formControls.username.touched) && formControls.username.errors"
+            slot="error">Enter your username</small>
+        </ion-item>
+        <ion-item lines="none" class="form-item ion-margin-bottom">
+          <!-- <ion-label color="medium" position="stacked">
+            Password
+          </ion-label> -->
+            <ion-input placeholder="Password" name="xyz123" id="xyz123" autocomplete="xyz123" formControlName="password"
+              (keyup.enter)="performManualLogin()" enterkeyhint="done" #b autocapitalize="off"
+              [type]="showPassword ? 'text':  'password'" class="form-input password-input"></ion-input>
+            <ion-button (click)="togglePasswordInput()" class="password-toggle ion-no-margin" size="small" fill="clear"
+              slot="end">
+              <ion-icon color="icon" size="small" class="ion-no-margin" slot="icon-only"
+                [name]="showPassword ? 'eye-off' : 'eye'"></ion-icon>
+            </ion-button>
+            <!-- <ion-icon (click)="togglePasswordInput()" color="icon" size="small"  slot="end"
+          [name]="showPassword ? 'lock-open-outline' : 'lock-closed-outline'"></ion-icon> -->
+          <small *ngIf="(formControls.password.dirty || formControls.password.touched) && formControls.password.errors"
+            slot="error">Enter your passowrd</small>
+        </ion-item>
+  
+      <p class="ion-text-end">
+        <ion-text color="secondary">
+         <span (click)="presentResetPasswordModal()" class="remove-focus">
+           Forgot Password?
+         </span>
+        </ion-text>
+       </p>
+        <ion-button style="margin-top: auto;" type="button" (click)="performManualLogin()" expand="block" color="secondary">Log In</ion-button>
+      </form>
+    </div>
   </div>
 </ion-content>

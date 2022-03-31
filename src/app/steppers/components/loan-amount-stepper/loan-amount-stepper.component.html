@@ -1,6 +1,6 @@
 <div class="stepper-content">
   <ion-text color="primary">
-    <h3 class="stepper-title ion-text-center">
+    <h3 class="stepper-title">
       How much loan do you want?
     </h3>
   </ion-text>
@@ -10,12 +10,12 @@
       Enter the amount you would like to borrow.
     </p>
   </ion-text> -->
-  <ion-item class="ion-no-padding ion-margin-bottom">
-    <ion-label color="medium" position="stacked">
+  <ion-item lines="none" class="form-item ion-margin-top ion-margin-bottom">
+    <!-- <ion-label color="medium" position="stacked">
       Enter the amount you would like to borrow.
-    </ion-label>
-    <!-- <ion-icon style="color: rgba(32, 27, 27, .5);" slot="start" name="keypad"></ion-icon> -->
-   <ion-input type="tel" inputmode="numeric" pattern="[-+]?[0-9]*[.,]?[0-9]+" enterkeyhint="next" formControlName="loan_amount" #a (keyup.enter)="setFocus(b)" class="form-input"></ion-input>
+    </ion-label> -->
+    <ion-icon color="icon" size="small" slot="end" name="keypad"></ion-icon>
+   <ion-input placeholder="Loan Amount" type="tel" inputmode="numeric" pattern="[-+]?[0-9]*[.,]?[0-9]+" enterkeyhint="next" formControlName="loan_amount" #a (keyup.enter)="setFocus(b)" class="form-input"></ion-input>
    <small *ngIf="(formControls.loan_amount.dirty || formControls.loan_amount.touched) && formControls.loan_amount.errors" slot="error">Enter the amount you want</small>
   </ion-item>
   <!-- <ion-text color="medium">
@@ -23,11 +23,11 @@
       Select how long
     </p>
   </ion-text> -->
-  <ion-item class="ion-no-padding">
-    <ion-label color="medium" position="stacked">
+  <ion-item lines="none" class="form-item ">
+    <!-- <ion-label color="medium" position="stacked">
       Select duration
-    </ion-label>
-    <ion-select formControlName="tenor" #b [interfaceOptions]="customActionSheetOptions"  okText="Okay" cancelText="Dismiss" interface="alert">
+    </ion-label> -->
+    <ion-select placeholder="Duration" formControlName="tenor" #b [interfaceOptions]="customActionSheetOptions"  okText="Okay" cancelText="Dismiss" interface="alert">
       <ion-select-option *ngFor="let tenor of tenors" [value]="tenor.value">{{tenor.label}}</ion-select-option>
     </ion-select>
     <small *ngIf="(formControls.tenor.dirty || formControls.tenor.touched) && formControls.tenor.errors" slot="error">Select Duration</small>

@@ -1,10 +1,38 @@
-ion-toolbar {
-    --background: #ffffff
+ion-toolbar{
+  --padding-end: 16px;
+  --padding-start: 16px;
 }
 
 ion-img::part(image) {
-    width: 100px;
-    height: 100px;
-    margin: 0 auto;
-    border-radius: 100%;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
+  border-radius: 50px;
+}
+
+ion-content::part(scroll) {
+  background-image: url('/assets/images/bubbles-few-bg.svg');
+  background-position-y: 0%;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+ion-item.avatar-section {
+  --background: transparent
+}
+
+// ion-button.account-btn {
+//   --background: rgba(251, 230, 221, 1);
+//   width: 45px;
+//   height: 45px;
+//   --border-radius: 100%;
+//   display: block;
+//   margin: auto;
+//   margin-bottom: 10px;
+
+//   --background-activated: rgba(251, 230, 221, 1)
+// }
+
+.logout-btn {
+    --border-radius: 15px
 }
