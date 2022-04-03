@@ -1,0 +1,35 @@
+ion-content::part(scroll) {
+    background-image: url('/assets/images/bubbles-few-bg.svg');
+    background-position-y: 0%;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+
+ion-grid.notification-item {
+    padding: 16px;
+    background: rgba(250, 248, 248, 1);
+}
+
+.notification-icon {
+    height: 40px !important;
+    width: 40px !important;
+    background: rgba(251, 230, 221, 1) !important;
+    border-radius: 100% !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notification-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+
+.notification-text {
+    font-size: 12px;
+    font-weight: 300;
+}

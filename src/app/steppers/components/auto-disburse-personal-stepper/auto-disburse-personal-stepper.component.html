@@ -91,7 +91,7 @@
         Place of work (Employer name)
       </ion-label> -->
       <ion-icon color="icon" slot="end" size="small" src="assets/icon/employment-icon.svg"></ion-icon>
-      <ion-textarea placeholder="Place of work" autocapitalize="on" enterkeyhint="next" formControlName="place_of_work" (keyup.enter)="setFocus(d)" class="form-input">
+      <ion-textarea autocapitalize="on" placeholder="Place of work" autocapitalize="on" enterkeyhint="next" formControlName="place_of_work" (keyup.enter)="setFocus(d)" class="form-input">
       </ion-textarea>
       <small
         *ngIf="(formControls.place_of_work.dirty || formControls.place_of_work.touched) && formControls.place_of_work.errors"
@@ -112,7 +112,7 @@
         House Address
       </ion-label> -->
       <ion-icon color="icon" slot="end" size="small" src="assets/icon/address-icon.svg"></ion-icon>
-      <ion-textarea placeholder="House Address" autocapitalize="on" enterkeyhint="next" #e (keyup.enter)="setFocus(f)" formControlName="house_address"
+      <ion-textarea autocapitalize="on" placeholder="House Address" autocapitalize="on" enterkeyhint="next" #e (keyup.enter)="setFocus(f)" formControlName="house_address"
         class="form-input"></ion-textarea>
       <small
         *ngIf="(formControls.house_address.dirty || formControls.house_address.touched) && formControls.house_address.errors"
@@ -123,7 +123,7 @@
         City
       </ion-label> -->
       <ion-icon color="icon" slot="end" size="small" src="assets/icon/city-icon.svg"></ion-icon>
-      <ion-input placeholder="City" autocapitalize="on" enterkeyhint="next" #f (keyup.enter)="openSelect(g)" formControlName="city" type="text"
+      <ion-input autocapitalize="on" placeholder="City" autocapitalize="on" enterkeyhint="next" #f (keyup.enter)="openSelect(g)" formControlName="city" type="text"
         class="form-input"></ion-input>
       <small *ngIf="(formControls.city.dirty || formControls.city.touched) && formControls.city.errors"
         slot="error">Enter city</small>

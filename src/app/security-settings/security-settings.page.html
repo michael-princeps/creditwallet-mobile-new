@@ -1,7 +1,7 @@
 <ion-header class="ion-no-border">
   <ion-toolbar class="white-toolbar">
     <ion-buttons slot="start">
-     <ion-back-button color="primary" icon="arrow-back" text="">
+     <ion-back-button color="primary" defaultHref="/main/account" icon="arrow-back" text="">
 
      </ion-back-button>
     </ion-buttons>
@@ -11,7 +11,7 @@
 
 <ion-content class="ion-padding-top ion-padding-bottom">
   <ion-list lines="full">
-    <ion-item button [routerLink]="['/main/account/change-password']" >
+    <ion-item button detail [routerLink]="['/main/account/change-password']" >
       <ion-label>
        Change Password
       </ion-label>
@@ -21,7 +21,7 @@
       <ion-label>
         Use FaceID for Login
       </ion-label>
-      <ion-toggle slot="end" color="primary"></ion-toggle>
+      <ion-toggle [(ngModel)]="useFaceID" slot="end" color="primary"></ion-toggle>
     </ion-item> -->
   </ion-list>
 </ion-content>

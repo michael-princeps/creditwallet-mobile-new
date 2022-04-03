@@ -15,7 +15,7 @@
         Place of work
       </ion-label> -->
       <ion-icon color="icon" slot="end" size="small" src="assets/icon/employment-icon.svg"></ion-icon>
-      <ion-textarea placeholder="Place of work"  enterkeyhint="next" inputmode="text" formControlName="place_of_work" #a (keyup.enter)="openSelect(c)" class="form-input"></ion-textarea>
+      <ion-textarea autocapitalize="on" placeholder="Place of work"  enterkeyhint="next" inputmode="text" formControlName="place_of_work" #a (keyup.enter)="openSelect(c)" class="form-input"></ion-textarea>
       <small
         *ngIf="(formControls.place_of_work.dirty || formControls.place_of_work.touched) && formControls.place_of_work.errors"
         slot="error">Enter place of work</small>

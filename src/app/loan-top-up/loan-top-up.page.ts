@@ -7,6 +7,7 @@ import { takeUntil } from 'rxjs/operators';
 import { AuthenticationService } from '../services/authentication.service';
 import { LoaderService } from '../services/loader.service';
 import { MainService } from '../services/main.service';
+import { LocalNotifications } from '@awesome-cordova-plugins/local-notifications/ngx';
 
 @Component({
   selector: 'app-loan-top-up',
@@ -37,10 +38,19 @@ export class LoanTopUpPage implements OnInit {
   destroy$ = new Subject<boolean>()
   user: any;
   
-  constructor(private modalController: ModalController, private loaderService: LoaderService, private service: MainService,  private authService: AuthenticationService, public alertController: AlertController) { }
+  constructor(private modalController: ModalController,  private localNotifications: LocalNotifications, private loaderService: LoaderService, private service: MainService,  private authService: AuthenticationService, public alertController: AlertController) { }
 
   ngOnInit() {
     this.authService.userObject.subscribe((user) => this.user = user)
+  }
+
+  showSuccessNotification() {
+    this.localNotifications.schedule({
+      title: 'Top up request in progress',
+      text: 'Top up request in review. Please hold on for a response',
+      trigger: {at: new Date(new Date().getTime() + 3000)},
+      // group: 'loan-application'
+   });
   }
 
   close() {
@@ -137,6 +147,7 @@ export class LoanTopUpPage implements OnInit {
       this.loaderService.dismissLoader();
     this.currentStep = currentData.page + 1;
       this.currentPageSubject.next({ page: 3 });
+      this.showSuccessNotification()
     }, () => this.loaderService.dismissLoader())
   }
 

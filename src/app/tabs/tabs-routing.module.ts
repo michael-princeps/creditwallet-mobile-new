@@ -35,6 +35,10 @@ const routes: Routes = [
             path: 'statement-account',
             loadChildren: () => import('../statement-account/statement-account.module').then(m => m.StatementAccountPageModule)
           },
+          {
+        path: 'notifications',
+        loadChildren: () => import('../notifications/notifications.module').then( m => m.NotificationsPageModule)
+        },
         ]
       },
       {
@@ -51,11 +55,6 @@ const routes: Routes = [
       {
         path: '',
         redirectTo: 'dashboard',
-        pathMatch: 'full'
-      },
-      {
-        path: '',
-        redirectTo: 'main/dashboard',
         pathMatch: 'full'
       }
     ]

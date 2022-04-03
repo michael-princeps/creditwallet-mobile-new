@@ -33,19 +33,29 @@ export class DashboardPage implements OnInit, ViewDidLeave {
   }
 
   ionViewDidLeave(): void {
-      this.destroy$.next();
-      this.destroy$.complete()
-      if (this.refresherEvent) {
-        this.refresherEvent.target.complete()
-      }
+    this.destroy$.next();
+    this.destroy$.complete()
+    if (this.refresherEvent) {
+      this.refresherEvent.target.complete()
+    }
   }
+
 
   toggleBalance() {
-    this.showBalance =! this.showBalance
+    this.showBalance = !this.showBalance
   }
 
-  openSupportModal() {
-    
+  showNotifications() {
+    // LocalNotifications.schedule({
+    //   notifications: [
+    //     {
+    //       body: 'Loan application is undergoing review. Someone will get back to you shortly with the status of your loan',
+    //       title: 'Review in progress',
+    //       id: 1,
+    //       schedule: { at: new Date(new Date().getTime() + 3000), allowWhileIdle: true }
+    //     }
+    //   ]
+    // })
   }
 
   fetchDashboard() {
@@ -56,6 +66,7 @@ export class DashboardPage implements OnInit, ViewDidLeave {
       this.dashboardData = data;
       this.openLoans = data.open_loan;
       this.repayments = data.repayments;
+      // this.authService.updateFirebaseToken();
     }, () => this.loaderService.dismissLoader())
   }
 
@@ -113,37 +124,37 @@ export class DashboardPage implements OnInit, ViewDidLeave {
       default:
         return 'Cash Deposit';
     }
-  } 
+  }
 
 
   async presentActionSheet() {
     const actionSheet = await this.actionSheetController.create({
       header: 'Support Help',
       cssClass: 'my-custom-class',
-      buttons: [ 
+      buttons: [
         {
-        text: 'Call 07085698828',
-        // icon: 'call',
-        handler: () => {
-          this.openDialer()
-        }
-      }, {
-        text: 'Send a mail',
-        // icon: 'mail',
-        data: 'Data value',
-        handler: () => {
-          this.openEmail()
+          text: 'Call 07085698828',
+          // icon: 'call',
+          handler: () => {
+            this.openDialer()
+          }
+        }, {
+          text: 'Send a mail',
+          // icon: 'mail',
+          data: 'Data value',
+          handler: () => {
+            this.openEmail()
+          },
         },
-      },
-      {
-        text: 'Cancel',
-        // icon: 'close',
-        role: 'cancel',
-        handler: () => {
-          // console.log('Cancel clicked');
+        {
+          text: 'Cancel',
+          // icon: 'close',
+          role: 'cancel',
+          handler: () => {
+            // console.log('Cancel clicked');
+          }
         }
-      }
-    ]
+      ]
     });
     await actionSheet.present();
 
@@ -153,8 +164,8 @@ export class DashboardPage implements OnInit, ViewDidLeave {
 
   openDialer() {
     this.callNumber.callNumber("07085698828", true)
-      // .then(res => console.log('Call placed'))
-      // .catch(err => console.log('Error launching dialer', err));
+    // .then(res => console.log('Call placed'))
+    // .catch(err => console.log('Error launching dialer', err));
   }
 
   async openEmail() {

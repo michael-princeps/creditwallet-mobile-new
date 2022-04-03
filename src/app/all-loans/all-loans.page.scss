@@ -4,8 +4,9 @@ ion-toolbar{
 }
 
 .loan-card {
-    padding:15px 20px;
-    border-radius: 10px;
+    position: relative;
+    padding: 30px 20px 15px;
+    border-radius: 17px;
     margin-bottom: 15px;
     cursor: pointer;
     // background-color: rgba(0, 46, 91, .2);
@@ -19,20 +20,42 @@ ion-toolbar{
 
     &.completed {
         border: 0.45px solid rgba(45, 211, 111, .075);
-        background-color: rgba(45, 211, 111, .075) !important;
+        // background-color: rgba(45, 211, 111, .075) !important;
+        background: linear-gradient(211.38deg, #5CFFA1 18.94%, #2ECC71 86.32%) !important;
+        .loan-status {
+            background-color: #FFFFFF;
+        }
     }
 
     &.active {
         border: 0.45px solid rgba(245, 108, 42, .075);
-        background-color: rgba(245, 108, 42, .075) !important;
+        // background-color: rgba(245, 108, 42, .075) !important;
+        background: linear-gradient(199.65deg, #FFB067 13.16%, #F56B2A 76.51%) !important;
+
+        .loan-status {
+            background-color: #F56B2A;
+        }
     }
 }
 
+.loan-status {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
+
 .loan-amount {
-    font-size: 20px;
+    font-size: 25px;
     font-weight: bold;
     margin: 0;
-    padding: 5px 0;
+    margin-bottom: 10px;
+    // padding: 2px 0;
 }
 
 .monthly-payment {
@@ -47,10 +70,45 @@ ion-item {
 }
 
 ion-button.new-loan-btn{
-    width: 60%;
-    --border-radius: 10px
+    width: 45%;
 
     &::part(native) {
-        justify-content: flex-start !important;
+        // justify-content: flex-start !important;
+    --border-radius: 5px
     }
 }
+
+.loan-params--bottom {
+    display: flex;
+    *{
+        margin-right: 10px;
+    }
+}
+
+.loan-param{
+    *{
+        margin-right: 5px;
+    }
+}
+
+.loan-text {
+    font-size: 7.5px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+}
+
+.loan-value {
+    font-size: 10px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 1);
+}
+
+ion-skeleton-text {
+    line-height: 13px;
+    --border-radius: 3px
+  }
+
+  ion-skeleton-text:last-child {
+    margin-bottom: 5px;
+  }

@@ -1,9 +1,9 @@
 <ion-header class="ion-no-border">
   <ion-toolbar class="white-toolbar">
     <ion-buttons slot="start">
-     <ion-back-button color="primary" icon="arrow-back" text="">
+      <ion-back-button color="primary" icon="arrow-back" text="">
 
-     </ion-back-button>
+      </ion-back-button>
     </ion-buttons>
     <ion-title>Email Statement</ion-title>
   </ion-toolbar>
@@ -11,12 +11,12 @@
 
 <ion-content class="ion-padding-top ion-padding-bottom">
   <ion-list lines="full">
-    <ion-item button (click)="openDebtednessModal('indebtedness')">
+    <ion-item button detail (click)="openDebtednessModal('indebtedness')">
       <ion-label>
-       Letter of Indebtedness
+        Letter of Indebtedness
       </ion-label>
     </ion-item>
-    <ion-item button (click)="openDebtednessModal('nonindebtedness')">
+    <ion-item button detail (click)="openDebtednessModal('nonindebtedness')">
       <ion-label>
         Letter of Non-Debtedness
       </ion-label>
@@ -25,23 +25,18 @@
 </ion-content>
 
 
-<ion-modal
-(didDismiss)="closeModal()"
-[backdropDismiss]="shouldBackdropDismiss"
-  [isOpen]="showDebtednessModal"
-  [breakpoints]="[0, 0.5, 1]"
-  [initialBreakpoint]="0.5"
->
+<ion-modal (didDismiss)="closeModal()" [backdropDismiss]="shouldBackdropDismiss" [isOpen]="showDebtednessModal"
+  [breakpoints]="[0, 0.5, 0.9]" [initialBreakpoint]="0.5">
   <ng-template>
     <ion-content class="ion-padding">
-    <ion-text color="primary">
-      <h4 class="ion-text-center">
-        Get your letter of {{showDebtednessModalTitle | titlecase}}
-      </h4>
-    </ion-text>
-    <ng-container [ngTemplateOutlet]="emailform">
+      <ion-text color="primary">
+        <h4 class="ion-text-center">
+          Get your letter of {{showDebtednessModalTitle | titlecase}}
+        </h4>
+      </ion-text>
+      <ng-container [ngTemplateOutlet]="emailform">
 
-    </ng-container>
+      </ng-container>
     </ion-content>
   </ng-template>
 </ion-modal>
@@ -53,13 +48,15 @@
       <ion-label color="medium" position="stacked">
         Enter preferred email
       </ion-label>
-     <ion-input formControlName="email" autocapitalize="off" autocomplete="off" class="form-input"></ion-input>
-     <small *ngIf="(formControls.email.dirty || formControls.email.touched) && formControls.email.errors" slot="error">Provide a valid email</small>
+      <ion-input formControlName="email" autocapitalize="off" autocomplete="off" class="form-input"></ion-input>
+      <small *ngIf="(formControls.email.dirty || formControls.email.touched) && formControls.email.errors"
+        slot="error">Provide a valid email</small>
     </ion-item>
-    <ion-button  [disabled]="loading" type="button" expand="block" class="ion-margin-top" color="secondary" (click)="handleRequestStatement()">
+    <ion-button [disabled]="loading" type="button" expand="block" class="ion-margin-top" color="secondary"
+      (click)="handleRequestStatement()">
       <ion-spinner *ngIf="loading; else showText" name="bubbles"></ion-spinner>
     </ion-button>
-   </form>
+  </form>
 </ng-template>
 
 <ng-template #showText>

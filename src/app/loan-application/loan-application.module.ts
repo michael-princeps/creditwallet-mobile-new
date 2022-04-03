@@ -13,6 +13,7 @@ import {File} from '@awesome-cordova-plugins/file/ngx'
 // import {FileOpener} from '@awesome-cordova-plugins/file-opener/ngx'
 import {FilePath} from '@awesome-cordova-plugins/file-path/ngx'
 import { AndroidPermissions } from '@awesome-cordova-plugins/android-permissions/ngx';
+import { LocalNotifications } from '@awesome-cordova-plugins/local-notifications/ngx';
 
 @NgModule({
   imports: [
@@ -22,7 +23,7 @@ import { AndroidPermissions } from '@awesome-cordova-plugins/android-permissions
     LoanApplicationPageRoutingModule
   ],
   providers: [
-    MediaCapture, File, FilePath, AndroidPermissions
+    MediaCapture, File, FilePath, AndroidPermissions,LocalNotifications
   ],
   declarations: [LoanApplicationPage]
 })

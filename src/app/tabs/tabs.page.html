@@ -1,6 +1,6 @@
 <ion-tabs>
 
-  <ion-tab-bar slot="bottom">
+  <ion-tab-bar class="tabs-bottom" *ngIf="showTabs" slot="bottom">
     <ion-tab-button tab="dashboard">
       <ion-icon style="font-size: 20px;" src="assets/icon/home-tab-icon.svg"></ion-icon>
       <ion-label>Home</ion-label>
@@ -10,7 +10,8 @@
       <ion-label>Loans</ion-label>
     </ion-tab-button>
     <ion-tab-button tab="account">
-      <ion-icon style="font-size: 20px;" src="assets/icon/user-tab-icon.svg"></ion-icon>
+      <ion-icon style="font-size: 22.5px;" name="person-circle"></ion-icon>
+      <!-- <img src="assets/icon/user-tab-icon.svg" width="25" height="25" style="border-radius: 100%;" alt="" srcset=""> -->
       <ion-label>Account</ion-label>
     </ion-tab-button>
   </ion-tab-bar>

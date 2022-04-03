@@ -3,6 +3,7 @@ import { Storage } from '@capacitor/storage';
 
 export const TOKEN_KEY = 'creditwallet-customer-Token';
 export const USER_KEY = 'creditwallet-customer';
+export const FCM_TOKEN = 'fcm-token';
 export async function addToStorage(key: string, value: any): Promise<void> {
     await Storage.set({
         key: key,

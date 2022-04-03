@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "996137623950",
+    "project_id": "creditwallet-mobile",
+    "storage_bucket": "creditwallet-mobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:996137623950:android:698223f2143b733365c4df",
+        "android_client_info": {
+          "package_name": "com.princepsfinance.creditwallet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "996137623950-q3p0tompt4r0dv3qsi3o2ot1iu7l821a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_aNGzVMuI63S8snhtMsSukm9TVOt67Uo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "996137623950-q3p0tompt4r0dv3qsi3o2ot1iu7l821a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

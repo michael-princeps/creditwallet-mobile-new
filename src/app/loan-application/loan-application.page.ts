@@ -7,6 +7,10 @@ import { MainService } from '../services/main.service';
 import { takeUntil } from 'rxjs/operators';
 import { LoaderService } from '../services/loader.service';
 import { LoanAutoDisburseApplicationPage } from '../loan-auto-disburse-application/loan-auto-disburse-application.page';
+// import { LocalNotifications } from '@awesome-cordova-plugins/local-notifications/ngx';
+import {
+  LocalNotifications,
+} from '@capacitor/local-notifications';
 
 @Component({
   selector: 'app-loan-application',
@@ -42,6 +46,25 @@ export class LoanApplicationPage implements OnInit {
     this.activatedRoute.queryParams.subscribe((param: any) => {
       this.code = param.code
     })
+  }
+
+  showSuccessNotification() {
+  //   this.localNotifications.schedule({
+  //     title: 'Review in progress',
+  //     text: 'Loan application is undergoing review. Someone will get back to you shortly with the status of your loan',
+  //     trigger: {at: new Date(new Date().getTime() + 3000)},
+  //     // group: 'loan-application'
+  //  });
+  LocalNotifications.schedule({
+    notifications: [
+      {
+        body: 'Loan application is undergoing review. Someone will get back to you shortly with the status of your loan',
+        title: 'Review in progress',
+        id: 1,
+        schedule: { at: new Date(new Date().getTime() + 3000), allowWhileIdle: true }
+      }
+    ]
+  })
   }
 
   close() {
@@ -143,6 +166,7 @@ export class LoanApplicationPage implements OnInit {
       this.loaderService.dismissLoader();
       this.currentStep = currentData.page + 1;
       this.currentPageSubject.next({ page: 9 });
+      this.showSuccessNotification();
     }, () => this.loaderService.dismissLoader())
   }
 

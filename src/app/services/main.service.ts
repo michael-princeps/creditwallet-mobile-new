@@ -77,7 +77,7 @@ export class MainService {
   // accept offer 
   fetchInitialOffer(id: string | undefined) : Observable<any> {
     // return this.http.post(`${environment.baseUrl}loans/automation/offer/view`, {id});
-    return this.http.post(`${environment.loanV2Url}${this.modulePath}/offer/view`, {id});
+    return this.http.post(`${environment.baseUrl}${this.modulePath}/offer/view`, {id});
   }
 
 
@@ -91,7 +91,7 @@ export class MainService {
 
   acceptOffer(loan: any) : Observable<any> {
     // return this.http.post(`${environment.baseUrl}loans/automation/offer/accept`, {id});
-    return this.http.post(`${environment.loanV2Url}loan/finalize/new`, loan);
+    return this.http.post(`${environment.baseUrl}loan/finalize/new`, loan);
   }
 
   verifyAccountDetails(account_details: any): Observable<any> {
@@ -104,6 +104,6 @@ export class MainService {
 
   uploadID(details: any) : Observable<any> {
     // return this.http.post(`${environment.baseUrl}loan/document/upload`, details, {reportProgress: true});
-    return this.http.post(`${environment.loanV2Url}loans/upload`, details, {reportProgress: true});
+    return this.http.post(`${environment.baseUrl}loans/upload`, details, {reportProgress: true});
   }
 }

@@ -14,14 +14,18 @@ dependencies {
     implementation project(':capacitor-filesystem')
     implementation project(':capacitor-haptics')
     implementation project(':capacitor-keyboard')
+    implementation project(':capacitor-local-notifications')
+    implementation project(':capacitor-push-notifications')
     implementation project(':capacitor-splash-screen')
     implementation project(':capacitor-status-bar')
     implementation project(':capacitor-storage')
     implementation project(':capacitor-email-composer')
     implementation project(':capacitor-native-biometric')
     implementation project(':capacitor-video-player')
-
+    implementation "com.android.support:support-v4:26.+"
 }
+apply from: "../../node_modules/cordova-plugin-badge/src/android/badge.gradle"
+apply from: "../../node_modules/cordova-plugin-local-notification/src/android/build/localnotification.gradle"
 apply from: "../../node_modules/cordova-plugin-video-editor/src/android/build.gradle"
 
 if (hasProperty('postBuildExtras')) {

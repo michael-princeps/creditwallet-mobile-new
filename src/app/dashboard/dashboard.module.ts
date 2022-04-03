@@ -10,6 +10,7 @@ import { DashboardPage } from './dashboard.page';
 import { SupportMethodsModule } from '../components/support-methods/support-methods.module';
 import { LoanTopUpModule } from '../components/loan-top-up.module';
 import {CallNumber} from '@ionic-native/call-number/ngx'
+import { LocalNotifications } from '@awesome-cordova-plugins/local-notifications/ngx';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import {CallNumber} from '@ionic-native/call-number/ngx'
     DashboardPageRoutingModule
   ],
   providers: [
-    CallNumber
+    CallNumber,
+    LocalNotifications,
   ],
   declarations: [DashboardPage]
 })

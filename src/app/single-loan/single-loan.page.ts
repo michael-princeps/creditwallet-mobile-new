@@ -42,6 +42,7 @@ export class SingleLoanPage implements OnInit, ViewDidLeave {
     //   this.loan_id = param.id;
     //   this.viewLoanDetails();
     // })
+    this.emailForm.patchValue({email: this.loanObject.borrower_email})
   }
 
   get formControls() {
@@ -59,7 +60,7 @@ export class SingleLoanPage implements OnInit, ViewDidLeave {
   closeModal() {
     this.showLiquidationModal = false;
     this.statementModal = false;
-    this.emailForm.reset();
+    this.emailForm.reset({email: this.loanObject.borrower_email});
   }
 
   viewLoanDetails() {

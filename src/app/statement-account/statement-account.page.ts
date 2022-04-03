@@ -23,13 +23,14 @@ export class StatementAccountPage implements OnInit, ViewDidLeave {
   showDebtednessModalTitle: string;
   loading = false;
   constructor(authService: AuthenticationService, private toaster: ToastService, private service: MainService, private fb: FormBuilder) {
-    authService.userObject.subscribe((user) => this.user = user)
-  }
-
-  ngOnInit() {
+    authService.userObject.subscribe((user) => this.user = user.user)
     this.emailForm = this.fb.group({
       email: [null, [Validators.required, Validators.email]]
     })
+  }
+
+  ngOnInit() {
+    this.emailForm.patchValue({email: this.user.borrower_email})
   }
 
   ionViewDidLeave(): void {
@@ -48,7 +49,7 @@ export class StatementAccountPage implements OnInit, ViewDidLeave {
 
   closeModal() {
     this.showDebtednessModal = false;
-    this.emailForm.reset();
+    this.emailForm.reset({email: this.user.borrower_email});
   }
 
   handleRequestStatement() {

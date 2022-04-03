@@ -79,10 +79,10 @@ export class LoginPage implements OnInit {
       password: params.password
     }).then(() => {
       this.loaderService.dismissLoader();
-      this.router.navigate(['/main'], { replaceUrl: true })
+      this.router.navigate(['/main/dashboard'], { replaceUrl: true })
     }, () => {
       this.loaderService.dismissLoader();
-      this.router.navigate(['/main'], { replaceUrl: true })
+      this.router.navigate(['/main/dashboard'], { replaceUrl: true })
     })
   }
 

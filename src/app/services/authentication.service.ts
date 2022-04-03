@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { shareReplay, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { addToStorage, clearStorage, getFromStorage, removeFromStorage, TOKEN_KEY, USER_KEY } from './storage';
+import { addToStorage, clearStorage, FCM_TOKEN, getFromStorage, removeFromStorage, TOKEN_KEY, USER_KEY } from './storage';
 import {
   NativeBiometric,
 } from 'capacitor-native-biometric';
@@ -26,11 +26,21 @@ export class AuthenticationService {
     return this.http.post<any>(`${environment.baseUrl}customer/login`, user).pipe(tap(res => this.setSession(res)))
   }
 
+  async updateFirebaseToken(email: string) {
+    const token = await getFromStorage(FCM_TOKEN);
+    const params = {
+      email,
+      token
+    }
+    this.http.post(`${environment.baseUrl}customer/token-update`, params).subscribe()
+  }
+
   resetAccountPassword(params: any) {
     return this.http.post<any>(`${environment.baseUrl}customer/password/reset`, params)
   }
 
   async clearStorage() {
+    this.isAuthenticated.next(false)
     if (Capacitor.getPlatform() != 'web') {
       return NativeBiometric.deleteCredentials({server: 'accounts.creditwallet.ng'}).then(() => clearStorage(), () => () => clearStorage())
     } else {
@@ -66,6 +76,7 @@ export class AuthenticationService {
     removeFromStorage(USER_KEY).then(() => addToStorage(USER_KEY, authResult.borrower), () => addToStorage(USER_KEY, authResult.borrower));
     this.isAuthenticated.next(true);
     this.userObject.next({user: authResult.borrower});
+    this.updateFirebaseToken(authResult.borrower.borrower_email)
   }
 
   async getUserObject() {

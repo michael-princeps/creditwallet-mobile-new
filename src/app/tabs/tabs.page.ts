@@ -1,6 +1,8 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router, Event } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { Subject } from 'rxjs';
+import { filter, takeUntil } from 'rxjs/operators';
 import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
@@ -10,8 +12,17 @@ import { AuthenticationService } from '../services/authentication.service';
 })
 export class TabsPage implements OnInit {
   idleLogoutTimer: any;
-
-  constructor(private modalController: ModalController,private authservice: AuthenticationService, private router: Router) { }
+  destroy$ = new Subject<boolean>();
+  showTabs = true;
+  constructor(private modalController: ModalController, private authservice: AuthenticationService, private router: Router) {
+    // this.router.events.pipe(filter(e => e instanceof NavigationEnd), takeUntil(this.destroy$)).subscribe((event) => {
+    //   if (event['url'].indexOf('notifications') !== -1) {
+    //     this.showTabs = false;
+    //   } else {
+    //     this.showTabs = true;
+    //   }
+    // })
+   }
 
   @HostListener('touchstart')
   onTouchStart() {
@@ -26,7 +37,7 @@ export class TabsPage implements OnInit {
     clearTimeout(this.idleLogoutTimer);
     this.idleLogoutTimer = setTimeout(() => {
       this.logUserOut();
-    }, 3600000);
+    }, 36000000);
   }
 
 

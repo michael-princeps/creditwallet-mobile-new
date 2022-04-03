@@ -37,7 +37,7 @@
     <!-- <ion-icon style="color: rgba(32, 27, 27, .5);" slot="start" name="keypad"></ion-icon> -->
     <!-- <ion-input type="text" ></ion-input> -->
       <ion-icon color="icon" slot="end" size="small" src="assets/icon/address-icon.svg"></ion-icon>
-    <ion-textarea placeholder="House Address" enterkeyhint="next" #c (keyup.enter)="setFocus(d)" formControlName="house_address" class="form-input"></ion-textarea>
+    <ion-textarea autocapitalize="on" placeholder="House Address" enterkeyhint="next" #c (keyup.enter)="setFocus(d)" formControlName="house_address" class="form-input"></ion-textarea>
     <small *ngIf="(formControls.house_address.dirty || formControls.house_address.touched) && formControls.house_address.errors"
     slot="error">Enter house address</small>
   </ion-item>
@@ -47,7 +47,7 @@
     </ion-label> -->
     <!-- <ion-icon style="color: rgba(32, 27, 27, .5);" slot="start" name="keypad"></ion-icon> -->
       <ion-icon color="icon" slot="end" size="small" src="assets/icon/city-icon.svg"></ion-icon>
-    <ion-input placeholder="City" enterkeyhint="next" #d (keyup.enter)="openSelect(e)" formControlName="city" type="text" class="form-input"></ion-input>
+    <ion-input autocapitalize="on" placeholder="City" enterkeyhint="next" #d (keyup.enter)="openSelect(e)" formControlName="city" type="text" class="form-input"></ion-input>
     <small *ngIf="(formControls.city.dirty || formControls.city.touched) && formControls.city.errors"
     slot="error">Enter city</small>
   </ion-item>
@@ -60,11 +60,11 @@
     </ion-select> -->
     <ionic-selectable placeholder="State" #e formControlName="state" [items]="states" itemValueField="name" itemTextField="name"
     [canSearch]="true">
-    <ng-template ionicSelectableIconTemplate>
+    <!-- <ng-template ionicSelectableIconTemplate>
       <div class="selectable-icon" role="presentation">
         <div class="selectable-icon-inner"></div>
       </div>
-    </ng-template>
+    </ng-template> -->
   </ionic-selectable>
     <small *ngIf="(formControls.state.dirty || formControls.state.touched) && formControls.state.errors"
     slot="error">Select state</small>

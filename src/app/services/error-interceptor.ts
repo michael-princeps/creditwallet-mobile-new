@@ -24,7 +24,9 @@ export class ErrorInterceptor implements HttpInterceptor {
           })
         } else if (error.status === 500) {
           // this.alertService.error('Unknown Error')
-          this.toastService.presentToast('danger', 'Please contact support')
+          if (!req.url.includes('customer/token-update')) {
+            this.toastService.presentToast('danger', 'Please contact support')
+          }
           // this.router.navigate(['/error'])
           // if (environment.production) {
           //     this.router.navigate(['/error'])

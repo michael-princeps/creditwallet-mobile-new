@@ -10,4 +10,83 @@ ion-toolbar{
 
 ion-item.item {
     --min-height: 35px;
+    --background: transparent
+}
+
+.loan-status {
+    display: flex;
+    align-items: center;
+    border-radius: 7.5px;
+    padding: 7.5px 10px;
+    // width: 80px;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 300;
+}
+
+.loan-badge {
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+    display: flex;
+    background-color: #fff;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+}
+
+.top-container {
+    border-radius:  0px 0px 25px 25px;
+    &.active {
+        background: linear-gradient(199.65deg, #FFB067 13.16%, #F56B2A 76.51%);
+
+        .loan-status{
+            background-color: #F56B2A;
+        }
+    } 
+    &.completed{
+        background: linear-gradient(211.38deg, #5CFFA1 18.94%, #2ECC71 86.32%);
+
+        .loan-status{
+            background-color: #2ECC71;
+        }
+    }
+    &-content {
+        padding: 20px 16px 16px;
+    }
+}
+
+.loan-amount {
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0;
+    margin-bottom: 10px;
+    // padding: 2px 0;
+}
+
+.loan-params--bottom {
+    display: flex;
+    margin-bottom: 10px;
+    *{
+        margin-right: 10px;
+    }
+}
+
+.loan-param{
+    *{
+        margin-right: 5px;
+    }
+}
+
+.loan-text {
+    font-size: 10px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+}
+
+.loan-value {
+    font-size: 12.5px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 1);
 }

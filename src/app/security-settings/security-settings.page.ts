@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./security-settings.page.scss'],
 })
 export class SecuritySettingsPage implements OnInit {
-
+  useFaceID = false
   constructor() { }
 
   ngOnInit() {

@@ -105,10 +105,10 @@ export class UnauthenticatedPagePage implements OnInit, AfterViewInit {
       password: params.password
     }).then(() => {
       this.loaderService.dismissLoader();
-      this.router.navigate(['/main'], { replaceUrl: true })
+      this.router.navigate(['/main/dashboard'], { replaceUrl: true })
     }, () => {
       this.loaderService.dismissLoader();
-      this.router.navigate(['/main'], { replaceUrl: true })
+      this.router.navigate(['/main/dashboard'], { replaceUrl: true })
     })
   }
 

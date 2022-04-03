@@ -6,16 +6,17 @@ import { ThreeDeeTouch, ThreeDeeTouchQuickAction, ThreeDeeTouchForceTouch } from
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { Capacitor } from '@capacitor/core';
+import { FcmService } from './services/fcm.service';
 
 
 let actions: ThreeDeeTouchQuickAction[] = [
   {
-    type: 'loan-auto-disburse-application',
+    type: 'start',
     title: 'Apply for Loan',
     iconType: 'Add'
   },
   {
-    type: 'liquidate',
+    type: 'main/loans',
     title: 'Liquidate loan',
     iconType: 'Stop'
   },
@@ -27,7 +28,7 @@ let actions: ThreeDeeTouchQuickAction[] = [
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor(private authService: AuthenticationService, private platform: Platform, private threeDeeTouch: ThreeDeeTouch, private router: Router, private zone: NgZone) {
+  constructor(private authService: AuthenticationService, private fcmService: FcmService, private platform: Platform, private threeDeeTouch: ThreeDeeTouch, private router: Router, private zone: NgZone) {
     this.authService.checkIfUserExists();
     this.initializeApp();
     this.has3DTouch();
@@ -56,26 +57,25 @@ export class AppComponent {
 
   has3DTouch() {
     this.threeDeeTouch.configureQuickActions(actions);
-   this.platform.ready().then(() => {
-    setTimeout(async () => {
-      await SplashScreen.hide({
-        fadeOutDuration: 500
-      });
-    }, 1000);
-    this.zone.run(() => {
-      if ((window as any).shortcutItemType) {
-        this.router.navigateByUrl((window as any).shortcutItemType);
-        (window as any).shortcutItemType = null;
-      }
+    this.platform.ready().then(() => {
+      this.fcmService.initPush();
+      this.threeDeeTouch.onHomeIconPressed().subscribe(
+        (payload) => {
+          // alert(payload.type)
+          // console.log(payload)
+          this.router.navigateByUrl(payload.type, { replaceUrl: true })
+        }
+      )
+      setTimeout(async () => {
+        await SplashScreen.hide();
+      }, 250);
+      // this.zone.run(() => {
+      //   if ((window as any).shortcutItemType) {
+      //     this.router.navigateByUrl((window as any).shortcutItemType);
+      //     (window as any).shortcutItemType = null;
+      //   }
+      // })
     })
-    // this.threeDeeTouch.onHomeIconPressed().subscribe(
-    //   (payload) => {
-    //     alert(payload.type)
-    //     console.log(payload)
-    //     this.router.navigateByUrl(payload.type, { replaceUrl: true })
-    //   }
-    // )
-   })
   }
 
 

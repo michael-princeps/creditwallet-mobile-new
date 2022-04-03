@@ -16,7 +16,7 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-toolbar class="transparent-toolbar ion-no-border">
+  <ion-toolbar *ngIf="currentStep < 9" class="transparent-toolbar ion-no-border">
     <div class="stepper-steps">
       <span class="stepper-step" [ngClass]="{'currentstep': currentStep ==1, 'activestep': currentStep >=1}">
 

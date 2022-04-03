@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalController, ViewDidLeave } from '@ionic/angular';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -15,7 +16,8 @@ export class AllLoansPage implements OnInit, ViewDidLeave {
   destroy$ = new Subject<boolean>();
   allLoans: any[]
   refresherEvent: any;
-  constructor(private modalController: ModalController, private service: MainService) { }
+  constructor(private modalController: ModalController, private router: Router, private service: MainService) { 
+    console.log(this.router.url)}
 
   ngOnInit() {
     this.fetchAllLoans();

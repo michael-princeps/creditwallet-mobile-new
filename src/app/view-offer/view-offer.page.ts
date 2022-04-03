@@ -4,6 +4,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ModalController, AlertController, ViewDidEnter, Platform } from '@ionic/angular';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { LoaderService } from '../services/loader.service';
+import { LocalNotifications } from '@awesome-cordova-plugins/local-notifications/ngx';
 
 @Component({
   selector: 'app-view-offer',
@@ -33,7 +34,7 @@ export class ViewOfferPage implements OnInit, ViewDidEnter {
   loanDetails: any;
   destroy$ = new Subject<boolean>()
 
-  constructor(private route: ActivatedRoute, private platform: Platform, private loader: LoaderService, private router: Router, public alertController: AlertController) { 
+  constructor(private route: ActivatedRoute, private platform: Platform, private localNotifications: LocalNotifications, private loader: LoaderService, private router: Router, public alertController: AlertController) { 
     // this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     // this.platform.pause.subscribe(async () => {
     //   this.closeApplication();
@@ -48,6 +49,15 @@ export class ViewOfferPage implements OnInit, ViewDidEnter {
       this.currentPageSubject.next({ page: 1 })
     })
     // this.offerId = this.route.snapshot.paramMap.get('id');
+  }
+
+  showSuccessNotification() {
+    this.localNotifications.schedule({
+      title: 'Top up request in progress',
+      text: 'Top up request in review. Please hold on for a response',
+      trigger: {at: new Date(new Date().getTime() + 3000)},
+      // group: 'loan-application'
+   });
   }
 
   ionViewDidEnter(): void {

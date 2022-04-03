@@ -17,6 +17,9 @@ const config: CapacitorConfig = {
       launchShowDuration: 7000,
       splashFullScreen: true,
       splashImmersive: true,
+    },
+    PushNotifications: {
+      presentationOptions: ["badge", "sound", "alert"]
     }
   }
 };
