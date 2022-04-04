@@ -7,7 +7,12 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { Capacitor } from '@capacitor/core';
 import { FcmService } from './services/fcm.service';
-
+import { codePush, InstallMode } from 'capacitor-codepush';
+import { environment } from 'src/environments/environment';
+import {
+  IRemotePackage,
+  ILocalPackage,
+} from 'capacitor-codepush/dist/esm/package';
 
 let actions: ThreeDeeTouchQuickAction[] = [
   {
@@ -50,6 +55,11 @@ export class AppComponent {
         if (change.isActive && (window as any).shortcutItemType) {
           this.router.navigateByUrl((window as any).shortcutItemType);
           (window as any).shortcutItemType = null;
+        } else if(change.isActive) {
+          if (this.platform.is('capacitor')) {
+            this.checkUpdate()
+            // codePush.sync()
+          }
         }
       })
     });
@@ -78,5 +88,67 @@ export class AppComponent {
     })
   }
 
+  checkUpdate() {
+    let deploymentKey;
 
+    if (this.platform.is('ios')) {
+      deploymentKey = environment.codePushIosKey;
+      
+    } else if (this.platform.is('android')) {
+      deploymentKey = environment.codepushAndroidKey;
+     
+    }
+    codePush.checkForUpdate(this.success, this.error, deploymentKey); 
+  }
+
+  async success(remotePackage: IRemotePackage) {
+    if (!remotePackage) {
+      console.log('App is Up to date');
+      codePush.notifyApplicationReady();
+    } else {
+      if (!remotePackage.failedInstall) {
+        // console.log(
+        //   'A CodePush update is available. Package hash: ',
+        //   remotePackage
+        // );
+
+        // DOWNLOAD UPDATE
+        console.log('Downloading =========--=======>');
+        const result: ILocalPackage = await remotePackage.download();
+        if (result) {
+          result.install({
+            installMode: InstallMode.IMMEDIATE,
+            minimumBackgroundDuration: 0,
+            mandatoryInstallMode: InstallMode.IMMEDIATE,
+          });
+        }
+        // console.log('Result of download', result);
+      } else {
+        console.log('The available update was attempted before and failed.');
+      }
+    }
+  }
+
+  onPackageDownloaded(localPackage: ILocalPackage) {
+    console.log('Download succeeded.===========>', localPackage.description);
+    localPackage
+      .install({
+        installMode: InstallMode.IMMEDIATE,
+        minimumBackgroundDuration: 0,
+        mandatoryInstallMode: InstallMode.IMMEDIATE,
+      })
+      .then(this.onInstallSuccess, this.error);
+  }
+
+  onInstallSuccess() {
+    console.log('Installation succeeded.');
+
+    setTimeout(async () => {
+      codePush.restartApplication(); // restarts the application to patch the update
+    }, 200);
+  }
+
+  error(error) {
+    console.log('Error===>', error);
+  }
 }

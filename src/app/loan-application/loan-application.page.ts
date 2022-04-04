@@ -39,6 +39,7 @@ export class LoanApplicationPage implements OnInit {
   loanDetails: any;
   destroy$ = new Subject<boolean>()
   code: any;
+  bgClass = 'transparent-toolbar';
   // stepperTitle = 'Loan Amount'
   constructor(private modalController: ModalController, private loaderService: LoaderService, private service: MainService, private router: Router, public alertController: AlertController, private activatedRoute: ActivatedRoute) { }
 
@@ -46,6 +47,18 @@ export class LoanApplicationPage implements OnInit {
     this.activatedRoute.queryParams.subscribe((param: any) => {
       this.code = param.code
     })
+  }
+
+  changeBgClass() {
+    this.bgClass = 'add-white-bg'
+  }
+
+  onContentScroll(event) {
+    if (event.detail.scrollTop >= 50) {
+      this.bgClass = 'add-white-bg'
+    } else {
+      this.bgClass = 'transparent-toolbar'
+    }
   }
 
   showSuccessNotification() {

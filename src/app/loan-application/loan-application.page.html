@@ -1,5 +1,5 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar class="transparent-toolbar ion-no-border">
+  <ion-toolbar class="ion-no-border" [class]="bgClass">
     <ion-buttons slot="start">
       <ion-button color="secondary" slot="icon-only" (click)="presentCancelAlert()" *ngIf="currentStep == 1">
         <ion-icon color="primary" name="close"></ion-icon>
@@ -16,7 +16,7 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-toolbar *ngIf="currentStep < 9" class="transparent-toolbar ion-no-border">
+  <ion-toolbar *ngIf="currentStep < 9" class="ion-no-border" [class]="bgClass">
     <div class="stepper-steps">
       <span class="stepper-step" [ngClass]="{'currentstep': currentStep ==1, 'activestep': currentStep >=1}">
 
@@ -49,7 +49,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="shapes-bg" fullscreen>
+<ion-content class="shapes-bg" fullscreen (ionScroll)='onContentScroll($event)'>
 
   <div *ngIf="(pageData$ | async) as pageData" style="position: relative; height: 100%;">
     <!-- <div *ngIf="pageData.page == 1" style="height: 100%;" class="ion-padding"
