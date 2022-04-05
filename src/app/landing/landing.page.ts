@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { ModalController, ViewWillEnter, ViewWillLeave } from '@ionic/angular';
 import SwiperCore from 'swiper';
 import { SwiperComponent } from 'swiper/angular';
 import { AuthLandingPage } from '../auth-landing/auth-landing.page';
@@ -10,7 +10,7 @@ import { ModalBaseComponent } from '../components/modal-base/modal-base.componen
   templateUrl: './landing.page.html',
   styleUrls: ['./landing.page.scss'],
 })
-export class LandingPage implements OnInit {
+export class LandingPage implements OnInit, ViewWillEnter {
   @ViewChild(SwiperComponent) swiper: SwiperComponent;
   activeIndex = 0;
   breakPoint = 0.65
@@ -19,11 +19,15 @@ export class LandingPage implements OnInit {
   ngOnInit() {
   }
 
+  ionViewWillEnter(): void {
+    this.activeIndex = 0;
+    this.swiper.swiperRef.slideTo(0)
+    this.chref.detectChanges();
+  }
+
   changeActiveClass(swiper) {
-    // console.log(swiper)
     this.activeIndex = swiper.swiperRef.activeIndex;
     this.chref.detectChanges();
-    // console.log(this.activeIndex)
   }
 
   goToSlide(index: number) {

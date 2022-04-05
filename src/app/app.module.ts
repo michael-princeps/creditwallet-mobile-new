@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { TokenInterceptor } from './services/token-interceptor';
 import { ErrorInterceptor } from './services/error-interceptor';
 import { ThreeDeeTouch } from '@awesome-cordova-plugins/three-dee-touch/ngx';
+import { LocalNotifications } from '@awesome-cordova-plugins/local-notifications/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,6 +26,7 @@ import { ThreeDeeTouch } from '@awesome-cordova-plugins/three-dee-touch/ngx';
   ],
   providers: [
     ThreeDeeTouch,
+    LocalNotifications,
     {
       provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true
     },

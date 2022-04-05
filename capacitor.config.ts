@@ -12,15 +12,18 @@ const config: CapacitorConfig = {
     },
     SplashScreen: {
       backgroundColor: "#F56B2A",
-      androidScaleType: "CENTER_CROP",
+      // androidScaleType: "CENTER_CROP",
       launchAutoHide: false,
-      launchShowDuration: 7000,
-      splashFullScreen: true,
-      splashImmersive: true,
+      androidSplashResourceName: 'splash',
+      launchShowDuration: 30000,
+      splashFullScreen: false,
     },
     PushNotifications: {
       presentationOptions: ["badge", "sound", "alert"]
     },
+    // LocalNotifications: {
+    //   "iconColor": "#F56B2A",
+    // },
     CodePush: {
       //can be found in your appcenter Demo-ios app dashboard
       "IOS_DEPLOY_KEY": "5p0WHe6vmQXpJRyJ_o3WQrcEKCrxo_5tfDfjX", 

@@ -8,7 +8,6 @@ import { ViewOfferPageRoutingModule } from './view-offer-routing.module';
 
 import { ViewOfferPage } from './view-offer.page';
 import { OfferSteppersModule } from '../offer-steppers/offer-steppers.module';
-import { LocalNotifications } from '@awesome-cordova-plugins/local-notifications/ngx';
 
 @NgModule({
   imports: [
@@ -18,7 +17,6 @@ import { LocalNotifications } from '@awesome-cordova-plugins/local-notifications
     OfferSteppersModule,
     ViewOfferPageRoutingModule
   ],
-  providers: [LocalNotifications],
   declarations: [ViewOfferPage]
 })
 export class ViewOfferPageModule {}

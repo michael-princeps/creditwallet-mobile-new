@@ -8,7 +8,6 @@ import { LoanTopUpPageRoutingModule } from './loan-top-up-routing.module';
 
 import { LoanTopUpPage } from './loan-top-up.page';
 import { ApplicationSteppersModule } from '../steppers/application-steppers.module';
-import { LocalNotifications } from '@awesome-cordova-plugins/local-notifications/ngx';
 
 @NgModule({
   imports: [
@@ -17,9 +16,6 @@ import { LocalNotifications } from '@awesome-cordova-plugins/local-notifications
     IonicModule,
     ApplicationSteppersModule,
     LoanTopUpPageRoutingModule
-  ],
-  providers: [
-    LocalNotifications
   ],
   declarations: [LoanTopUpPage]
 })

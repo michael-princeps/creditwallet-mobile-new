@@ -51,15 +51,14 @@ export class AppComponent {
       });
     });
     App.addListener("appStateChange", (change) => {
+      console.log(change)
       this.zone.run(() => {
+        console.log(change.isActive)
         if (change.isActive && (window as any).shortcutItemType) {
           this.router.navigateByUrl((window as any).shortcutItemType);
           (window as any).shortcutItemType = null;
-        } else if(change.isActive) {
-          if (this.platform.is('capacitor')) {
-            this.checkUpdate()
-            // codePush.sync()
-          }
+        } else if (change.isActive) {
+          this.checkUpdate();
         }
       })
     });
@@ -77,8 +76,10 @@ export class AppComponent {
         }
       )
       setTimeout(async () => {
-        await SplashScreen.hide();
-      }, 250);
+        await SplashScreen.hide({
+          fadeOutDuration: 1000
+        });
+      }, 1500);
       // this.zone.run(() => {
       //   if ((window as any).shortcutItemType) {
       //     this.router.navigateByUrl((window as any).shortcutItemType);
@@ -117,9 +118,9 @@ export class AppComponent {
         const result: ILocalPackage = await remotePackage.download();
         if (result) {
           result.install({
-            installMode: InstallMode.IMMEDIATE,
+            installMode: InstallMode.ON_NEXT_RESTART,
             minimumBackgroundDuration: 0,
-            mandatoryInstallMode: InstallMode.IMMEDIATE,
+            mandatoryInstallMode: InstallMode.ON_NEXT_RESTART,
           });
         }
         // console.log('Result of download', result);
@@ -133,9 +134,9 @@ export class AppComponent {
     console.log('Download succeeded.===========>', localPackage.description);
     localPackage
       .install({
-        installMode: InstallMode.IMMEDIATE,
+        installMode: InstallMode.ON_NEXT_RESTART,
         minimumBackgroundDuration: 0,
-        mandatoryInstallMode: InstallMode.IMMEDIATE,
+        mandatoryInstallMode: InstallMode.ON_NEXT_RESTART,
       })
       .then(this.onInstallSuccess, this.error);
   }

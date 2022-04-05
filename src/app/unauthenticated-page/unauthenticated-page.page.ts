@@ -76,6 +76,18 @@ export class UnauthenticatedPagePage implements OnInit, AfterViewInit {
     // console.log('onDidDismiss resolved with role', role);
   }
 
+  async presentNoAuthEnabled() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'No fingerprint enrolled',
+      message: 'Please go to your phone settings and add fingerprint authentication',
+     buttons: ['Okay'],
+    });
+    await alert.present();
+    const { role } = await alert.onDidDismiss();
+    // console.log('onDidDismiss resolved with role', role);
+  }
+
   openBioAuth() {
     NativeBiometric.getCredentials({
       server: 'accounts.creditwallet.ng',
@@ -85,8 +97,7 @@ export class UnauthenticatedPagePage implements OnInit, AfterViewInit {
         title: 'Log in to your account'
       }).then(() => {
         this.performBioLogin(credential.username, credential.password)
-      }, () => {
-      }).catch((e) => console.log(e))
+      }, () => this.presentNoAuthEnabled()).catch((e) => this.presentNoAuthEnabled())
     }, () => {
       this.presentNoCredentialsAuth()
     }).catch((e) => {

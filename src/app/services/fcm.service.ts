@@ -8,16 +8,21 @@ import {
   Token,
 } from '@capacitor/push-notifications';
 import { addToStorage, FCM_TOKEN } from './storage';
+// import {
+//   LocalNotificationActionPerformed,
+//   LocalNotifications
+// } from '@capacitor/local-notifications';
+import { LocalNotifications } from '@awesome-cordova-plugins/local-notifications/ngx';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FcmService {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private localNotification: LocalNotifications) { }
 
   initPush() {
-    if (Capacitor.platform !== 'web') {
+    if (Capacitor.getPlatform() != 'web') {
       this.registerPush();
     }
   }
@@ -50,6 +55,11 @@ export class FcmService {
       'pushNotificationReceived',
       (notification: PushNotificationSchema) => {
         // alert('Push received: ' + JSON.stringify(notification));
+        this.doLocalNotif(notification)
+
+        // this.localNotification addListener('localNotificationActionPerformed', (event: LocalNotificationActionPerformed) => {
+        //   this.router.navigateByUrl('main/notifications');
+        // })
       },
     );
 
@@ -59,8 +69,19 @@ export class FcmService {
         const data = notification.notification.data;
         // alert('Push action performed: ' + JSON.stringify(notification));
         // this.router.navigateByUrl(`/home/${data.detailsId}`);
-        this.router.navigateByUrl(`/main/notifications`);
+        this.router.navigateByUrl(`main/notifications`);
       },
     );
+  }
+
+  doLocalNotif(notification) {
+    this.localNotification.schedule( {
+      title: notification.title,
+      text: notification.body,
+      id: Date.now(),
+      foreground: true,
+      launch: true,
+      icon: 'res://ic_activity_icon.png'
+    });
   }
 }

@@ -7,10 +7,7 @@ import { MainService } from '../services/main.service';
 import { takeUntil } from 'rxjs/operators';
 import { LoaderService } from '../services/loader.service';
 import { LoanAutoDisburseApplicationPage } from '../loan-auto-disburse-application/loan-auto-disburse-application.page';
-// import { LocalNotifications } from '@awesome-cordova-plugins/local-notifications/ngx';
-import {
-  LocalNotifications,
-} from '@capacitor/local-notifications';
+import { LocalNotifications } from '@awesome-cordova-plugins/local-notifications/ngx';
 
 @Component({
   selector: 'app-loan-application',
@@ -41,7 +38,7 @@ export class LoanApplicationPage implements OnInit {
   code: any;
   bgClass = 'transparent-toolbar';
   // stepperTitle = 'Loan Amount'
-  constructor(private modalController: ModalController, private loaderService: LoaderService, private service: MainService, private router: Router, public alertController: AlertController, private activatedRoute: ActivatedRoute) { }
+  constructor(private modalController: ModalController, private localNotification: LocalNotifications, private loaderService: LoaderService, private service: MainService, private router: Router, public alertController: AlertController, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe((param: any) => {
@@ -60,26 +57,6 @@ export class LoanApplicationPage implements OnInit {
       this.bgClass = 'transparent-toolbar'
     }
   }
-
-  showSuccessNotification() {
-  //   this.localNotifications.schedule({
-  //     title: 'Review in progress',
-  //     text: 'Loan application is undergoing review. Someone will get back to you shortly with the status of your loan',
-  //     trigger: {at: new Date(new Date().getTime() + 3000)},
-  //     // group: 'loan-application'
-  //  });
-  LocalNotifications.schedule({
-    notifications: [
-      {
-        body: 'Loan application is undergoing review. Someone will get back to you shortly with the status of your loan',
-        title: 'Review in progress',
-        id: 1,
-        schedule: { at: new Date(new Date().getTime() + 3000), allowWhileIdle: true }
-      }
-    ]
-  })
-  }
-
   close() {
     // this.modalController.dismiss().then(() => {
     //   this.destroy$.next();
@@ -106,6 +83,18 @@ export class LoanApplicationPage implements OnInit {
     this.currentStep = currentData.page - 1;
     const newObject = { ...currentData, page: this.currentStep }
     this.currentPageSubject.next(newObject)
+  }
+
+  doLocalNotif() {
+    this.localNotification.schedule( {
+      title: 'Review in progress',
+      text: 'Loan application review in progress. Please await a feedback from our team',
+      id: Date.now(),
+      foreground: true,
+      trigger: { at: new Date(new Date().getTime() + 5000) },
+      launch: true,
+      icon: 'res://ic_activity_icon.png'
+    });
   }
 
   get stepperTitle() {
@@ -179,7 +168,7 @@ export class LoanApplicationPage implements OnInit {
       this.loaderService.dismissLoader();
       this.currentStep = currentData.page + 1;
       this.currentPageSubject.next({ page: 9 });
-      this.showSuccessNotification();
+      this.doLocalNotif();
     }, () => this.loaderService.dismissLoader())
   }
 

@@ -8,7 +8,7 @@
   </ion-header>
 <ion-content class="shapes-bg" fullscreen>
   <div class="page-padding"  style="height: 100%;">
-    <div class="no-scrollbar" style="padding-top: 40px; height: 100%; text-align: center; overflow: auto; display: flex; flex-direction: column; align-items: center;">
+    <div class="no-scrollbar" style="padding-top: 40px; height: 100%; text-align: center; display: flex; flex-direction: column; align-items: center;">
       <img src="assets/images/logo-2.png" alt="" width="70" height="70" style="border-radius: 100%; overflow: hidden; margin-bottom: 20px;" srcset="">
      <div style="margin-bottom: 10px; width: 100%;">
       <ion-text color="primary">
@@ -36,7 +36,7 @@
             <small>{{loginForm.errors.message}}</small>
           </ion-text>
         </p>
-        <ion-item lines="none" class="form-item ion-margin-bottom">
+        <ion-item lines="none" class="form-item">
           <!-- <ion-label color="medium" position="stacked">
             Username
           </ion-label> -->
@@ -46,6 +46,13 @@
           <small *ngIf="(formControls.username.dirty || formControls.username.touched) && formControls.username.errors"
             slot="error">Enter your username</small>
         </ion-item>
+        <p class="ion-text-end">
+          <ion-text color="secondary">
+           <span (click)="presentResetPasswordModal()" class="remove-focus">
+             Forgot Password?
+           </span>
+          </ion-text>
+         </p>
         <ion-item lines="none" class="form-item ion-margin-bottom">
           <!-- <ion-label color="medium" position="stacked">
             Password
@@ -63,14 +70,6 @@
           <small *ngIf="(formControls.password.dirty || formControls.password.touched) && formControls.password.errors"
             slot="error">Enter your passowrd</small>
         </ion-item>
-  
-      <p class="ion-text-end">
-        <ion-text color="secondary">
-         <span (click)="presentResetPasswordModal()" class="remove-focus">
-           Forgot Password?
-         </span>
-        </ion-text>
-       </p>
         <ion-button style="margin-top: auto;" type="button" (click)="performManualLogin()" expand="block" color="secondary">Log In</ion-button>
       </form>
     </div>
