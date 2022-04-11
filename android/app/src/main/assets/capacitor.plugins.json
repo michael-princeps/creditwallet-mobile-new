@@ -62,9 +62,5 @@
 	{
 		"pkg": "capacitor-native-biometric",
 		"classpath": "com.epicshaggy.biometric.NativeBiometric"
-	},
-	{
-		"pkg": "capacitor-video-player",
-		"classpath": "com.jeep.plugin.capacitor.capacitorvideoplayer.CapacitorVideoPlayerPlugin"
 	}
 ]

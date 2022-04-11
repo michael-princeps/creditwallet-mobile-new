@@ -25,7 +25,6 @@ def capacitor_pods
   pod 'CapacitorCodepush', :path => '../../node_modules/capacitor-codepush'
   pod 'CapacitorEmailComposer', :path => '../../node_modules/capacitor-email-composer'
   pod 'CapacitorNativeBiometric', :path => '../../node_modules/capacitor-native-biometric'
-  pod 'CapacitorVideoPlayer', :path => '../../node_modules/capacitor-video-player'
   pod 'CordovaPlugins', :path => '../capacitor-cordova-ios-plugins'
   pod 'CordovaPluginsResources', :path => '../capacitor-cordova-ios-plugins'
 end

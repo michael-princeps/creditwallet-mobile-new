@@ -2,10 +2,8 @@ import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, 
 import { DomSanitizer } from '@angular/platform-browser';
 import { Filesystem, Directory } from '@capacitor/filesystem';
 import { MediaCapture, MediaFile, CaptureVideoOptions } from '@ionic-native/media-capture/ngx'
-// import { VideoPlayer, VideoOptions } from '@ionic-native/video-player/ngx';
 import { DirectoryEntry, File as Filee } from '@awesome-cordova-plugins/file/ngx'
 import { Platform, ViewDidLeave } from '@ionic/angular';
-// import {FileOpener} from '@awesome-cordova-plugins/file-opener/ngx'
 import { FilePath } from '@awesome-cordova-plugins/file-path/ngx'
 import { Capacitor } from '@capacitor/core';
 import { MainService } from 'src/app/services/main.service';
