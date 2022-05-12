@@ -19,6 +19,7 @@ export class DashboardPage implements OnInit, ViewDidLeave {
   showBalance = true;
   showSupportModal = false;
   showLiquidationModal = false;
+  showAccountDetailsModal = false;
   destroy$ = new Subject<boolean>()
   dashboardData: any;
   openLoans: any;

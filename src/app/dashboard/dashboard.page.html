@@ -104,7 +104,7 @@
  </div> -->
  <ion-row class="ion-margin-top ion-margin-bottom">
    <ion-col size="7">
-    <ion-button [disabled]="dashboardData.open_loans_count == 0" mode="ios" expand="block" color="success">
+    <ion-button (click)="showAccountDetailsModal = true" [disabled]="dashboardData.open_loans_count == 0" mode="ios" expand="block" color="success">
       <ion-icon slot="start" src="assets/icon/send-icon.svg"></ion-icon>
       Pay outstanding
     </ion-button>
@@ -212,6 +212,55 @@
   
       <ion-button expand="block" class="ion-margin-top" color="secondary">Proceed</ion-button>
      </form>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<ion-modal
+(didDismiss)="showAccountDetailsModal = false"
+  [isOpen]="showAccountDetailsModal"
+  [breakpoints]="[0, 0.3, 0.4]"
+  [initialBreakpoint]="0.3"
+>
+  <ng-template>
+    <ion-content class="ion-padding">
+    <ion-list-header>
+      <ion-label color="primary">Please find account details below to make your repayment</ion-label>
+    </ion-list-header>
+    <ion-list>
+      <ion-item lines="none">
+      <div style="width: 100%;">
+        <ion-row class="ion-justify-content-between">
+          <ion-col size="auto">
+            <div class="ion-text-end">
+              <strong>Bank Name</strong>
+            </div>
+          </ion-col>
+          <ion-col>
+            <div class="ion-text-end">
+              {{openLoans.custom_field_5443}}
+            </div>
+          </ion-col>
+        </ion-row>
+      </div>
+      </ion-item>
+      <ion-item lines="none">
+       <div style="width: 100%;">
+        <ion-row class="ion-justify-content-between">
+          <ion-col size="auto">
+            <div class="ion-text-end">
+              <strong>Account Name</strong>
+            </div>
+          </ion-col>
+          <ion-col>
+            <div class="ion-text-end">
+              {{openLoans.custom_field_5444}}
+            </div>
+          </ion-col>
+        </ion-row>
+       </div>
+      </ion-item>
+    </ion-list>
     </ion-content>
   </ng-template>
 </ion-modal>
